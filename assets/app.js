@@ -5,6 +5,7 @@ var today = {};
 var primaryMonth = { month: "primary" };
 var priorMonth = { month: "prior" };
 var viewReportButton = document.getElementById("viewReport");
+var affiliateReportButton = document.getElementById("affiliate_report_button");
 
 //general functions
 function toUSD(dollarInt) {
@@ -64,6 +65,7 @@ function password_check() {
 			break;
 	}
 }
+
 function perfomance_report() {
 	var acceptableData = true;
 	today.date = DateToString(new Date());
@@ -149,4 +151,13 @@ function perfomance_report() {
 			month: "primary",
 		});
 	}
+}
+function affiliate_report() {
+	affiliateReportButton.innerHTML = `<div class="spinner-border text-primary" role="status"><span class="visually-hidden"></span></div>`;
+	runAPI({
+		report_id: 15,
+		startDate: primaryMonth.startDate,
+		endDate: primaryMonth.endDate,
+		month: "primary",
+	});
 }
