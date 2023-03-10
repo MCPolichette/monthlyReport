@@ -92,25 +92,11 @@ function reportStep2(xml, report_id, month) {
 					merchant.name + " " + merchant.month + " " + report.year + " Report";
 				updateHeaders();
 				buildFirstTable();
-
 				viewReportButton.disabled = false;
 			}
 			break;
 		case 15: //Performance Summary by Affiliate for selected dates
-			//Performance Summary by Affiliate for selected dates
 			let affiliates = [];
-			let totalValues = {
-				test: 0,
-				clicks: 0,
-				Number_of_Sales: 0,
-				Number_of_Mobile_Sales: 0,
-				Sales: 0,
-				Ad_Impressions: 0,
-				New_Customers: 0,
-				New_Customer_Sales: 0,
-				Mobile_Sales: 0,
-				Number_of_Mobile_Sales: 0,
-			};
 			xmlDoc = xml.getElementsByTagName("Table1");
 			console.log(xmlDoc.length);
 			for (let i = 0; i < xmlDoc.length; i++) {
@@ -118,73 +104,88 @@ function reportStep2(xml, report_id, month) {
 					Affiliate:
 						xmlDoc[i].getElementsByTagName("Affiliate")[0].childNodes[0]
 							.nodeValue,
-					Click_Throughs:
-						xmlDoc[i].getElementsByTagName("Click_Throughs")[0].childNodes[0]
-							.nodeValue,
+					Click_Throughs: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Click_Throughs")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
 					Affiliate_Id:
 						xmlDoc[i].getElementsByTagName("Affiliate_Id")[0].childNodes[0]
 							.nodeValue,
-					Number_of_Sales:
-						xmlDoc[i].getElementsByTagName("Number_of_Sales")[0].childNodes[0]
-							.nodeValue,
-					Sales:
-						xmlDoc[i].getElementsByTagName("Sales")[0].childNodes[0].nodeValue,
-					Ad_Impressions:
-						xmlDoc[i].getElementsByTagName("Ad_Impressions")[0].childNodes[0]
-							.nodeValue,
+					Number_of_Sales: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Number_of_Sales")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					Sales: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Sales")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					Ad_Impressions: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Ad_Impressions")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
 
-					Conversion_Rate:
-						xmlDoc[i].getElementsByTagName("Conversion_Rate")[0].childNodes[0]
-							.nodeValue,
-					New_Customers:
-						xmlDoc[i].getElementsByTagName("New_Customers")[0].childNodes[0]
-							.nodeValue,
-					New_Customer_Sales:
-						xmlDoc[i].getElementsByTagName("New_Customer_Sales")[0]
-							.childNodes[0].nodeValue,
-					Mobile_Sales:
-						xmlDoc[i].getElementsByTagName("Mobile_Sales")[0].childNodes[0]
-							.nodeValue,
-					Number_of_Mobile_Sales: xmlDoc[i].getElementsByTagName(
-						"Number_of_Mobile_Sales"
-					)[0].childNodes[0].nodeValue,
+					Conversion_Rate: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Conversion_Rate")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("%", "")
+					),
+					New_Customers: Number(
+						xmlDoc[i]
+							.getElementsByTagName("New_Customers")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					New_Customer_Sales: Number(
+						xmlDoc[i]
+							.getElementsByTagName("New_Customer_Sales")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					Mobile_Sales: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Mobile_Sales")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					Number_of_Mobile_Sales: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Number_of_Mobile_Sales")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
 				});
 			}
-			for (let i = 0; i < affiliates.length; i++) {
-				totalValues.test++;
-				affiliates[i].clicks = Number(
-					affiliates[i].Click_Throughs.replaceAll(",", "")
-				);
-				affiliates[i].sales = Number(
-					affiliates[i].Sales.replaceAll(",", "").replaceAll("$", "")
-				);
-				affiliates[i].Number_of_Sales = Number(
-					affiliates[i].Number_of_Sales.replaceAll(",", "")
-				);
-				affiliates[i].Ad_Impressions = Number(
-					affiliates[i].Ad_Impressions.replaceAll(",", "")
-				);
-				affiliates[i].New_Customers = Number(
-					affiliates[i].New_Customers.replaceAll(",", "")
-				);
-				affiliates[i].Number_of_Mobile_Sales = Number(
-					affiliates[i].Number_of_Mobile_Sales.replaceAll(",", "")
-				);
-				affiliates[i].New_Customer_Sales = Number(
-					affiliates[i].New_Customer_Sales.replaceAll(",", "").replaceAll(
-						"$",
-						""
-					)
-				);
-				affiliates[i].Mobile_Sales = Number(
-					affiliates[i].Mobile_Sales.replaceAll(",", "").replaceAll("$", "")
-				);
-			}
 			affiliates.sort((a, b) => b.sales - a.sales);
-			// outage.conversion_rate = Number((outage.total_sales_count / outage.total_clicks)); //.toFixed(6) !?
-			console.log(merchant);
-			console.log(affiliates);
-			console.log(totalValues);
+			if (month === "primary") {
+				primaryMonth.affiliateReport = affiliates;
+				runAPI({
+					report_id: 15,
+					startDate: priorMonth.startDate,
+					endDate: priorMonth.endDate,
+					month: "prior",
+				});
+			} else {
+				priorMonth.affiliateReport = affiliates;
+				for (i = 0; i < primaryMonth.affiliateReport.length; i++) {
+					for (j = 0; j < priorMonth.affiliateReport.length; i++) {
+						if (
+							primaryMonth.affiliateReport[i].Affiliate_Id ===
+							priorMonth.affiliateReport[j].Affiliate_Id
+						) {
+							primaryMonth.affiliateReport[i].Sales;
+						}
+					}
+				}
+			}
 			break;
 	}
 }

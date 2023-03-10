@@ -18,8 +18,7 @@
     <div class="container-sm fixed-top">
         <div id="title" class="row">
             <div class="col-4">
-                <h4 onclick='use_local_storage()' class="justify-content-center"><strong>AvantLink Merchant Monthly
-                        Comparison</strong></h4>
+                <h4 onclick='use_local_storage()' class="justify-content-center"><strong>AvantLink Merchant Monthly Comparison</strong></h4>
             </div>
         </div>
     </div>
@@ -33,14 +32,13 @@
                     <!-- <label for="password_input" class="form-label">Your API key</label> -->
                     <input type="password" id="password_input" class="form-control" aria-describedby="passwordHelpBlock">
                     <br>
-                    <button type="submit" onclick='password_check()' class="btn btn-block btn-primary">Submit</button>
+                    <button id="firstSubmit" type="submit" onclick='password_check()' class="btn btn-block btn-primary">Submit</button>
                 </div>
             </div>
         </div>
     </div>
     <div class='container-fluid d-flex flex-column align-items-center collapse' >
-        <div class="row">
-            <div class="col" hidden id="monthlyReport">
+        <div class="row" hidden id="monthlyReport">
                 <br>
                 <h1>Monthly Report Example</h1>
                 <div class="accordion  shadow p-3 mb-5 bg-white rounded" id="reportAccordian">
@@ -51,17 +49,15 @@
                                 <strong>Parameters</strong>
                             </button>
                         </h2>
-                        
-
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="parameters"
                             data-bs-parent="#reportAccordian">
                             <div class="accordion-body">
+                                <div class="container-fluid"><div class="row"><div class ="col">
                                 <h3>Please fill out inputs below:</h3>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="merchantId">Merchant Id</span>
                                     <input type="text" id="merchant_ID_input" class="form-control" aria-describedby="merchantId">
-                                </div>
-                                
+                                </div> 
                                 <select id="selectedMonth" class="form-select" aria-label="Default select example">
                                     <option selected>Select Month</option>
                                     <option value="-01">January</option>
@@ -90,17 +86,19 @@
                                 data-bs-target="#reportAccordian" aria-expanded="false" ><div class="spinner-border text-primary" role="status">
                                     <span class="visually-hidden"></span>
                                 </div></button>
+                            </div></div>
+                            </div>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
+                        <h2 class="accordion-header" id="reportHeader">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#reportAccordian" aria-expanded="false" aria-controls="reportAccordian"><strong>
                                 Report</strong>
                             </button>
                         </h2>
-                        <div id="reportAccordian" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        <div id="reportAccordian" class="accordion-collapse collapse" aria-labelledby="reportHeader"
                             data-bs-parent="#reportAccordian">
                             <div class="accordion-body">
                             <div class="container" id="report_pdf">
@@ -119,47 +117,22 @@
                                                         <th >Nominal Change</th>
                                                     </tr>
                                                 </thead>
-                                                <!-- <tr>
-                                                    <td>SALES </td>
-                                                    <td id="primarySales"></td>
-                                                <td id="priorSales"></td>
-                                            </tr>
-                                                <tr>
-                                                    <td>Clicks</td>
-                                                    <td id="primaryClicks"></td>
-                                                <td id="priorClicks"></td>
-                                            </tr>
-                                                <tr>
-                                                    <td>Affiliate Commission </td>
-                                                    <td id="primaryCommission"></td>
-                                                <td id="priorCommission"></td>
-                                            </tr>
-                                                <tr>
-                                                    <td>Network Commission </td>
-                                                    <td id="primaryNetworkCommission"></td>
-                                                <td id="priorNetworkCommission"></td>
-                                            </tr>
-                                                <tr>
-                                                    <td>Total Commission (SPEND?) </td>
-                                                    <td id="primaryTotalCommission"></td>
-                                                <td id="priorTotalCommission"></td>
-                                            </tr> -->
                                             </tbody>
                                         </table>
+                                        <hr>
+                                        <div class="d-grid gap-2">
+                                            <button hidden id="affiliate_report_button" class="btn btn-outline-primary" 
+                                            onclick="affiliate_report()"
+                                            type="button">Affiliate Performance</button>
+                                        </div>
                                     </div>
                                 </div>
                                         
                             </div>
                         </div>
                     </div>
-                  
                 </div>
                 </div>
-                </div>
-
-
-
-
     
     <script src="assets/API_reports.js"></script>
     <script src="assets/build_tables.js"></script>

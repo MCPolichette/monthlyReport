@@ -12,12 +12,15 @@ function build5columns(table, row, col1, col2, col3, col4, col5) {
 	var cell5 = (row.insertCell(4).innerHTML = col5);
 }
 function updateHeaders() {
-	document.getElementById("report_merchant_name").innerHTML = merchant.name;
+	document.getElementById("report_merchant_name").innerHTML =
+		merchant.name + " Performance";
 	document.getElementById("report_merchant_id").innerHTML = merchant.id;
 	document.getElementById("primaryMonthTitle").innerHTML =
 		merchant.month + "\n" + report.year;
 	document.getElementById("priorMonthTitle").innerHTML =
 		merchant.month + "\n" + report.previousyear;
+
+	document.getElementById("affiliate_report_button").hidden = false;
 }
 function buildFirstTable() {
 	let table = document.getElementById("performanceSummaryReport");
