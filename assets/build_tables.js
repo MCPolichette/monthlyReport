@@ -11,6 +11,30 @@ function build5columns(table, row, col1, col2, col3, col4, col5) {
 	var cell4 = (row.insertCell(3).innerHTML = col4);
 	var cell5 = (row.insertCell(4).innerHTML = col5);
 }
+function build9columns(
+	table,
+	row,
+	col1,
+	col2,
+	col3,
+	col4,
+	col5,
+	col6,
+	col7,
+	col8,
+	col9
+) {
+	var row = table.insertRow(row);
+	var cell1 = (row.insertCell(0).innerHTML = col1);
+	var cell2 = (row.insertCell(1).innerHTML = col2);
+	var cell3 = (row.insertCell(2).innerHTML = col3);
+	var cell4 = (row.insertCell(3).innerHTML = col4);
+	var cell5 = (row.insertCell(4).innerHTML = col5);
+	var cell1 = (row.insertCell(5).innerHTML = col6);
+	var cell2 = (row.insertCell(6).innerHTML = col7);
+	var cell3 = (row.insertCell(7).innerHTML = col8);
+	var cell4 = (row.insertCell(8).innerHTML = col9);
+}
 function updateHeaders() {
 	document.getElementById("report_merchant_name").innerHTML =
 		merchant.name + " Performance";
@@ -81,6 +105,27 @@ function buildFirstTable() {
 		numericalData.percentageChange.Number_of_Adjustments + "%",
 		numericalData.nominalChange.Number_of_Adjustments
 	);
+}
+function buildAffiliateTable(array) {
+	let table = document.getElementById("affiliateSummaryReport");
+	console.log(array);
+
+	for (let i = 0; i < 10; i++) {
+		build9columns(
+			table,
+			i + 1,
+			array[i].Affiliate,
+			array[i].Sales,
+			array[i].salesYOYpercent,
+			array[i].Click_Throughs,
+			array[i].Click_ThroughsYOYpercent,
+			"NA",
+			"NA",
+			"NA",
+			"NA"
+		);
+	}
+	affiliateReportButton.hidden = true;
 }
 
 function numberifyAndCalculateDifferences() {
