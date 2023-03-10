@@ -15,9 +15,9 @@ function updateHeaders() {
 	document.getElementById("report_merchant_name").innerHTML = merchant.name;
 	document.getElementById("report_merchant_id").innerHTML = merchant.id;
 	document.getElementById("primaryMonthTitle").innerHTML =
-		merchant.month + " " + report.year;
+		merchant.month + "\n" + report.year;
 	document.getElementById("priorMonthTitle").innerHTML =
-		merchant.month + " " + report.previousyear;
+		merchant.month + "\n" + report.previousyear;
 }
 function buildFirstTable() {
 	let table = document.getElementById("performanceSummaryReport");
@@ -235,7 +235,7 @@ function numberifyAndCalculateDifferences() {
 		Sales: (primaryMonthData.Sales - priorMonthData.Sales).toFixed(2),
 		Click_Throughs: (
 			primaryMonthData.Click_Throughs - priorMonthData.Click_Throughs
-		).toFixed(2),
+		).toFixed(0),
 		New_Customer_Sales: (
 			primaryMonthData.New_Customer_Sales - priorMonthData.New_Customer_Sales
 		).toFixed(2),
@@ -248,7 +248,7 @@ function numberifyAndCalculateDifferences() {
 		Number_of_Adjustments: (
 			primaryMonthData.Number_of_Adjustments -
 			priorMonthData.Number_of_Adjustments
-		).toFixed(2),
+		).toFixed(0),
 	};
 
 	return { percentageChange, nominalChange };
