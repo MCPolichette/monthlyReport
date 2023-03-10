@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="icon" type=".gif" href="style/markbounce.gif">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+    <title>AvantLink Monthly report</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="style/style.css" />
+</head>
+<body>
+    <div class="container-sm fixed-top">
+        <div id="title" class="row">
+            <div class="col-4">
+                <h4 onclick='use_local_storage()' class="justify-content-center"><strong>AvantLink Merchant Monthly
+                        Comparison</strong></h4>
+            </div>
+        </div>
+    </div>
+    <div class='container-fluid d-flex flex-column min-vh-100 justify-content-center align-items-center' id='first_display'>
+        <div class="row">
+            <div class="card shadow p-3 mb-5 bg-white rounded text-center">
+                <div class="card-body">
+                    <div id="passwordHelpBlock" class="form-text">
+                        Please enter your required API key to continue and use this project.
+                    </div><br>
+                    <!-- <label for="password_input" class="form-label">Your API key</label> -->
+                    <input type="password" id="password_input" class="form-control" aria-describedby="passwordHelpBlock">
+                    <br>
+                    <button type="submit" onclick='password_check()' class="btn btn-block btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='container-fluid d-flex flex-column align-items-center collapse' >
+        <div class="row">
+            <div class="col" hidden id="monthlyReport">
+                <br>
+                <h1>Monthly Report Example</h1>
+                <div class="accordion  shadow p-3 mb-5 bg-white rounded" id="reportAccordian">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="parameters">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                <strong>Parameters</strong>
+                            </button>
+                        </h2>
+                        
+
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="parameters"
+                            data-bs-parent="#reportAccordian">
+                            <div class="accordion-body">
+                                <h3>Please fill out inputs below:</h3>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="merchantId">Merchant Id</span>
+                                    <input type="text" id="merchant_ID_input" class="form-control" aria-describedby="merchantId">
+                                </div>
+                                
+                                <select id="selectedMonth" class="form-select" aria-label="Default select example">
+                                    <option selected>Select Month</option>
+                                    <option value="-01">January</option>
+                                    <option value="-02">February</option>
+                                    <option value="-03">March</option>
+                                    <option value="-04">April</option>
+                                    <option value="-05">May</option>
+                                    <option value="-06">June</option>
+                                    <option value="-07">July</option>
+                                    <option value="-08">August</option>
+                                    <option value="-09">September</option>
+                                    <option value="-10">October</option>
+                                    <option value="-11">November</option>
+                                    <option value="-12">December</option>
+                                </select>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" >Year</span>
+                                    <input id="selectedYear" type="text" class="form-control" aria-describedby="selectedYear">
+                                </div>
+                                <p>Selecting the month below, will compare this year's month with last years.</p>
+                                <p>Future iterations will allow you to be more specific</p>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary" onclick='perfomance_report()' type="button">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#reportAccordian" aria-expanded="false" aria-controls="reportAccordian"><strong>
+                                Report</strong>
+                            </button>
+                        </h2>
+                        <div id="reportAccordian" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#reportAccordian">
+                            <div class="accordion-body">
+                            <div class="container" id="report_pdf">
+                                <div class="row align-top">
+                                    <div class="col">
+                                        <h2 id="report_merchant_name">MERCHANT NAME</h2>
+                                        <h4 id="report_merchant_id">123456 </h4>
+                                        <table id='performanceSummaryReport' class="table  table-striped centered table-sm">
+                                            <tbody style="font-size: small;">
+                                                <thead>
+                                                    <tr>
+                                                        <th id="primaryMonthTitle">Primary Month</th>
+                                                        <th id="r_merchant_id">Prior Month</th>
+                                                        <th id="r_merchant_id">Percentage Change</th>
+                                                        <th id="r_merchant_id">Nominal Change</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>SALES </td>
+                                                    <td id="primarySales"></td>
+                                                <td id="priorSales"></td>
+                                            </tr>
+                                                <tr>
+                                                    <td>Clicks</td>
+                                                    <td id="primaryClicks"></td>
+                                                <td id="priorClicks"></td>
+                                            </tr>
+                                                <tr>
+                                                    <td>Affiliate Commission </td>
+                                                    <td id="primaryCommission"></td>
+                                                <td id="priorCommission"></td>
+                                            </tr>
+                                                <tr>
+                                                    <td>Network Commission </td>
+                                                    <td id="primaryNetworkCommission"></td>
+                                                <td id="priorNetworkCommission"></td>
+                                            </tr>
+                                                <tr>
+                                                    <td>Total Commission (SPEND?) </td>
+                                                    <td id="primaryTotalCommission"></td>
+                                                <td id="priorTotalCommission"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                        
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                </div>
+                </div>
+
+
+
+
+    
+    <script src="assets/API_reports.js"></script>
+    <script src="assets/build_tables.js"></script>
+    <script src="assets/app.js"></script>  
+    <!-- <script src="assets/export_files.js"></script> -->
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script>
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
+</body>
+</html>
