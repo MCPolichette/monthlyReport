@@ -2,6 +2,7 @@ function runAPI(report) {
 	startDate = report.startDate;
 	endDate = report.endDate;
 	report_id = report.report_id;
+	month = report.month;
 	console.log("running API module " + report_id);
 	fetch(
 		"https://classic.avantlink.com/api.php?module=AdminReport&auth_key=" +
@@ -23,57 +24,77 @@ function runAPI(report) {
 		)
 		.then((data) =>
 			// console.log(data)
-			reportStep2(data, report_id)
+			reportStep2(data, report_id, month)
 		);
 }
-function reportStep2(xml, report_id) {
+function reportStep2(xml, report_id, month) {
 	console.log("2ndreport", report_id);
 	switch (report_id) {
 		case 1: //Performance Summary
 			console.log(xml);
+			let performanceReport = {};
 			merchant.name =
 				xmlDoc.getElementsByTagName("Merchant")[0].childNodes[0].nodeValue;
-			primaryMonth.Ad_Impressions =
+			performanceReport.Ad_Impressions =
 				xmlDoc.getElementsByTagName(
 					"Ad_Impressions"
 				)[0].childNodes[0].nodeValue;
-			primaryMonth.Click_Throughs =
+			performanceReport.Click_Throughs =
 				xmlDoc.getElementsByTagName(
 					"Click_Throughs"
 				)[0].childNodes[0].nodeValue;
-			primaryMonth.Sales =
+			performanceReport.Sales =
 				xmlDoc.getElementsByTagName("Sales")[0].childNodes[0].nodeValue;
-			primaryMonth.Number_of_Sales =
+			performanceReport.Number_of_Sales =
 				xmlDoc.getElementsByTagName(
 					"Number_of_Sales"
 				)[0].childNodes[0].nodeValue;
-			primaryMonth.Mobile_Sales =
+			performanceReport.Mobile_Sales =
 				xmlDoc.getElementsByTagName("Mobile_Sales")[0].childNodes[0].nodeValue;
-			primaryMonth.Number_of_Mobile_Sales = xmlDoc.getElementsByTagName(
+			performanceReport.Number_of_Mobile_Sales = xmlDoc.getElementsByTagName(
 				"Number_of_Mobile_Sales"
 			)[0].childNodes[0].nodeValue;
 
-			primaryMonth.Commissions =
+			performanceReport.Commissions =
 				xmlDoc.getElementsByTagName("Commissions")[0].childNodes[0].nodeValue;
-			primaryMonth.Incentives =
+			performanceReport.Incentives =
 				xmlDoc.getElementsByTagName("Incentives")[0].childNodes[0].nodeValue;
-			primaryMonth.Network_Commissions = xmlDoc.getElementsByTagName(
+			performanceReport.Network_Commissions = xmlDoc.getElementsByTagName(
 				"Network_Commissions"
 			)[0].childNodes[0].nodeValue;
-			primaryMonth.Number_of_Adjustments = xmlDoc.getElementsByTagName(
+			performanceReport.Number_of_Adjustments = xmlDoc.getElementsByTagName(
 				"Number_of_Adjustments"
 			)[0].childNodes[0].nodeValue;
-			primaryMonth.New_Customers =
+			performanceReport.New_Customers =
 				xmlDoc.getElementsByTagName("New_Customers")[0].childNodes[0].nodeValue;
-			primaryMonth.New_Customer_Sales =
+			performanceReport.New_Customer_Sales =
 				xmlDoc.getElementsByTagName(
 					"New_Customer_Sales"
 				)[0].childNodes[0].nodeValue;
-			primaryMonth.Average_Sale_Amount = xmlDoc.getElementsByTagName(
+			performanceReport.Average_Sale_Amount = xmlDoc.getElementsByTagName(
 				"Average_Sale_Amount"
 			)[0].childNodes[0].nodeValue;
-			console.log(primaryMonth);
-			// console.log(merchant, primaryMonth);
+			console.log(performanceReport);
+			console.log(month);
+			if (month === "primary") {
+				primaryMonth.performanceReport = performanceReport;
+				runAPI({
+					report_id: 1,
+					startDate: priorMonth.startDate,
+					endDate: priorMonth.endDate,
+					month: "prior",
+				});
+			} else {
+				priorMonth.performanceReport = performanceReport;
+				console.log("TEST THIS ", performanceReport);
+				console.log(merchant, primaryMonth, priorMonth);
+				viewReportButton.innerHTML =
+					merchant.name + " " + merchant.month + " " + report.year + " Report";
+				updateHeaders();
+				buildFirstTable();
+
+				viewReportButton.disabled = false;
+			}
 			break;
 		case 15: //Performance Summary by Affiliate for selected dates
 			//Performance Summary by Affiliate for selected dates
@@ -161,7 +182,6 @@ function reportStep2(xml, report_id) {
 			}
 			affiliates.sort((a, b) => b.sales - a.sales);
 			// outage.conversion_rate = Number((outage.total_sales_count / outage.total_clicks)); //.toFixed(6) !?
-
 			console.log(merchant);
 			console.log(affiliates);
 			console.log(totalValues);
