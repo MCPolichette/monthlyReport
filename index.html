@@ -85,6 +85,11 @@
                                 <p>Future iterations will allow you to be more specific</p>
                                 <div class="d-grid gap-2">
                                     <button class="btn btn-primary" onclick='perfomance_report()' type="button">Submit</button>
+                                    <button class="btn btn-outline-success" id="viewReport" hidden disabled type="button"
+                                    data-bs-toggle="collapse"
+                                data-bs-target="#reportAccordian" aria-expanded="false" ><div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden"></span>
+                                </div></button>
                             </div>
                         </div>
                     </div>
@@ -107,13 +112,14 @@
                                             <tbody style="font-size: small;">
                                                 <thead>
                                                     <tr>
+                                                        <th class="intentionallyBlank"></th>
                                                         <th id="primaryMonthTitle">Primary Month</th>
-                                                        <th id="r_merchant_id">Prior Month</th>
-                                                        <th id="r_merchant_id">Percentage Change</th>
-                                                        <th id="r_merchant_id">Nominal Change</th>
+                                                        <th id="priorMonthTitle">Prior Month</th>
+                                                        <th>Percentage Change</th>
+                                                        <th >Nominal Change</th>
                                                     </tr>
                                                 </thead>
-                                                <tr>
+                                                <!-- <tr>
                                                     <td>SALES </td>
                                                     <td id="primarySales"></td>
                                                 <td id="priorSales"></td>
@@ -137,7 +143,7 @@
                                                     <td>Total Commission (SPEND?) </td>
                                                     <td id="primaryTotalCommission"></td>
                                                 <td id="priorTotalCommission"></td>
-                                            </tr>
+                                            </tr> -->
                                             </tbody>
                                         </table>
                                     </div>

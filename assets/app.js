@@ -2,10 +2,19 @@
 var merchant = {};
 var report = {};
 var today = {};
-var primaryMonth = {};
-var PriorMonth = {};
+var primaryMonth = { month: "primary" };
+var priorMonth = { month: "prior" };
+var viewReportButton = document.getElementById("viewReport");
 
 //general functions
+function toUSD(dollarInt) {
+	var formatter = new Intl.NumberFormat("en-US", {
+		style: "currency",
+		currency: "USD",
+	});
+	dollarUSD = formatter.format(dollarInt);
+	return dollarUSD;
+}
 function hide(arr) {
 	//Reveals a hidden HTML element.
 	arr.forEach((id) => {
@@ -63,6 +72,45 @@ function perfomance_report() {
 	console.log(today);
 	merchant.id = document.getElementById("merchant_ID_input").value;
 	report.month = document.getElementById("selectedMonth").value;
+	switch (report.month) {
+		case "-01":
+			merchant.month = "January";
+			break;
+		case "-02":
+			merchant.month = "February";
+			break;
+		case "-03":
+			merchant.month = "March";
+			break;
+		case "-04":
+			merchant.month = "April";
+			break;
+		case "-05":
+			merchant.month = "May";
+			break;
+		case "-06":
+			merchant.month = "June";
+			break;
+		case "-07":
+			merchant.month = "July";
+			break;
+		case "-08":
+			merchant.month = "August";
+			break;
+		case "-09":
+			merchant.month = "September";
+			break;
+		case "-10":
+			merchant.month = "October";
+			break;
+		case "-11":
+			merchant.month = "November";
+			break;
+		case "-12":
+			merchant.month = "December";
+			break;
+	}
+
 	let selectedYear = document.getElementById("selectedYear").value;
 	report.year = Number(selectedYear);
 	report.previousyear = report.year - 1;
@@ -81,28 +129,24 @@ function perfomance_report() {
 		acceptableData = false;
 	}
 	if (acceptableData === true) {
-		let firstMonthDayCount = daysInMonth(
+		let primaryDayCount = daysInMonth(
 			report.month.replaceAll("-", ""),
 			report.year
 		);
-		console.log(firstMonthDayCount);
-		let secondMonthDayCount = daysInMonth(report.month, report.previousyear);
-		let reportedMonth = {
-			startDate: report.year + report.month + "-01",
-			endDate: report.year + report.month + "-" + firstMonthDayCount,
-		};
-		console.log(reportedMonth);
+		console.log(primaryDayCount);
+		let priorDayCount = daysInMonth(report.month, report.previousyear);
+		primaryMonth.startDate = report.year + report.month + "-01";
+		primaryMonth.endDate = report.year + report.month + "-" + primaryDayCount;
+		priorMonth.startDate = report.year + report.month + "-01";
+		priorMonth.endDate = report.year + report.month + "-" + priorDayCount;
 
+		console.log(primaryMonth);
+		viewReportButton.hidden = false;
 		runAPI({
 			report_id: 1,
-			startDate: reportedMonth.startDate,
-			endDate: reportedMonth.endDate,
+			startDate: primaryMonth.startDate,
+			endDate: primaryMonth.endDate,
+			month: "primary",
 		});
-
-		// runAPI({
-		// 	report_id: 15,
-		// 	startDate: reportedMonth.startDate,
-		// 	endDate: reportedMonth.endDate,
-		// })
 	}
 }
