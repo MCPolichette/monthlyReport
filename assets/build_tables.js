@@ -108,17 +108,17 @@ function buildFirstTable() {
 }
 function buildAffiliateTable(array) {
 	let table = document.getElementById("affiliateSummaryReport");
+	table.style.textAlign = "right";
 	console.log(array);
-
 	for (let i = 0; i < 10; i++) {
 		build9columns(
 			table,
 			i + 1,
 			array[i].Affiliate,
-			array[i].Sales,
-			array[i].salesYOYpercent,
+			toUSD(array[i].Sales),
+			array[i].salesYOYpercent + "%",
 			array[i].Click_Throughs,
-			array[i].Click_ThroughsYOYpercent,
+			array[i].Click_ThroughsYOYpercent + "%",
 			"NA",
 			"NA",
 			"NA",

@@ -1,6 +1,8 @@
 // global variables
 var merchant = {};
-var report = {};
+var report = {
+	yoyPerformance: [],
+};
 var today = {};
 var primaryMonth = { month: "primary" };
 var priorMonth = { month: "prior" };
@@ -144,6 +146,7 @@ function perfomance_report() {
 
 		console.log(primaryMonth);
 		viewReportButton.hidden = false;
+		document.getElementById("submitBtn").disabled = true;
 		runAPI({
 			report_id: 1,
 			startDate: primaryMonth.startDate,
@@ -161,3 +164,4 @@ function affiliate_report() {
 		month: "primary",
 	});
 }
+function products_sold_report() {}
