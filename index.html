@@ -20,7 +20,7 @@
             <div class="col-4">
                 <h4 onclick='use_local_storage()' class="justify-content-center"><strong>AvantLink Merchant Monthly Comparison</strong></h4>
             </div>
-        </div>
+         </div>
     </div>
     <div class='container-fluid d-flex flex-column min-vh-100 justify-content-center align-items-center' id='first_display'>
         <div class="row">
@@ -39,6 +39,7 @@
     </div>
     <div class='container-fluid d-flex flex-column align-items-center collapse' >
         <div class="row" hidden id="monthlyReport">
+            <div class="col-12">
                 <br>
                 <h1>Monthly Report Example</h1>
                 <div class="accordion  shadow p-3 mb-5 bg-white rounded" id="reportAccordian">
@@ -52,49 +53,155 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="parameters"
                             data-bs-parent="#reportAccordian">
                             <div class="accordion-body">
-                                <div class="container-fluid"><div class="row"><div class ="col">
-                                <h3>Please fill out inputs below:</h3>
-                                <div class="input-group mb-3">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <h3>Please fill out inputs below:</h3>
+                                    <div class ="col-6">
+                                
+                                    <div class="input-group mb-3">
                                     <span class="input-group-text" id="merchantId">Merchant Id</span>
                                     <input type="text" id="merchant_ID_input" class="form-control" aria-describedby="merchantId">
-                                </div> 
-                                <select id="selectedMonth" class="form-select" aria-label="Default select example">
-                                    <option selected>Select Month</option>
-                                    <option value="-01">January</option>
-                                    <option value="-02">February</option>
-                                    <option value="-03">March</option>
-                                    <option value="-04">April</option>
-                                    <option value="-05">May</option>
-                                    <option value="-06">June</option>
-                                    <option value="-07">July</option>
-                                    <option value="-08">August</option>
-                                    <option value="-09">September</option>
-                                    <option value="-10">October</option>
-                                    <option value="-11">November</option>
-                                    <option value="-12">December</option>
-                                </select>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" >Year</span>
-                                    <input id="selectedYear" type="text" class="form-control" aria-describedby="selectedYear">
+                                    </div> 
+                                    <p>Selecting the month below, will compare this year's  month with last years.</p>
+                                    <p>Future iterations will allow you to be more specific</p>
+                                    <select id="selectedMonth" class="form-select"  aria-label="Default select example">
+                                        <option selected>Select Month</option>
+                                        <option value="-01">January</option>
+                                        <option value="-02">February</option>
+                                        <option value="-03">March</option>
+                                        <option value="-04">April</option>
+                                        <option value="-05">May</option>
+                                        <option value="-06">June</option>
+                                        <option value="-07">July</option>
+                                        <option value="-08">August</option>
+                                        <option value="-09">September</option>
+                                        <option value="-10">October</option>
+                                        <option value="-11">November</option>
+                                        <option value="-12">December</option>
+                                    </select>
+                                    <br>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" >Year</span>
+                                        <input id="selectedYear" type="text"    class="form-control"   aria-describedby="selectedYear" />
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-primary" id="submitBtn" onclick='perfomance_report()' type="button">Submit</button>
+                                    </div>
+                                
                                 </div>
-                                <p>Selecting the month below, will compare this year's month with last years.</p>
-                                <p>Future iterations will allow you to be more specific</p>
-                                <div class="d-grid gap-2">
-                                    <button class="btn btn-primary" onclick='perfomance_report()' type="button">Submit</button>
-                                    <button class="btn btn-outline-success" id="viewReport" hidden disabled type="button"
-                                    data-bs-toggle="collapse"
-                                data-bs-target="#reportAccordian" aria-expanded="false" ><div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden"></span>
-                                </div></button>
-                            </div></div>
-                            </div>
+                                <div class="col-6">
+                                    <div class="card border-primary mb-3" >
+                                            <div class="card-header">Base Merchant Info</div>
+                                            <div class="card-body text-primary">
+                                                <h5 id="merchantCard" class="card-title">Merchant</h5>
+                                                <ul>
+                                                    <li id ="merchantCardId"></li>
+                                                    <li id ="monthYoY"></li>
+                                                    <li > more data?</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                        <button hidden id="affiliate_report_button" class="btn btn-outline-success" data-bs-toggle="collapse" data-bs-target="#affiliateDataAccordian" aria-expanded="false" aria-controls="affiliateDataAccordian" onclick="affiliate_report()"
+                                            type="button">NEXT STEP: Run API for Affiliate Performance</button>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+		<h2 class="accordion-header" id="Affiliate Data">
+			<button
+				class="accordion-button collapsed"
+				type="button"
+				data-bs-toggle="collapse"
+				data-bs-target="#affiliateDataAccordian"
+				aria-expanded="false"
+				aria-controls="affiliateDataAccordian"
+			>
+				<strong>Affiliate Data</strong>
+			</button>
+		</h2>
+		<div
+			id="affiliateDataAccordian"
+			class="accordion-collapse collapse"
+			aria-labelledby="Affiliate Data"
+			data-bs-parent="#reportAccordian">
+			<div class="accordion-body">
+				 <div class="row">
+                 <div class="col-6">
+                     <h4>List New Affiliates</h4>
+                     <!-- MORE QUESTIONS!? -->
+                     <p>Please list New Affiliates, separated by commas in the inputs below:</p>
+                     <h4 id="newAffMonth1">This Month</h4>
+                     <div class="input-group mb-3">
+                         <input type="text" class="form-control" placeholder="Affiliate ID" aria-label="Affiliate ID" id="addNewAffMonth1"
+                             aria-describedby="addNewAffMonth1">
+                         <button class="btn btn-outline-secondary" type="button" onclick="addAffiliateToThisMonth()">Add Affilaite</button>
+                     </div>
+                     <h4 id="newAffMonth2">Last Month</h4>
+                     <div class="input-group mb-3">
+                         <input type="text" class="form-control" placeholder="Affiliate ID" aria-label="Affiliate ID" id="addnewAffMonth2"
+                             aria-describedby="addnewAffMonth2">
+                         <button class="btn btn-outline-secondary" type="button" onclick="addAffiliateToThisMonth()">Add Affilaite</button>
+                     </div>
+                     <h4 id="newAffMonth3">Two Months Ago</h4>
+                     <div class="input-group mb-3">
+                         <input type="text" class="form-control" placeholder="Affiliate ID" aria-label="Affiliate ID" id="addNewAffMonth3"
+                             aria-describedby="addNewAffMonth3">
+                         <button class="btn btn-outline-secondary" type="button" onclick="addAffiliateToThisMonth()">Add Affilaite</button>
+                     </div>
+                 </div>
+                 <div class="col-6">
+                     <div class="card border-primary mb-3">
+                         <div id="thisMonthList" class="card-header">Header</div>
+                         <div class="card-body text-primary">
+                             <p class="card-title">Affiliates joined - click to remove
+                             </p>
+                             <div id="thisMonthListOfAffiliates"></div>
+                         </div>
+                     </div>
+                     <div class="card border-primary mb-3">
+                         <div id="lastMonthList" class="card-header">Header</div>
+                         <div class="card-body text-primary">
+                             <p class="card-title">Affiliates joined - click to remove
+                             </p>
+                             <div id="thisMonthListOfAffiliates"></div>
+                         </div>
+                     </div>
+                     <div class="card border-primary mb-3">
+                         <div id="twoMonthsAgo" class="card-header">Header
+
+                         </div>
+                         <div class="card-body text-primary">
+                             <p class="card-title">Affiliates joined - click to remove
+                             </p>
+                                 <div id="thisMonthListOfAffiliates"></div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <div class="row">
+                 <div class="d-grid gap-2">
+                 
+                     <button class="btn btn-outline-success" id="viewReport" hidden disabled type="button"
+                 data-bs-toggle="collapse"
+             data-bs-target="#reportAccordian" aria-expanded="false" >
+             <div class="spinner-border text-primary" role="status">
+                 <span class="visually-hidden"></span>
+             </div>
+         </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="reportHeader">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#reportAccordian" aria-expanded="false" aria-controls="reportAccordian"><strong>
+								</div>
+							</div>
+						</div>
+						 
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="reportHeader">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"                            data-bs-target="#reportAccordian" aria-expanded="false" aria-controls="reportAccordian"><strong>
                                 Report</strong>
                             </button>
                         </h2>
@@ -102,10 +209,10 @@
                             data-bs-parent="#reportAccordian">
                             <div class="accordion-body">
                             <div class="container" id="report_pdf">
+                                <div class="row"><h2 id="report_merchant_name">MERCHANT NAME<h4 id="report_merchant_id">123456 </h4></h2></div>
                                 <div class="row align-top">
-                                    <div class="col">
-                                        <h2 id="report_merchant_name">MERCHANT NAME</h2>
-                                        <h4 id="report_merchant_id">123456 </h4>
+                                    <div class="col-6">
+                                       <h3>Monthly Performance</h3>                
                                         <table id='performanceSummaryReport' class="table  table-striped centered table-sm">
                                             <tbody style="font-size: small;">
                                                 <thead>
@@ -119,12 +226,14 @@
                                                 </thead>
                                             </tbody>
                                         </table>
-                                        <hr>
-                                        <div class="d-grid gap-2">
-                                            <button hidden id="affiliate_report_button" class="btn btn-outline-primary" 
-                                            onclick="affiliate_report()"
-                                            type="button">Affiliate Performance</button>
+                                    </div>
+                                    <!-- <div class="col-6">
+                                        <h3>second column</h3>
                                         </div>
+                                    </div> -->
+                                        <div class = "row">
+                                            <div class="col-12">
+                                  
                                         <table id='affiliateSummaryReport' class="table  table-striped centered table-sm">
                                             <tbody style="font-size: small;">
                                                 <thead>
@@ -143,12 +252,16 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    
+                                </div>
                                         
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
+        </div>
     
     <script src="assets/API_reports.js"></script>
     <script src="assets/build_tables.js"></script>

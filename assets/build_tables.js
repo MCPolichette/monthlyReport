@@ -43,7 +43,11 @@ function updateHeaders() {
 		merchant.month + "\n" + report.year;
 	document.getElementById("priorMonthTitle").innerHTML =
 		merchant.month + "\n" + report.previousyear;
-
+	document.getElementById("merchantCard").innerHTML =
+		merchant.name + " " + " Performance Report";
+	document.getElementById("merchantCardId").innerHTML = "ID:  " + merchant.id;
+	document.getElementById("monthYoY").innerHTML =
+		merchant.month + " " + report.year + "/" + report.previousyear;
 	document.getElementById("affiliate_report_button").hidden = false;
 }
 function buildFirstTable() {
@@ -108,17 +112,17 @@ function buildFirstTable() {
 }
 function buildAffiliateTable(array) {
 	let table = document.getElementById("affiliateSummaryReport");
+	table.style.textAlign = "right";
 	console.log(array);
-
 	for (let i = 0; i < 10; i++) {
 		build9columns(
 			table,
 			i + 1,
 			array[i].Affiliate,
-			array[i].Sales,
-			array[i].salesYOYpercent,
+			toUSD(array[i].Sales),
+			array[i].salesYOYpercent + "%",
 			array[i].Click_Throughs,
-			array[i].Click_ThroughsYOYpercent,
+			array[i].Click_ThroughsYOYpercent + "%",
 			"NA",
 			"NA",
 			"NA",
@@ -155,10 +159,10 @@ function numberifyAndCalculateDifferences() {
 			).replaceAll("$", "")
 		),
 		Commissions: Number(
-			primaryMonth.performanceReport.Commissions.replaceAll(",", "").replaceAll(
-				"$",
+			primaryMonth.performanceReport.Commissions.replaceAll(
+				",",
 				""
-			)
+			).replaceAll("$", "")
 		),
 		Network_Commissions: Number(
 			primaryMonth.performanceReport.Network_Commissions.replaceAll(
@@ -175,7 +179,10 @@ function numberifyAndCalculateDifferences() {
 	};
 	let priorMonthData = {
 		Sales: Number(
-			priorMonth.performanceReport.Sales.replaceAll(",", "").replaceAll("$", "")
+			priorMonth.performanceReport.Sales.replaceAll(",", "").replaceAll(
+				"$",
+				""
+			)
 		),
 		Click_Throughs: Number(
 			priorMonth.performanceReport.Click_Throughs.replaceAll(
@@ -184,10 +191,10 @@ function numberifyAndCalculateDifferences() {
 			).replaceAll("$", "")
 		),
 		New_Customers: Number(
-			priorMonth.performanceReport.New_Customers.replaceAll(",", "").replaceAll(
-				"$",
+			priorMonth.performanceReport.New_Customers.replaceAll(
+				",",
 				""
-			)
+			).replaceAll("$", "")
 		),
 		New_Customer_Sales: Number(
 			priorMonth.performanceReport.New_Customer_Sales.replaceAll(
@@ -196,10 +203,10 @@ function numberifyAndCalculateDifferences() {
 			).replaceAll("$", "")
 		),
 		Commissions: Number(
-			priorMonth.performanceReport.Commissions.replaceAll(",", "").replaceAll(
-				"$",
+			priorMonth.performanceReport.Commissions.replaceAll(
+				",",
 				""
-			)
+			).replaceAll("$", "")
 		),
 		Network_Commissions: Number(
 			priorMonth.performanceReport.Network_Commissions.replaceAll(
@@ -246,7 +253,10 @@ function numberifyAndCalculateDifferences() {
 			primaryMonthData.New_Customer_Sales
 		).toFixed(2);
 	}
-	if (primaryMonthData.Commissions === 0 || priorMonthData.Commissions === 0) {
+	if (
+		primaryMonthData.Commissions === 0 ||
+		priorMonthData.Commissions === 0
+	) {
 		percentageChange.Commissions = "N / A";
 	} else {
 		percentageChange.Commissions = (
@@ -285,13 +295,15 @@ function numberifyAndCalculateDifferences() {
 			primaryMonthData.Click_Throughs - priorMonthData.Click_Throughs
 		).toFixed(0),
 		New_Customer_Sales: (
-			primaryMonthData.New_Customer_Sales - priorMonthData.New_Customer_Sales
+			primaryMonthData.New_Customer_Sales -
+			priorMonthData.New_Customer_Sales
 		).toFixed(2),
 		Commissions: (
 			primaryMonthData.Commissions - priorMonthData.Commissions
 		).toFixed(2),
 		Network_Commissions: (
-			primaryMonthData.Network_Commissions - priorMonthData.Network_Commissions
+			primaryMonthData.Network_Commissions -
+			priorMonthData.Network_Commissions
 		).toFixed(2),
 		Number_of_Adjustments: (
 			primaryMonthData.Number_of_Adjustments -
