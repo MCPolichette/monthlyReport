@@ -2,6 +2,9 @@
 var merchant = {};
 var report = {
 	yoyPerformance: [],
+	newAffsMonth1: [],
+	newAffsMonth2: [],
+	newAffsMonth3: [],
 };
 var today = {};
 var primaryMonth = { month: "primary" };
@@ -34,6 +37,39 @@ function unhide(arr) {
 			element.removeAttribute("hidden");
 		}
 	});
+}
+function updateDivArray(array, text) {
+	for (let i = 0; i < array.length; i++) {
+		document.getElementById(array[i]).innerHTML = text;
+	}
+}
+function addAffiliateToThisMonth() {
+	let affiliateId = document.getElementById("addNewAffMonth1").value;
+	addAffiliate(affiliateId, report.newAffsMonth1, "ID HERE");
+	affiliateId.value = "";
+}
+function addAffiliateToLastMonth() {
+	let affiliateId = document.getElementById("addNewAffMonth2").value;
+	addAffiliate(affiliateId, report.newAffsMonth2, "ID HERE");
+	affiliateId.value = "";
+}
+function addAffiliateToMonth() {
+	let affiliateId = document.getElementById("addNewAffMonth3").value;
+	addAffiliate(affiliateId, report.newAffsMonth3, "ID HERE");
+	affiliateId.value = "";
+}
+function addAffiliate(affiliate, array, id) {
+	if (array.c) array.push(affiliate);
+	document.getElementById(id).innerHTML = "";
+	for (i = 0; (i = array.length); i++) {
+		let affiliateButton = document.createElement("button");
+		(affiliateButton.innertext = affiliate),
+			(onclick = removeAffiliate(affiliate, array));
+		document.getElementById(id).appendChild(affiliateButton);
+	}
+}
+function removeAffiliate(affiliate) {
+	console.log(affiliate);
 }
 function DateToString(date) {
 	let options = {
@@ -76,45 +112,177 @@ function perfomance_report() {
 	console.log(today);
 	merchant.id = document.getElementById("merchant_ID_input").value;
 	report.month = document.getElementById("selectedMonth").value;
+
 	switch (report.month) {
 		case "-01":
 			merchant.month = "January";
+			merchant.previousMonth = "December";
+			merchant.twoMonthsAgo = "November";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-02":
 			merchant.month = "February";
+			merchant.previousMonth = "January";
+			merchant.twoMonthsAgo = "December";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-03":
 			merchant.month = "March";
+			merchant.previousMonth = "February";
+			merchant.twoMonthsAgo = "January";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-04":
 			merchant.month = "April";
+			merchant.previousMonth = "March";
+			merchant.twoMonthsAgo = "February";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-05":
 			merchant.month = "May";
+			merchant.previousMonth = "April";
+			merchant.twoMonthsAgo = "March";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-06":
 			merchant.month = "June";
+			merchant.previousMonth = "May";
+			merchant.twoMonthsAgo = "April";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-07":
 			merchant.month = "July";
+			merchant.previousMonth = "June";
+			merchant.twoMonthsAgo = "May";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-08":
 			merchant.month = "August";
+			merchant.previousMonth = "July";
+			merchant.twoMonthsAgo = "June";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-09":
 			merchant.month = "September";
+			merchant.previousMonth = "August";
+			merchant.twoMonthsAgo = "July";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-10":
 			merchant.month = "October";
+			merchant.previousMonth = "September";
+			merchant.twoMonthsAgo = "August";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-11":
 			merchant.month = "November";
+			merchant.previousMonth = "October";
+			merchant.twoMonthsAgo = "September";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 		case "-12":
 			merchant.month = "December";
+			merchant.previousMonth = "November";
+			merchant.twoMonthsAgo = "October";
+			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			updateDivArray(
+				["newAffMonth2", "lastMonthList"],
+				merchant.previousMonth
+			);
+			updateDivArray(
+				["newAffMonth3", "twoMonthsAgo"],
+				merchant.twoMonthsAgo
+			);
 			break;
 	}
-
 	let selectedYear = document.getElementById("selectedYear").value;
 	report.year = Number(selectedYear);
 	report.previousyear = report.year - 1;
@@ -140,7 +308,8 @@ function perfomance_report() {
 		console.log(primaryDayCount);
 		let priorDayCount = daysInMonth(report.month, report.previousyear);
 		primaryMonth.startDate = report.year + report.month + "-01";
-		primaryMonth.endDate = report.year + report.month + "-" + primaryDayCount;
+		primaryMonth.endDate =
+			report.year + report.month + "-" + primaryDayCount;
 		priorMonth.startDate = report.year + report.month + "-01";
 		priorMonth.endDate = report.year + report.month + "-" + priorDayCount;
 
@@ -163,5 +332,8 @@ function affiliate_report() {
 		endDate: primaryMonth.endDate,
 		month: "primary",
 	});
+	// document.getElementById("newAffMonth1text").disabled = false;
+	// document.getElementById("newAffMonth2text").disabled = false;
+	// document.getElementById("newAffMonth3text").disabled = false;
 }
 function products_sold_report() {}
