@@ -11,7 +11,6 @@ function build5columns(table, row, col1, col2, col3, col4, col5) {
 	var cell4 = (row.insertCell(3).innerHTML = col4);
 	var cell5 = (row.insertCell(4).innerHTML = col5);
 }
-
 function build4columns(table, row, col1, col2, col3, col4) {
 	var row = table.insertRow(row);
 	var cell1 = (row.insertCell(0).innerHTML = col1);
@@ -57,6 +56,21 @@ function updateHeaders() {
 	document.getElementById("monthYoY").innerHTML =
 		merchant.month + " " + report.year + "/" + report.previousyear;
 	document.getElementById("affiliate_report_button").hidden = false;
+}
+function build_products_sold_table() {
+	let table = document.getElementById("productsSoldReport");
+	table.style.textAlign = "right";
+	for (let i = 0; i < report.productList.length; i++) {
+		build5columns(
+			table,
+			[i + 1],
+			report.productList[i].Product_SKU,
+			report.productList[i].Product_Name,
+			report.productList[i].Sale_Count,
+			report.productList[i].Mobile_Sale_Count,
+			report.productList[i].Total_Product_Sale_Amount
+		);
+	}
 }
 function buildNewPerformersTable() {
 	let table = document.getElementById("newPartnerReport");
@@ -356,7 +370,6 @@ function numberifyAndCalculateDifferences() {
 			primaryMonthData.Number_of_Adjustments
 		).toFixed(2);
 	}
-
 	let nominalChange = {
 		Sales: (primaryMonthData.Sales - priorMonthData.Sales).toFixed(2),
 		Click_Throughs: (
@@ -378,6 +391,5 @@ function numberifyAndCalculateDifferences() {
 			priorMonthData.Number_of_Adjustments
 		).toFixed(0),
 	};
-
 	return { percentageChange, nominalChange };
 }

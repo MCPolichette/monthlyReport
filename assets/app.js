@@ -5,6 +5,7 @@ var report = {
 	newAffsMonth1: [],
 	newAffsMonth2: [],
 	newAffsMonth3: [],
+	productList: [],
 };
 var today = {};
 var primaryMonth = { month: "primary" };
@@ -380,4 +381,12 @@ function affiliate_report() {
 		month: "primary",
 	});
 }
-function products_sold_report() {}
+function products_sold_report() {
+	document.getElementById("first_loading_bar").hidden = false;
+	runAPI({
+		report_id: 18,
+		startDate: primaryMonth.startDate,
+		endDate: primaryMonth.endDate,
+		month: "primary",
+	});
+}

@@ -33,6 +33,34 @@ function runAPI(report) {
 function reportStep2(xml, report_id, month) {
 	console.log("2ndreport", report_id);
 	switch (report_id) {
+		case 18:
+			console.log(xmlDoc.getElementsByTagName("Product_SKU").length);
+			for (
+				let i = 0;
+				i < 10;
+				i++ //!? MAKE THE ITEM COUNT DYNAMIC!?
+			) {
+				let x = {};
+				x.Product_SKU =
+					xmlDoc.getElementsByTagName("Product_SKU")[i].textContent;
+				console.log(x);
+				x.Product_Name =
+					xmlDoc.getElementsByTagName("Product_Name")[i].textContent;
+				x.Sale_Count =
+					xmlDoc.getElementsByTagName("Sale_Count")[i].textContent;
+				x.Mobile_Sale_Count =
+					xmlDoc.getElementsByTagName("Mobile_Sale_Count")[
+						i
+					].textContent;
+				x.Total_Product_Sale_Amount = xmlDoc.getElementsByTagName(
+					"Total_Product_Sale_Amount"
+				)[i].textContent;
+				report.productList[i] = x;
+			}
+			document.getElementById("product_report_btn").disabled = true;
+			document.getElementById("first_loading_bar").hidden = true;
+			build_products_sold_table();
+			break;
 		case 1: //Performance Summary
 			console.log(xml);
 			let performanceReport = {};
