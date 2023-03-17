@@ -11,7 +11,6 @@ var primaryMonth = { month: "primary" };
 var priorMonth = { month: "prior" };
 var viewReportButton = document.getElementById("viewReport");
 var affiliateReportButton = document.getElementById("affiliate_report_button");
-
 //general functions
 function toUSD(dollarInt) {
 	var formatter = new Intl.NumberFormat("en-US", {
@@ -45,29 +44,72 @@ function updateDivArray(array, text) {
 }
 function addAffiliateToThisMonth() {
 	let affiliateId = document.getElementById("addNewAffMonth1").value;
-	addAffiliate(affiliateId, report.newAffsMonth1, "ID HERE");
+	addAffiliate(
+		affiliateId,
+		report.newAffsMonth1,
+		"thisMonthListOfAffiliates",
+		"addNewAffMonth1"
+	);
 	affiliateId.value = "";
 }
 function addAffiliateToLastMonth() {
 	let affiliateId = document.getElementById("addNewAffMonth2").value;
-	addAffiliate(affiliateId, report.newAffsMonth2, "ID HERE");
+	addAffiliate(
+		affiliateId,
+		report.newAffsMonth2,
+		"lastMonthListOfAffiliates",
+		"addNewAffMonth2"
+	);
 	affiliateId.value = "";
 }
-function addAffiliateToMonth() {
+function addAffiliateTwoMonths() {
 	let affiliateId = document.getElementById("addNewAffMonth3").value;
-	addAffiliate(affiliateId, report.newAffsMonth3, "ID HERE");
+	addAffiliate(
+		affiliateId,
+		report.newAffsMonth3,
+		"twoMonthsAgoListOfAffiliates",
+		"addNewAffMonth3"
+	);
 	affiliateId.value = "";
 }
-function addAffiliate(affiliate, array, id) {
-	if (array.c) array.push(affiliate);
+function displayNewAffiliates(array, id) {
 	document.getElementById(id).innerHTML = "";
-	for (i = 0; (i = array.length); i++) {
+	for (j = 0; j < array.length; j++) {
 		let affiliateButton = document.createElement("button");
-		(affiliateButton.innertext = affiliate),
-			(onclick = removeAffiliate(affiliate, array));
+		let x = array[j];
+		affiliateButton.innerHTML = x;
+		affiliateButton.classList = "btn btn-primary";
+		affiliateButton.addEventListener(
+			"click",
+			function () {
+				let y = array.indexOf(x);
+				console.log(j, x, y, array[j]);
+				array.splice(y, 1);
+				displayNewAffiliates(array, id);
+			},
+			false,
+			false
+		);
 		document.getElementById(id).appendChild(affiliateButton);
 	}
 }
+function addAffiliate(affiliate, array, id, clearId) {
+	if (array.includes(affiliate)) {
+		alert("already added this Affiliate");
+	} else {
+		console.log(affiliate, array);
+		for (i = 0; i < primaryMonth.affiliateReport.length; i++) {
+			console.log(primaryMonth.affiliateReport[i].Affiliate_Id, i);
+			if (affiliate === primaryMonth.affiliateReport[i].Affiliate_Id) {
+				array.push(affiliate);
+				console.log(affiliate, array, id);
+				displayNewAffiliates(array, id, affiliate);
+			}
+		}
+	}
+	document.getElementById(clearId).value = "";
+}
+
 function removeAffiliate(affiliate) {
 	console.log(affiliate);
 }
@@ -103,7 +145,6 @@ function password_check() {
 			break;
 	}
 }
-
 function perfomance_report() {
 	var acceptableData = true;
 	today.date = DateToString(new Date());
@@ -315,6 +356,7 @@ function perfomance_report() {
 
 		console.log(primaryMonth);
 		viewReportButton.hidden = false;
+		document.getElementById("first_loading_bar").hidden = false;
 		document.getElementById("submitBtn").disabled = true;
 		runAPI({
 			report_id: 1,
@@ -325,15 +367,17 @@ function perfomance_report() {
 	}
 }
 function affiliate_report() {
-	affiliateReportButton.innerHTML = `<div class="spinner-border text-primary" role="status"><span class="visually-hidden"></span></div>`;
+	document.getElementById("first_loading_bar").hidden = false;
+	document.getElementById(
+		"affiliate_report_button"
+	).innerHTML = `<div class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`;
 	runAPI({
 		report_id: 15,
 		startDate: primaryMonth.startDate,
 		endDate: primaryMonth.endDate,
 		month: "primary",
 	});
-	// document.getElementById("newAffMonth1text").disabled = false;
-	// document.getElementById("newAffMonth2text").disabled = false;
-	// document.getElementById("newAffMonth3text").disabled = false;
 }
 function products_sold_report() {}
