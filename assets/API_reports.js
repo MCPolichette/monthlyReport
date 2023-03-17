@@ -20,7 +20,10 @@ function runAPI(report) {
 		.then((response) => response.text())
 		.then(
 			(str) =>
-				(xmlDoc = new window.DOMParser().parseFromString(str, "text/xml"))
+				(xmlDoc = new window.DOMParser().parseFromString(
+					str,
+					"text/xml"
+				))
 		)
 		.then((data) =>
 			// console.log(data)
@@ -34,7 +37,9 @@ function reportStep2(xml, report_id, month) {
 			console.log(xml);
 			let performanceReport = {};
 			merchant.name =
-				xmlDoc.getElementsByTagName("Merchant")[0].childNodes[0].nodeValue;
+				xmlDoc.getElementsByTagName(
+					"Merchant"
+				)[0].childNodes[0].nodeValue;
 			performanceReport.Ad_Impressions =
 				xmlDoc.getElementsByTagName(
 					"Ad_Impressions"
@@ -50,23 +55,32 @@ function reportStep2(xml, report_id, month) {
 					"Number_of_Sales"
 				)[0].childNodes[0].nodeValue;
 			performanceReport.Mobile_Sales =
-				xmlDoc.getElementsByTagName("Mobile_Sales")[0].childNodes[0].nodeValue;
-			performanceReport.Number_of_Mobile_Sales = xmlDoc.getElementsByTagName(
-				"Number_of_Mobile_Sales"
-			)[0].childNodes[0].nodeValue;
-
+				xmlDoc.getElementsByTagName(
+					"Mobile_Sales"
+				)[0].childNodes[0].nodeValue;
+			performanceReport.Number_of_Mobile_Sales =
+				xmlDoc.getElementsByTagName(
+					"Number_of_Mobile_Sales"
+				)[0].childNodes[0].nodeValue;
 			performanceReport.Commissions =
-				xmlDoc.getElementsByTagName("Commissions")[0].childNodes[0].nodeValue;
+				xmlDoc.getElementsByTagName(
+					"Commissions"
+				)[0].childNodes[0].nodeValue;
 			performanceReport.Incentives =
-				xmlDoc.getElementsByTagName("Incentives")[0].childNodes[0].nodeValue;
+				xmlDoc.getElementsByTagName(
+					"Incentives"
+				)[0].childNodes[0].nodeValue;
 			performanceReport.Network_Commissions = xmlDoc.getElementsByTagName(
 				"Network_Commissions"
 			)[0].childNodes[0].nodeValue;
-			performanceReport.Number_of_Adjustments = xmlDoc.getElementsByTagName(
-				"Number_of_Adjustments"
-			)[0].childNodes[0].nodeValue;
+			performanceReport.Number_of_Adjustments =
+				xmlDoc.getElementsByTagName(
+					"Number_of_Adjustments"
+				)[0].childNodes[0].nodeValue;
 			performanceReport.New_Customers =
-				xmlDoc.getElementsByTagName("New_Customers")[0].childNodes[0].nodeValue;
+				xmlDoc.getElementsByTagName(
+					"New_Customers"
+				)[0].childNodes[0].nodeValue;
 			performanceReport.New_Customer_Sales =
 				xmlDoc.getElementsByTagName(
 					"New_Customer_Sales"
@@ -89,9 +103,15 @@ function reportStep2(xml, report_id, month) {
 				console.log("TEST THIS ", performanceReport);
 				console.log(merchant, primaryMonth, priorMonth);
 				viewReportButton.innerHTML =
-					merchant.name + " " + merchant.month + " " + report.year + " Report";
+					merchant.name +
+					" " +
+					merchant.month +
+					" " +
+					report.year +
+					" Report";
 				updateHeaders();
 				buildFirstTable();
+				document.getElementById("first_loading_bar").hidden = true;
 				viewReportButton.disabled = false;
 			}
 			break;
@@ -99,11 +119,12 @@ function reportStep2(xml, report_id, month) {
 			let affiliates = [];
 			xmlDoc = xml.getElementsByTagName("Table1");
 			console.log(xmlDoc.length);
+			console.log;
 			for (let i = 0; i < xmlDoc.length; i++) {
 				affiliates.push({
 					Affiliate:
-						xmlDoc[i].getElementsByTagName("Affiliate")[0].childNodes[0]
-							.nodeValue,
+						xmlDoc[i].getElementsByTagName("Affiliate")[0]
+							.childNodes[0].nodeValue,
 					Click_Throughs: Number(
 						xmlDoc[i]
 							.getElementsByTagName("Click_Throughs")[0]
@@ -111,8 +132,8 @@ function reportStep2(xml, report_id, month) {
 							.replaceAll("$", "")
 					),
 					Affiliate_Id:
-						xmlDoc[i].getElementsByTagName("Affiliate_Id")[0].childNodes[0]
-							.nodeValue,
+						xmlDoc[i].getElementsByTagName("Affiliate_Id")[0]
+							.childNodes[0].nodeValue,
 					Number_of_Sales: Number(
 						xmlDoc[i]
 							.getElementsByTagName("Number_of_Sales")[0]
@@ -125,13 +146,30 @@ function reportStep2(xml, report_id, month) {
 							.childNodes[0].nodeValue.replaceAll(",", "")
 							.replaceAll("$", "")
 					),
+					Commissions: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Commissions")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					Network_Commissions: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Network_Commissions")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
 					Ad_Impressions: Number(
 						xmlDoc[i]
 							.getElementsByTagName("Ad_Impressions")[0]
 							.childNodes[0].nodeValue.replaceAll(",", "")
 							.replaceAll("$", "")
 					),
-
+					Incentives: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Incentives")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
 					Conversion_Rate: Number(
 						xmlDoc[i]
 							.getElementsByTagName("Conversion_Rate")[0]
@@ -163,6 +201,13 @@ function reportStep2(xml, report_id, month) {
 							.replaceAll("$", "")
 					),
 				});
+				affiliates[i].Total_Commission =
+					affiliates[i].Commissions +
+					affiliates[i].Network_Commissions +
+					affiliates[i].Incentives;
+				affiliates[i].roa =
+					affiliates[i].Sales / affiliates[i].Total_Commission;
+				console.log(affiliates[i]);
 			}
 			if (month === "primary") {
 				primaryMonth.affiliateReport = affiliates;
@@ -175,31 +220,61 @@ function reportStep2(xml, report_id, month) {
 			} else {
 				priorMonth.affiliateReport = affiliates;
 				for (let i = 0; i < primaryMonth.affiliateReport.length; i++) {
-					for (let j = 0; j < priorMonth.affiliateReport.length; j++) {
+					for (
+						let j = 0;
+						j < priorMonth.affiliateReport.length;
+						j++
+					) {
 						if (
 							primaryMonth.affiliateReport[i].Affiliate_Id ===
 							priorMonth.affiliateReport[j].Affiliate_Id
 						) {
 							primaryMonth.affiliateReport[i].lySales =
 								priorMonth.affiliateReport[j].Sales;
-							console.log("Match" + primaryMonth.affiliateReport[i].lySales);
 							let x = (
 								(primaryMonth.affiliateReport[i].Sales -
 									priorMonth.affiliateReport[j].Sales) /
 								primaryMonth.affiliateReport[i].Sales
 							).toFixed(2);
-							primaryMonth.affiliateReport[i].salesYOYpercent = Number(x);
+							primaryMonth.affiliateReport[i].salesYOYpercent =
+								Number(x);
 							primaryMonth.affiliateReport[i].lyClick_Throughs =
 								priorMonth.affiliateReport[j].Click_Throughs;
 							let y = (
-								(primaryMonth.affiliateReport[i].Click_Throughs -
-									priorMonth.affiliateReport[j].Click_Throughs) /
+								(primaryMonth.affiliateReport[i]
+									.Click_Throughs -
+									priorMonth.affiliateReport[j]
+										.Click_Throughs) /
 								primaryMonth.affiliateReport[i].Click_Throughs
 							).toFixed(2);
-							primaryMonth.affiliateReport[i].Click_ThroughsYOYpercent = y;
-							if (primaryMonth.affiliateReport[i].lySales > 0) {
-								report.yoyPerformance.push(primaryMonth.affiliateReport[i]);
-							}
+							primaryMonth.affiliateReport[
+								i
+							].Click_ThroughsYOYpercent = y;
+							let lyROA = Number(
+								priorMonth.affiliateReport[i].roa
+							);
+							let tyROA = Number(
+								primaryMonth.affiliateReport[i].roa
+							);
+							let roayoy = ((tyROA - lyROA) / tyROA).toFixed(2);
+							primaryMonth.affiliateReport[i].roaYOYPercent =
+								roayoy;
+							let totalCommissionYoy = (
+								(primaryMonth.affiliateReport[i]
+									.Total_Commission -
+									priorMonth.affiliateReport[i]
+										.Total_Commission) /
+								primaryMonth.affiliateReport[i].Total_Commission
+							).toFixed(2);
+							primaryMonth.affiliateReport[
+								i
+							].totalCommissionYOYPercent = totalCommissionYoy;
+							// if (primaryMonth.affiliateReport[i].lySales > 0) {
+							report.yoyPerformance.push(
+								primaryMonth.affiliateReport[i]
+							);
+
+							// }
 						}
 					}
 				}
@@ -213,6 +288,13 @@ function reportStep2(xml, report_id, month) {
 				for (let k = 0; k < 10; k++) {
 					topTen.push(report.yoyPerformance[k]);
 				}
+				document.getElementById("first_loading_bar").hidden = true;
+				document.getElementById("select_affiliates_btn").hidden = false;
+				document.getElementById(
+					"affiliate_report_button"
+				).disabled = true;
+				document.getElementById("affiliate_report_button").innerHTML =
+					"COMPLETED - Affiliate Performance";
 				buildAffiliateTable(primaryMonth.affiliateReport);
 			}
 			break;
