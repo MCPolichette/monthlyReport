@@ -33,6 +33,37 @@ function runAPI(report) {
 function reportStep2(xml, report_id, month) {
 	console.log("2ndreport", report_id);
 	switch (report_id) {
+		case 18:
+			console.log(xmlDoc.getElementsByTagName("Product_SKU").length);
+			for (
+				let i = 0;
+				i < 10;
+				i++ //!? MAKE THE ITEM COUNT DYNAMIC!?
+			) {
+				let x = {};
+				x.Product_SKU =
+					xmlDoc.getElementsByTagName("Product_SKU")[i].textContent;
+				console.log(x);
+				x.Product_Name =
+					xmlDoc.getElementsByTagName("Product_Name")[i].textContent;
+				x.Sale_Count =
+					xmlDoc.getElementsByTagName("Sale_Count")[i].textContent;
+				x.Mobile_Sale_Count =
+					xmlDoc.getElementsByTagName("Mobile_Sale_Count")[
+						i
+					].textContent;
+				x.Total_Product_Sale_Amount = xmlDoc.getElementsByTagName(
+					"Total_Product_Sale_Amount"
+				)[i].textContent;
+				report.productList[i] = x;
+			}
+			removeDisabledButton("select_affiliates_btn");
+			completeButton(
+				"product_report_btn",
+				"COMPLETED - Products Sold API"
+			);
+			build_products_sold_table();
+			break;
 		case 1: //Performance Summary
 			console.log(xml);
 			let performanceReport = {};
@@ -111,8 +142,9 @@ function reportStep2(xml, report_id, month) {
 					" Report";
 				updateHeaders();
 				buildFirstTable();
-				document.getElementById("first_loading_bar").hidden = true;
-				viewReportButton.disabled = false;
+				completeButton("submitBtn", "Merchant & Date Selected");
+				removeDisabledButton("affiliate_report_button");
+				removeDisabledButton("viewReport");
 			}
 			break;
 		case 15: //Performance Summary by Affiliate for selected dates
@@ -207,7 +239,6 @@ function reportStep2(xml, report_id, month) {
 					affiliates[i].Incentives;
 				affiliates[i].roa =
 					affiliates[i].Sales / affiliates[i].Total_Commission;
-				console.log(affiliates[i]);
 			}
 			if (month === "primary") {
 				primaryMonth.affiliateReport = affiliates;
@@ -250,19 +281,24 @@ function reportStep2(xml, report_id, month) {
 							primaryMonth.affiliateReport[
 								i
 							].Click_ThroughsYOYpercent = y;
-							let lyROA = Number(
-								priorMonth.affiliateReport[i].roa
-							);
+							let lyROA;
+							if (priorMonth.affiliateReport[j].roa) {
+								lyROA = Number(
+									priorMonth.affiliateReport[j].roa
+								);
+							} else {
+								lyROA = 0;
+							}
 							let tyROA = Number(
 								primaryMonth.affiliateReport[i].roa
 							);
-							let roayoy = ((tyROA - lyROA) / tyROA).toFixed(2);
+							let roayoy = (tyROA - lyROA) / tyROA;
 							primaryMonth.affiliateReport[i].roaYOYPercent =
 								roayoy;
 							let totalCommissionYoy = (
 								(primaryMonth.affiliateReport[i]
 									.Total_Commission -
-									priorMonth.affiliateReport[i]
+									priorMonth.affiliateReport[j]
 										.Total_Commission) /
 								primaryMonth.affiliateReport[i].Total_Commission
 							).toFixed(2);
@@ -273,12 +309,10 @@ function reportStep2(xml, report_id, month) {
 							report.yoyPerformance.push(
 								primaryMonth.affiliateReport[i]
 							);
-
 							// }
 						}
 					}
 				}
-				console.log("sorting");
 				primaryMonth.affiliateReport.sort((a, b) => b.Sales - a.Sales);
 				report.yoyPerformance.sort(function (a, b) {
 					return b.Sales - a.Sales;
@@ -288,15 +322,14 @@ function reportStep2(xml, report_id, month) {
 				for (let k = 0; k < 10; k++) {
 					topTen.push(report.yoyPerformance[k]);
 				}
-				document.getElementById("first_loading_bar").hidden = true;
-				document.getElementById("select_affiliates_btn").hidden = false;
-				document.getElementById(
-					"affiliate_report_button"
-				).disabled = true;
-				document.getElementById("affiliate_report_button").innerHTML =
-					"COMPLETED - Affiliate Performance";
+				removeDisabledButton("product_report_btn");
+				completeButton(
+					"affiliate_report_button",
+					"COMPLETED - AFfiliate Performance API"
+				);
 				buildAffiliateTable(primaryMonth.affiliateReport);
 			}
+
 			break;
 	}
 }
