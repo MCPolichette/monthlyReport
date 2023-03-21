@@ -234,8 +234,10 @@
 																id="merchantCardId"
 															></li>
 															<li
-																id="monthYoY"
-															></li>
+															>Months<ul>
+																<li id =merchantCardMonth1>month1</li>
+																<li id =merchantCardMonth2>month2</li>
+															</ul></li>
 															<li>Report Type: Month Year over Year</li>
 														</ul>
 													</div>
@@ -536,7 +538,6 @@
 								<div class="row">
 									<h2 id="report_merchant_name">
 										MERCHANT NAME
-										<h4 id="report_merchant_id">123456</h4>
 									</h2>
 								</div>
 								<div class="row align-top">
@@ -547,14 +548,7 @@
 											class="table table-striped centered table-sm"
 										>
 											<tbody style="font-size: small">
-												<thead>
-													<tr>
-														<th class="intentionallyBlank" ></th>
-														<th id="primaryMonthTitle" > Primary Month </th>
-														<th id="priorMonthTitle" > Prior Month </th>
-														<th> Percentage Change </th>
-														<th>Nominal Change</th>
-													</tr>
+												<thead id="primaryTHead">
 												</thead>
 											</tbody>
 										</table>
@@ -585,18 +579,8 @@
 											class="table table-striped centered table-sm"
 										>
 											<tbody style="font-size: small">
-												<thead>
-													<tr>
-														<th	>Affiliate</th>
-														<th id="primaryMonthTitle">Sales</th>
-														<th id="priorMonthTitle">YOY Percentage</th>
-														<th>Clicks</th>
-														<th> YOY Percentage change</th>
-														<th>TotalSpend</th>
-														<th>YOY Percentage change</th>
-														<th>ROAS</th>
-														<th>YOY Percentage change</th>
-													</tr>
+												<thead id="affTableTHead">
+												
 												</thead>
 											</tbody>
 										</table>
@@ -609,14 +593,14 @@
 											id="productsSoldReport"
 											class="table table-striped centered table-sm">
 											<tbody style="font-size: small">
-												<thead>
-													<tr>
+												<thead id ="productTHead">
+													<!-- <tr>
 														<th	>Product Sku</th>
 														<th>Product Name</th>
 														<th>Sale Count</th>
 														<th>Mobile Sale Count</th>
 														<th>Sale Amount</th>
-													</tr>
+													</tr> -->
 												</thead>
 											</tbody>
 										</table>

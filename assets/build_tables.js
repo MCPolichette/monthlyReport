@@ -42,28 +42,57 @@ function build9columns(
 	var cell3 = (row.insertCell(7).innerHTML = col8);
 	var cell4 = (row.insertCell(8).innerHTML = col9);
 }
+function add_borders(table_id, column) {
+	var table = document.getElementById(table_id);
+	var totalRowCount = table.rows.length - 1;
+	console.log(totalRowCount);
+	for (i = 0; i < totalRowCount; i++) {
+		table.rows[i].cells[column].style.cssText +=
+			"border-left-width :2px;  border-style:solid; border-left-color: #cfe2ff";
+	}
+}
+function tableHeaders(tableID, array) {
+	let table = document.getElementById(tableID);
+	let thead = document.createElement("thead");
+	table.appendChild(thead);
+	for (var i = 0; i < array.length; i++) {
+		thead
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode(array[i]));
+	}
+}
 function updateHeaders() {
+	document.getElementById("merchantCard").innerHTML = merchant.name;
+	document.getElementById("merchantCardId").innerHTML = "ID: " + merchant.id;
+	document.getElementById("merchantCardMonth1").innerHTML =
+		merchant.month + " " + report.year;
+	document.getElementById("merchantCardMonth2").innerHTML =
+		merchant.month + " " + report.previousyear;
 	document.getElementById("report_merchant_name").innerHTML =
-		merchant.name + " Performance";
-	document.getElementById("report_merchant_id").innerHTML = merchant.id;
-	document.getElementById("primaryMonthTitle").innerHTML =
-		merchant.month + "\n" + report.year;
-	document.getElementById("priorMonthTitle").innerHTML =
-		merchant.month + "\n" + report.previousyear;
-	document.getElementById("merchantCard").innerHTML =
-		merchant.name + " " + " Performance Report";
-	document.getElementById("merchantCardId").innerHTML = "ID:  " + merchant.id;
-	document.getElementById("monthYoY").innerHTML =
-		merchant.month + " " + report.year + "/" + report.previousyear;
-	document.getElementById("affiliate_report_button").hidden = false;
+		merchant.name + " " + merchant.id + "Performance Report";
+
+	// document.getElementById("affiliate_report_button").hidden = false;
 }
 function build_products_sold_table() {
 	let table = document.getElementById("productsSoldReport");
+	let thead = document.getElementById("productTHead");
+	let headArray = [
+		"Products SKU",
+		"Product Name",
+		"Total Sales count ",
+		"Mobile Sales Count",
+		"Total Sales Amount",
+	];
+	for (var i = 0; i < headArray.length; i++) {
+		thead
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode(headArray[i]));
+	}
 	// table.style.textAlign = "right";
 	for (let i = 0; i < report.productList.length; i++) {
 		build5columns(
 			table,
-			[i + 1],
+			[i],
 			report.productList[i].Product_SKU,
 			report.productList[i].Product_Name,
 			report.productList[i].Sale_Count,
@@ -98,13 +127,8 @@ function buildGrowingTable() {
 		"Sales " + merchant.abMonth + " " + report.previousyear,
 		"YoY Percent Change",
 	];
-	let thead = document.createElement("thead");
-	growingTable.appendChild(thead);
-	for (var i = 0; i < gHeaders.length; i++) {
-		thead
-			.appendChild(document.createElement("th"))
-			.appendChild(document.createTextNode(gHeaders[i]));
-	}
+
+	tableHeaders("growing_report", gHeaders);
 	for (let i = 0; i < 4; i++) {
 		build4columns(
 			growingTable,
@@ -127,13 +151,7 @@ function decliningTableBuild(x) {
 		"Sales " + merchant.abMonth + " " + report.previousyear,
 		"YoY Percent Change",
 	];
-	let thead = document.createElement("thead");
-	decliningTable.appendChild(thead);
-	for (var i = 0; i < dHeaders.length; i++) {
-		thead
-			.appendChild(document.createElement("th"))
-			.appendChild(document.createTextNode(dHeaders[i]));
-	}
+	tableHeaders("declining_report", dHeaders);
 	x.reverse();
 	console.log(x);
 	for (let i = 0; i < 4; i++) {
@@ -210,12 +228,25 @@ function buildNewPerformersTable() {
 }
 function buildFirstTable() {
 	let table = document.getElementById("performanceSummaryReport");
+	let thead = document.getElementById("primaryTHead");
+	let summaryHeadersArray = [
+		" ",
+		merchant.month + "\n" + report.year,
+		merchant.month + "\n" + report.previousyear,
+		"Percentage Change",
+		"Nominal Change",
+	];
+	for (var i = 0; i < summaryHeadersArray.length; i++) {
+		thead
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode(summaryHeadersArray[i]));
+	}
 	table.style.textAlign = "right";
 	let numericalData = numberifyAndCalculateDifferences();
 	console.log(numericalData);
 	build5columns(
 		table,
-		1,
+		0,
 		"Sales",
 		primaryMonth.performanceReport.Sales,
 		priorMonth.performanceReport.Sales,
@@ -224,7 +255,7 @@ function buildFirstTable() {
 	);
 	build5columns(
 		table,
-		2,
+		1,
 		"Click_Throughs",
 		primaryMonth.performanceReport.Click_Throughs,
 		priorMonth.performanceReport.Click_Throughs,
@@ -233,7 +264,7 @@ function buildFirstTable() {
 	);
 	build5columns(
 		table,
-		3,
+		2,
 		"New Customers",
 		primaryMonth.performanceReport.New_Customer_Sales,
 		priorMonth.performanceReport.New_Customer_Sales,
@@ -243,7 +274,7 @@ function buildFirstTable() {
 	);
 	build5columns(
 		table,
-		4,
+		3,
 		"Commissions",
 		primaryMonth.performanceReport.Commissions,
 		priorMonth.performanceReport.Commissions,
@@ -252,7 +283,7 @@ function buildFirstTable() {
 	);
 	build5columns(
 		table,
-		5,
+		4,
 		"Network_Commissions",
 		primaryMonth.performanceReport.Network_Commissions,
 		priorMonth.performanceReport.Network_Commissions,
@@ -262,7 +293,7 @@ function buildFirstTable() {
 	);
 	build5columns(
 		table,
-		6,
+		5,
 		"Returns",
 		primaryMonth.performanceReport.Number_of_Adjustments,
 		priorMonth.performanceReport.Number_of_Adjustments,
@@ -274,11 +305,28 @@ function buildFirstTable() {
 }
 function buildAffiliateTable(array) {
 	let table = document.getElementById("affiliateSummaryReport");
+	let thead = document.getElementById("affTableTHead");
+	let headArray = [
+		"Affiliate",
+		"Sales",
+		"YoY Percentage",
+		"Clicks",
+		"YoY Percentage",
+		"TotalSpend",
+		"YoY Percentage",
+		"ROAS",
+		"YoY Percentage",
+	];
+	for (var i = 0; i < headArray.length; i++) {
+		thead
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode(headArray[i]));
+	}
 	table.style.textAlign = "right";
 	for (let i = 0; i < 10; i++) {
 		build9columns(
 			table,
-			i + 1,
+			i,
 			array[i].Affiliate,
 			toUSD(array[i].Sales),
 			(array[i].salesYOYpercent * 100).toFixed(2) + "%",
@@ -291,6 +339,9 @@ function buildAffiliateTable(array) {
 		);
 	}
 	buildGrowingTable();
+	add_borders("affiliateSummaryReport", 3);
+	add_borders("affiliateSummaryReport", 5);
+	add_borders("affiliateSummaryReport", 7);
 
 	affiliateReportButton.disabled = true;
 }
