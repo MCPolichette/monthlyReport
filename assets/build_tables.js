@@ -45,10 +45,9 @@ function build9columns(
 function add_borders(table_id, column) {
 	var table = document.getElementById(table_id);
 	var totalRowCount = table.rows.length - 1;
-	console.log(totalRowCount);
-	for (i = 0; i < totalRowCount; i++) {
+	for (i = 0; i < totalRowCount + 1; i++) {
 		table.rows[i].cells[column].style.cssText +=
-			"border-left-width :2px;  border-style:solid; border-left-color: #cfe2ff";
+			"border-left-width :2px;  border-style:solid; border-left-color: #000000";
 	}
 }
 function tableHeaders(tableID, array) {
@@ -69,7 +68,7 @@ function updateHeaders() {
 	document.getElementById("merchantCardMonth2").innerHTML =
 		merchant.month + " " + report.previousyear;
 	document.getElementById("report_merchant_name").innerHTML =
-		merchant.name + " " + merchant.id + "Performance Report";
+		merchant.name + " - " + merchant.id + " - Performance Report";
 
 	// document.getElementById("affiliate_report_button").hidden = false;
 }
@@ -309,13 +308,13 @@ function buildAffiliateTable(array) {
 	let headArray = [
 		"Affiliate",
 		"Sales",
-		"YoY Percentage",
+		"YoY %",
 		"Clicks",
-		"YoY Percentage",
+		"YoY %",
 		"TotalSpend",
-		"YoY Percentage",
+		"YoY %",
 		"ROAS",
-		"YoY Percentage",
+		"YoY %",
 	];
 	for (var i = 0; i < headArray.length; i++) {
 		thead
