@@ -124,7 +124,7 @@ function buildGrowingTable() {
 		"Affiliate",
 		"Sales " + merchant.abMonth + " " + report.year,
 		"Sales " + merchant.abMonth + " " + report.previousyear,
-		"YoY Percent Change",
+		"YoY %",
 	];
 
 	tableHeaders("growing_report", gHeaders);
@@ -148,7 +148,7 @@ function decliningTableBuild(x) {
 		"Affiliate",
 		"Sales " + merchant.abMonth + " " + report.year,
 		"Sales " + merchant.abMonth + " " + report.previousyear,
-		"YoY Percent Change",
+		"YoY %",
 	];
 	tableHeaders("declining_report", dHeaders);
 	x.reverse();
@@ -264,7 +264,7 @@ function buildFirstTable() {
 	build5columns(
 		table,
 		2,
-		"New Customers",
+		"New Customer Sales",
 		primaryMonth.performanceReport.New_Customer_Sales,
 		priorMonth.performanceReport.New_Customer_Sales,
 		(numericalData.percentageChange.New_Customer_Sales * 100).toFixed(2) +
@@ -293,7 +293,7 @@ function buildFirstTable() {
 	build5columns(
 		table,
 		5,
-		"Returns",
+		"Returns / Adjustments",
 		primaryMonth.performanceReport.Number_of_Adjustments,
 		priorMonth.performanceReport.Number_of_Adjustments,
 		(numericalData.percentageChange.Number_of_Adjustments * 100).toFixed(
@@ -307,13 +307,13 @@ function buildAffiliateTable(array) {
 	let thead = document.getElementById("affTableTHead");
 	let headArray = [
 		"Affiliate",
-		"Sales",
+		merchant.abMonth + " " + report.year + " Sales",
 		"YoY %",
-		"Clicks",
+		merchant.abMonth + " " + report.year + " Clicks",
 		"YoY %",
-		"TotalSpend",
+		merchant.abMonth + " " + report.year + " TotalSpend",
 		"YoY %",
-		"ROAS",
+		merchant.abMonth + " " + report.year + " ROAS",
 		"YoY %",
 	];
 	for (var i = 0; i < headArray.length; i++) {
