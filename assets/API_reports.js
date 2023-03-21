@@ -43,7 +43,6 @@ function reportStep2(xml, report_id, month) {
 				let x = {};
 				x.Product_SKU =
 					xmlDoc.getElementsByTagName("Product_SKU")[i].textContent;
-				console.log(x);
 				x.Product_Name =
 					xmlDoc.getElementsByTagName("Product_Name")[i].textContent;
 				x.Sale_Count =
