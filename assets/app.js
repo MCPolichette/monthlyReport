@@ -6,6 +6,8 @@ var report = {
 	newAffsMonth2: [],
 	newAffsMonth3: [],
 	productList: [],
+	GrowingPerformancebyYoyPercent: [],
+	DecliningPerformancebyYoyPercent: [],
 };
 var today = {};
 var primaryMonth = { month: "primary" };
@@ -20,6 +22,26 @@ function toUSD(dollarInt) {
 	});
 	dollarUSD = formatter.format(dollarInt);
 	return dollarUSD;
+}
+function removeDisabledButton(id) {
+	let btn = document.getElementById(id);
+	btn.disabled = false;
+	btn.classList = "btn btn-success";
+}
+function loadButton(id) {
+	document.getElementById("first_loading_bar").hidden = false;
+	let btn = document.getElementById(id);
+	btn.disabled = true;
+	btn.classList = "btn btn-outline.primary";
+	btn.innerHTML = `<div class="spinner-border text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`;
+}
+function completeButton(id, newText) {
+	document.getElementById("first_loading_bar").hidden = true;
+	let btn = document.getElementById(id);
+	btn.disabled = true;
+	btn.innerHTML = newText;
 }
 function hide(arr) {
 	//Reveals a hidden HTML element.
@@ -110,10 +132,8 @@ function addAffiliate(affiliate, array, id, clearId) {
 	}
 	document.getElementById(clearId).value = "";
 }
+function testclick() {}
 
-function removeAffiliate(affiliate) {
-	console.log(affiliate);
-}
 function DateToString(date) {
 	let options = {
 		// weekday: "short", //to display the full name of the day, you can use short to indicate an abbreviation of the day
@@ -147,6 +167,7 @@ function password_check() {
 	}
 }
 function perfomance_report() {
+	loadButton("submitBtn");
 	var acceptableData = true;
 	today.date = DateToString(new Date());
 	today.year = new Date().getFullYear();
@@ -158,6 +179,8 @@ function perfomance_report() {
 	switch (report.month) {
 		case "-01":
 			merchant.month = "January";
+			merchant.abMonth = "Jan";
+			merchant.pabMonth = "Dec";
 			merchant.previousMonth = "December";
 			merchant.twoMonthsAgo = "November";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -172,6 +195,8 @@ function perfomance_report() {
 			break;
 		case "-02":
 			merchant.month = "February";
+			merchant.abMonth = "Feb";
+			merchant.pabMonth = "Jan";
 			merchant.previousMonth = "January";
 			merchant.twoMonthsAgo = "December";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -186,6 +211,8 @@ function perfomance_report() {
 			break;
 		case "-03":
 			merchant.month = "March";
+			merchant.abMonth = "Mar";
+			merchant.pabMonth = "Feb";
 			merchant.previousMonth = "February";
 			merchant.twoMonthsAgo = "January";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -200,6 +227,8 @@ function perfomance_report() {
 			break;
 		case "-04":
 			merchant.month = "April";
+			merchant.abMonth = "Apr";
+			merchant.pabMonth = "Mar";
 			merchant.previousMonth = "March";
 			merchant.twoMonthsAgo = "February";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -214,6 +243,8 @@ function perfomance_report() {
 			break;
 		case "-05":
 			merchant.month = "May";
+			merchant.abMonth = "May";
+			merchant.pabMonth = "Apr";
 			merchant.previousMonth = "April";
 			merchant.twoMonthsAgo = "March";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -228,6 +259,8 @@ function perfomance_report() {
 			break;
 		case "-06":
 			merchant.month = "June";
+			merchant.abMonth = "Jun";
+			merchant.pabMonth = "May";
 			merchant.previousMonth = "May";
 			merchant.twoMonthsAgo = "April";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -242,6 +275,8 @@ function perfomance_report() {
 			break;
 		case "-07":
 			merchant.month = "July";
+			merchant.abMonth = "Jul";
+			merchant.pabMonth = "Jun";
 			merchant.previousMonth = "June";
 			merchant.twoMonthsAgo = "May";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -256,6 +291,8 @@ function perfomance_report() {
 			break;
 		case "-08":
 			merchant.month = "August";
+			merchant.abMonth = "Aug";
+			merchant.pabMonth = "Jul";
 			merchant.previousMonth = "July";
 			merchant.twoMonthsAgo = "June";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -270,6 +307,8 @@ function perfomance_report() {
 			break;
 		case "-09":
 			merchant.month = "September";
+			merchant.abMonth = "Sep";
+			merchant.pabMonth = "Aug";
 			merchant.previousMonth = "August";
 			merchant.twoMonthsAgo = "July";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -284,6 +323,8 @@ function perfomance_report() {
 			break;
 		case "-10":
 			merchant.month = "October";
+			merchant.abMonth = "Oct";
+			merchant.pabMonth = "Sep";
 			merchant.previousMonth = "September";
 			merchant.twoMonthsAgo = "August";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -298,6 +339,8 @@ function perfomance_report() {
 			break;
 		case "-11":
 			merchant.month = "November";
+			merchant.abMonth = "Nov";
+			merchant.pabMonth = "Oct";
 			merchant.previousMonth = "October";
 			merchant.twoMonthsAgo = "September";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -312,6 +355,8 @@ function perfomance_report() {
 			break;
 		case "-12":
 			merchant.month = "December";
+			merchant.abMonth = "Dec";
+			merchant.pabMonth = "Nov";
 			merchant.previousMonth = "November";
 			merchant.twoMonthsAgo = "October";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -357,8 +402,6 @@ function perfomance_report() {
 
 		console.log(primaryMonth);
 		viewReportButton.hidden = false;
-		document.getElementById("first_loading_bar").hidden = false;
-		document.getElementById("submitBtn").disabled = true;
 		runAPI({
 			report_id: 1,
 			startDate: primaryMonth.startDate,

@@ -236,26 +236,24 @@
 															<li
 																id="monthYoY"
 															></li>
-															<li>more data?</li>
+															<li>Report Type: Month Year over Year</li>
 														</ul>
 													</div>
 												</div>
-												
-
 												<div class="d-grid gap-2">
 													<button
-														hidden
+														disabled
 														id="affiliate_report_button"
 														class="btn btn-outline-success"
 														onclick="affiliate_report()"
 														type="button"
-													>
-														NEXT STEP: Run API for
-														Affiliate Performance
+													>NEXT STEP: Run API for Affiliate Performance
 													</button>
 												</div>
+												<br>
 												<div class="d-grid gap-2">
 													<button
+														disabled
 														id="product_report_btn"
 														class="btn btn-outline-success"
 														onclick="products_sold_report()"
@@ -264,22 +262,32 @@
 														NEXT STEP: run Product Report API
 													</button>
 												</div>
+												<br>
 												<div class="d-grid gap-2">
-														<button
-															hidden
-															id="select_affiliates_btn"
-															class="btn btn-outline-success"
-															data-bs-toggle="collapse"
-															data-bs-target="#affiliateDataAccordian"
-															aria-expanded="false"
-															aria-controls="affiliateDataAccordian"
-															type="button"
-														>
-															NEXT STEP: Select
-															Affiliates for
-															specific reports:
-														</button>	
+													<button
+														disabled
+														id="select_affiliates_btn"
+														class="btn btn-outline-success"
+														data-bs-toggle="collapse"
+														data-bs-target="#affiliateDataAccordian"
+														aria-expanded="false"
+														aria-controls="affiliateDataAccordian"
+														type="button"
+													>
+														NEXT STEP: Select Affiliates for specific reports:
+													</button>	
 												</div>
+												<!-- <div class="d-grid gap-2">
+														<button
+														id="select_affiliates_btn"
+														class="btn success"
+														type="button"
+														onclick="testclick()"
+														type="button"
+														>
+															TEST
+														</button>	
+												</div> -->
                                                 <div
 													hidden
 													id="first_loading_bar"
@@ -610,6 +618,45 @@
 														<th>Sale Amount</th>
 													</tr>
 												</thead>
+											</tbody>
+										</table>
+									</div>
+                                </div>
+								<div class="row">
+                                    <!-- <div class="col-12">
+										<h4>NEXT REPORT </h4>
+										<table
+											id="next_report"
+											class="table table-striped centered table-sm">
+											<tbody style="font-size: small">
+												<thead>
+													<tr>			<th>Another REPORT </th>
+														<th>Sale Count</th>
+														<th>Mobile Sale Count</th>
+														<th>Sale Amount</th>
+													</tr>
+												</thead>
+											</tbody>
+										</table>
+									</div> -->
+                                </div>
+								<div class="row">
+                                    <div class="col-6">
+										<h4>Top Growing YoY Performance</h4>
+										<table
+											id="growing_report"
+											class="table table-striped centered table-sm">
+											<tbody style="font-size: small">
+											</tbody>
+										</table>
+									</div>
+									<div class="col-6">
+										<h4>Top Declining YoY Performance</h4>
+										<table
+											id="declining_report"
+											class="table table-striped centered table-sm">
+											<tbody style="font-size: small">
+												
 											</tbody>
 										</table>
 									</div>
