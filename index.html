@@ -583,7 +583,7 @@
 										</table>
 									</div>
 								</div>
-								<div class="row">
+								<div id ="productsRow" class="row">
                                     <div class="col-12">
 										<h4>Products Sold Report</h4>
 										<table
@@ -591,29 +591,16 @@
 											class="table table-striped centered table-sm">
 											<tbody style="font-size: small">
 												<thead id ="productTHead">
-													
 												</thead>
 											</tbody>
 										</table>
 									</div>
                                 </div>
 								<div class="row">
-                                    <!-- <div class="col-12">
-										<h4>NEXT REPORT </h4>
-										<table
-											id="next_report"
-											class="table table-striped centered table-sm">
-											<tbody style="font-size: small">
-												<thead>
-													<tr>			<th>Another REPORT </th>
-														<th>Sale Count</th>
-														<th>Mobile Sale Count</th>
-														<th>Sale Amount</th>
-													</tr>
-												</thead>
-											</tbody>
-										</table>
-									</div> -->
+                                    <div class="col-12">
+										<h4>NOTES </h4>
+										<div id="notesDiv"></div>
+									</div>
                                 </div>
 								<div class="row">
                                     <div class="col-6">
@@ -636,11 +623,27 @@
 										</table>
 									</div>
                                 </div>
+								<div class = "row" id="manual-report data">
+									<div class="col-12">
+
+									</div>
+								</div>
 							</div>
 							<div class="container">
 								<div class ="row">
-									<div class ="col-4"><button type="button"  onclick="generatePDF()" class="btn btn-info">Download this report as a PDF</button>
+									<div class ="col-10">
+										<hr>
+										<h5>Notes Title:</h5>
+										<div class="form-floating">
+											  <input class="form-control" type="text" placeholder="Default input" id="manualTitleText" aria-label="Notes Title"></div><div>
+											  <h5>Notes Text:</h5>
+											<textarea class="form-control" placeholder="NOTES GO HERE!" id="manualNotesText" wrap='hard' style="height: 100px"></textarea>
+											  </div>
+											  <button class="btn btn-primary" onclick="addNote()" type="button">Add Manual Note</button>
+									</div><div class="row">
+									<div class ="col-4"><br><button type="button"  onclick="generatePDF()" class="btn btn-info">Download this report as a PDF</button>
 									</div>
+								</div>
 								</div>
 							</div>
 						</div>

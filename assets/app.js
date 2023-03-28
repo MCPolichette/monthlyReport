@@ -14,6 +14,7 @@ var primaryMonth = { month: "primary" };
 var priorMonth = { month: "prior" };
 var viewReportButton = document.getElementById("viewReport");
 var affiliateReportButton = document.getElementById("affiliate_report_button");
+
 //general functions
 function toUSD(dollarInt) {
 	var formatter = new Intl.NumberFormat("en-US", {
@@ -36,6 +37,16 @@ function loadButton(id) {
 	btn.innerHTML = `<div class="spinner-border text-primary" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>`;
+}
+function addNote() {
+	let noteTitle = document.getElementById("manualTitleText").value;
+	let noteContent = document.getElementById("manualNotesText").value;
+	let noteSection = document.getElementById("notesDiv");
+	noteContent = noteContent.replace(/\r?\n/g, "<br />");
+	let note = `<h5>` + noteTitle + `</h5><p>` + noteContent + `</p>`;
+	noteSection.insertAdjacentHTML("afterend", note);
+	noteTitle = "";
+	noteContent = "";
 }
 function completeButton(id, newText) {
 	document.getElementById("first_loading_bar").hidden = true;
