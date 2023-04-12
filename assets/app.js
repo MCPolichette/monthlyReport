@@ -9,6 +9,10 @@ var report = {
 	GrowingPerformancebyYoyPercent: [],
 	DecliningPerformancebyYoyPercent: [],
 };
+var icons = {
+	up: `<i class="fa fa-caret-square-o-up" style="color:green"></i>`,
+	down: `<i class="fa fa-caret-square-o-down" style="color:red"></i>`,
+};
 var today = {};
 var primaryMonth = { month: "primary" };
 var priorMonth = { month: "prior" };
@@ -177,6 +181,7 @@ function password_check() {
 			break;
 	}
 }
+
 function perfomance_report() {
 	loadButton("submitBtn");
 	var acceptableData = true;
@@ -186,6 +191,8 @@ function perfomance_report() {
 	console.log(today);
 	merchant.id = document.getElementById("merchant_ID_input").value;
 	report.month = document.getElementById("selectedMonth").value;
+	document.getElementById("merchant_logo").src =
+		"https://static.avantlink.com/merchant-logos/" + merchant.id + ".png";
 
 	switch (report.month) {
 		case "-01":
@@ -404,14 +411,19 @@ function perfomance_report() {
 			report.year
 		);
 		console.log(primaryDayCount);
-		let priorDayCount = daysInMonth(report.month, report.previousyear);
+		let priorDayCount = daysInMonth(
+			report.month.replaceAll("-", ""),
+			report.previousyear
+		);
 		primaryMonth.startDate = report.year + report.month + "-01";
 		primaryMonth.endDate =
 			report.year + report.month + "-" + primaryDayCount;
-		priorMonth.startDate = report.year + report.month + "-01";
-		priorMonth.endDate = report.year + report.month + "-" + priorDayCount;
+		priorMonth.startDate = report.previousyear + report.month + "-01";
+		priorMonth.endDate =
+			report.previousyear + report.month + "-" + priorDayCount;
 
 		console.log(primaryMonth);
+		console.log(priorMonth);
 		viewReportButton.hidden = false;
 		runAPI({
 			report_id: 1,

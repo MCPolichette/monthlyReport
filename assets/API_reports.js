@@ -3,7 +3,7 @@ function runAPI(report) {
 	endDate = report.endDate;
 	report_id = report.report_id;
 	month = report.month;
-	console.log("running API module " + report_id);
+	console.log("API DETAILS", report);
 	fetch(
 		"https://classic.avantlink.com/api.php?module=AdminReport&auth_key=" +
 			API_KEY +
@@ -121,6 +121,7 @@ function reportStep2(xml, report_id, month) {
 			console.log(performanceReport);
 			console.log(month);
 			if (month === "primary") {
+				console.log(priorMonth);
 				primaryMonth.performanceReport = performanceReport;
 				runAPI({
 					report_id: 1,
@@ -141,6 +142,7 @@ function reportStep2(xml, report_id, month) {
 					" Report";
 				updateHeaders();
 				buildFirstTable();
+				buildQuickStatsTable();
 				completeButton("submitBtn", "Merchant & Date Selected");
 				removeDisabledButton("affiliate_report_button");
 				removeDisabledButton("viewReport");

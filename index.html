@@ -9,6 +9,7 @@
 			type="text/javascript"
 			src="https://html2canvas.hertzen.com/dist/html2canvas.js"
 		></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -33,12 +34,13 @@
 		<div class="container-sm fixed-top">
 			<div id="title" class="row">
 				<div class="col-4">
-					<h4
+					<h5
 						onclick="use_local_storage()"
 						class="justify-content-center"
 					>
-						<strong>AvantLink Merchant Monthly Comparison</strong>
-					</h4>
+						<strong>AvantLink Merchant Monthly Comparison </strong>
+						<!--  -->
+					</h5>
 				</div>
 			</div>
 		</div>
@@ -295,7 +297,7 @@
 													id="first_loading_bar"
 													class="text-center"
 												>
-													<h4>Running APIs</h4>
+													<h5>Running APIs</h5>
 													<div
 														class="spinner-border"
 														style="
@@ -337,7 +339,7 @@
 							>
 								<div class="accordion-body">
 									<div class="row">
-										<h4>Data for New Affiliates</h4>
+										<h5>Data for New Affiliates</h5>
 										<div class="col-6">
 											<!-- MORE QUESTIONS!? -->
 											<p>
@@ -349,9 +351,9 @@
 												Merchant platform manually with
 												the inputs below.
 											</p>
-											<h4 id="newAffMonth1">
+											<h5 id="newAffMonth1">
 												This Month
-											</h4>
+											</h5>
 											<div class="input-group mb-3">
 												<input
 													type="text"
@@ -369,9 +371,9 @@
 													Add Affilaite
 												</button>
 											</div>
-											<h4 id="newAffMonth2">
+											<h5 id="newAffMonth2">
 												Last Month
-											</h4>
+											</h5>
 											<div class="input-group mb-3">
 												<input
 													type="text"
@@ -389,9 +391,9 @@
 													Add Affilaite
 												</button>
 											</div>
-											<h4 id="newAffMonth3">
+											<h5 id="newAffMonth3">
 												Two Months Ago
-											</h4>
+											</h5>
 											<div class="input-group mb-3">
 												<input
 													type="text"
@@ -536,13 +538,35 @@
 						<div class="accordion-body">
 							<div class="container" id="report_pdf">
 								<div class="row">
-									<h2 id="report_merchant_name">
+									
+									<img src="assets/AvantLink Logo.png" alt="AvantLink Support Help Center home page"
+									style="width:300px"
+									></div>
+									<div class="row">
+									<div class="col-5">
+										<h5>Quick Stats</h5>
+										<table
+											id="quickStats"
+											class="table table-striped centered table-sm"
+										>
+											<tbody style="font-size: small">
+												<thead id="qstatsHead">
+												</thead>
+											</tbody>
+										</table>
+									</div>
+									<div class="col-1"></div>
+									<div class="col-5">
+										<h6 id="report_merchant_name">
 										MERCHANT NAME
-									</h2>
+									</h6>
+									<img id="merchant_logo"src="https://static.avantlink.com/merchant-logos/23845.png" alt="logo" style="width:200px">
+								</div>
+									
 								</div>
 								<div class="row align-top">
 									<div class="col-6">
-										<h4>Monthly YoY Performance</h4>
+										<h5>Monthly YoY Performance</h5>
 										<table
 											id="performanceSummaryReport"
 											class="table table-striped centered table-sm"
@@ -554,7 +578,7 @@
 										</table>
 									</div>
 									<div class="col-6">
-										<h4>New Partner Performance</h4>
+										<h5>New Partner Performance</h5>
                                         <table
 											id="newPartnerReport"
 											class="table table-striped centered table-sm"
@@ -572,7 +596,7 @@
 								</div>
 								<div class="row">
 									<div class="col-12">
-										<h4>Top Affiliate YOY Performances</h4>
+										<h5>Top Affiliate YOY Performances</h5>
 										<table
 											id="affiliateSummaryReport"
 											class="table table-striped centered table-sm">
@@ -585,7 +609,7 @@
 								</div>
 								<div id ="productsRow" class="row">
                                     <div class="col-12">
-										<h4>Products Sold Report</h4>
+										<h5>Products Sold Report</h5>
 										<table
 											id="productsSoldReport"
 											class="table table-striped centered table-sm">
@@ -595,16 +619,15 @@
 											</tbody>
 										</table>
 									</div>
-                                </div>
-								<div class="row">
+                                </div><div class="row">
                                     <div class="col-12">
-										<h4>NOTES </h4>
-										<div id="notesDiv"></div>
+										
 									</div>
                                 </div>
+								
 								<div class="row">
                                     <div class="col-6">
-										<h4>Top Growing YoY Performance</h4>
+										<h5>Top Growing YoY Performance</h5>
 										<table
 											id="growing_report"
 											class="table table-striped centered table-sm">
@@ -613,7 +636,7 @@
 										</table>
 									</div>
 									<div class="col-6">
-										<h4>Top Declining YoY Performance</h4>
+										<h5>Top Declining YoY Performance</h5>
 										<table
 											id="declining_report"
 											class="table table-striped centered table-sm">
@@ -625,7 +648,8 @@
                                 </div>
 								<div class = "row" id="manual-report data">
 									<div class="col-12">
-
+										<h5>NOTES </h5>
+										<div id="notesDiv"></div>
 									</div>
 								</div>
 							</div>

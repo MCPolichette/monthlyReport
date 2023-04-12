@@ -68,7 +68,13 @@ function updateHeaders() {
 	document.getElementById("merchantCardMonth2").innerHTML =
 		merchant.month + " " + report.previousyear;
 	document.getElementById("report_merchant_name").innerHTML =
-		merchant.name + " - " + merchant.id + " - Performance Report";
+		merchant.name +
+		" - ID: " +
+		merchant.id +
+		" - Performance Report - " +
+		merchant.month +
+		" " +
+		report.year;
 
 	// document.getElementById("affiliate_report_button").hidden = false;
 }
@@ -224,6 +230,84 @@ function buildNewPerformersTable() {
 		toUSD(month3Total),
 		"(insert text input-field)"
 	);
+}
+// // NOT SURE IF RELEVANT  TABLE BUILD IS MOSTLY A COPY - COME BACK TO THIS
+function buildQuickStatsTable() {
+	let table = document.getElementById("quickStats");
+	let thead = document.getElementById("qstatsHead");
+	let summaryHeadersArray = [
+		" ",
+		merchant.month + " " + report.year,
+		"&Delta YOY",
+		"% &Delta YOY",
+		"% of Total",
+	];
+	for (var i = 0; i < summaryHeadersArray.length; i++) {
+		thead
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode(summaryHeadersArray[i]));
+	}
+	// 	table.style.textAlign = "right";
+	// 	let numericalData = numberifyAndCalculateDifferences();
+	// 	console.log(numericalData);
+	// 	build5columns(
+	// 		table,
+	// 		0,
+	// 		"Sales",
+	// 		primaryMonth.performanceReport.Sales,
+	// 		priorMonth.performanceReport.Sales,
+	// 		(numericalData.percentageChange.Sales * 100).toFixed(2) + "%",
+	// 		"$" + numericalData.nominalChange.Sales
+	// 	);
+	// 	build5columns(
+	// 		table,
+	// 		1,
+	// 		"Click_Throughs",
+	// 		primaryMonth.performanceReport.Click_Throughs,
+	// 		priorMonth.performanceReport.Click_Throughs,
+	// 		(numericalData.percentageChange.Click_Throughs * 100).toFixed(2) + "%",
+	// 		numericalData.nominalChange.Click_Throughs
+	// 	);
+	// 	build5columns(
+	// 		table,
+	// 		2,
+	// 		"New Customer Sales",
+	// 		primaryMonth.performanceReport.New_Customer_Sales,
+	// 		priorMonth.performanceReport.New_Customer_Sales,
+	// 		(numericalData.percentageChange.New_Customer_Sales * 100).toFixed(2) +
+	// 			"%",
+	// 		numericalData.nominalChange.New_Customer_Sales
+	// 	);
+	// 	build5columns(
+	// 		table,
+	// 		3,
+	// 		"Commissions",
+	// 		primaryMonth.performanceReport.Commissions,
+	// 		priorMonth.performanceReport.Commissions,
+	// 		(numericalData.percentageChange.Commissions * 100).toFixed(2) + "%",
+	// 		"$" + numericalData.nominalChange.Commissions
+	// 	);
+	// 	build5columns(
+	// 		table,
+	// 		4,
+	// 		"Network_Commissions",
+	// 		primaryMonth.performanceReport.Network_Commissions,
+	// 		priorMonth.performanceReport.Network_Commissions,
+	// 		(numericalData.percentageChange.Network_Commissions * 100).toFixed(2) +
+	// 			"%",
+	// 		"$" + numericalData.nominalChange.Network_Commissions
+	// 	);
+	// 	build5columns(
+	// 		table,
+	// 		5,
+	// 		"Returns / Adjustments",
+	// 		primaryMonth.performanceReport.Number_of_Adjustments,
+	// 		priorMonth.performanceReport.Number_of_Adjustments,
+	// 		(numericalData.percentageChange.Number_of_Adjustments * 100).toFixed(
+	// 			2
+	// 		) + "%",
+	// 		numericalData.nominalChange.Number_of_Adjustments
+	// 	);
 }
 function buildFirstTable() {
 	let table = document.getElementById("performanceSummaryReport");
