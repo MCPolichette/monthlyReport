@@ -9,6 +9,15 @@ var report = {
 	GrowingPerformancebyYoyPercent: [],
 	DecliningPerformancebyYoyPercent: [],
 };
+// NOTES:
+// PRIMARY MONTH = month we're reporting on
+// Prior Month = (primaryMonth - 1)
+// Prior Year = (primaryMonth - 12)
+var performanceData = {
+	primaryMonth: {},
+	priorMonth: {},
+	priorYear: {},
+};
 var icons = {
 	up: `<i class="fa fa-caret-square-o-up" style="color:green"></i>`,
 	down: `<i class="fa fa-caret-square-o-down" style="color:red"></i>`,
@@ -80,73 +89,7 @@ function updateDivArray(array, text) {
 		document.getElementById(array[i]).innerHTML = text;
 	}
 }
-function addAffiliateToThisMonth() {
-	let affiliateId = document.getElementById("addNewAffMonth1").value;
-	addAffiliate(
-		affiliateId,
-		report.newAffsMonth1,
-		"thisMonthListOfAffiliates",
-		"addNewAffMonth1"
-	);
-	affiliateId.value = "";
-}
-function addAffiliateToLastMonth() {
-	let affiliateId = document.getElementById("addNewAffMonth2").value;
-	addAffiliate(
-		affiliateId,
-		report.newAffsMonth2,
-		"lastMonthListOfAffiliates",
-		"addNewAffMonth2"
-	);
-	affiliateId.value = "";
-}
-function addAffiliateTwoMonths() {
-	let affiliateId = document.getElementById("addNewAffMonth3").value;
-	addAffiliate(
-		affiliateId,
-		report.newAffsMonth3,
-		"twoMonthsAgoListOfAffiliates",
-		"addNewAffMonth3"
-	);
-	affiliateId.value = "";
-}
-function displayNewAffiliates(array, id) {
-	document.getElementById(id).innerHTML = "";
-	for (j = 0; j < array.length; j++) {
-		let affiliateButton = document.createElement("button");
-		let x = array[j];
-		affiliateButton.innerHTML = x;
-		affiliateButton.classList = "btn btn-primary";
-		affiliateButton.addEventListener(
-			"click",
-			function () {
-				let y = array.indexOf(x);
-				console.log(j, x, y, array[j]);
-				array.splice(y, 1);
-				displayNewAffiliates(array, id);
-			},
-			false,
-			false
-		);
-		document.getElementById(id).appendChild(affiliateButton);
-	}
-}
-function addAffiliate(affiliate, array, id, clearId) {
-	if (array.includes(affiliate)) {
-		alert("already added this Affiliate");
-	} else {
-		console.log(affiliate, array);
-		for (i = 0; i < primaryMonth.affiliateReport.length; i++) {
-			console.log(primaryMonth.affiliateReport[i].Affiliate_Id, i);
-			if (affiliate === primaryMonth.affiliateReport[i].Affiliate_Id) {
-				array.push(affiliate);
-				console.log(affiliate, array, id);
-				displayNewAffiliates(array, id, affiliate);
-			}
-		}
-	}
-	document.getElementById(clearId).value = "";
-}
+
 function testclick() {}
 
 function DateToString(date) {
@@ -199,6 +142,7 @@ function perfomance_report() {
 			merchant.month = "January";
 			merchant.abMonth = "Jan";
 			merchant.pabMonth = "Dec";
+			merchant.pabMonthNum = "-12";
 			merchant.previousMonth = "December";
 			merchant.twoMonthsAgo = "November";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -215,6 +159,7 @@ function perfomance_report() {
 			merchant.month = "February";
 			merchant.abMonth = "Feb";
 			merchant.pabMonth = "Jan";
+			merchant.pabMonthNum = "-01";
 			merchant.previousMonth = "January";
 			merchant.twoMonthsAgo = "December";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -231,6 +176,7 @@ function perfomance_report() {
 			merchant.month = "March";
 			merchant.abMonth = "Mar";
 			merchant.pabMonth = "Feb";
+			merchant.pabMonthNum = "-02";
 			merchant.previousMonth = "February";
 			merchant.twoMonthsAgo = "January";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -247,6 +193,7 @@ function perfomance_report() {
 			merchant.month = "April";
 			merchant.abMonth = "Apr";
 			merchant.pabMonth = "Mar";
+			merchant.pabMonthNum = "-03";
 			merchant.previousMonth = "March";
 			merchant.twoMonthsAgo = "February";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -263,6 +210,7 @@ function perfomance_report() {
 			merchant.month = "May";
 			merchant.abMonth = "May";
 			merchant.pabMonth = "Apr";
+			merchant.pabMonthNum = "-04";
 			merchant.previousMonth = "April";
 			merchant.twoMonthsAgo = "March";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -279,6 +227,7 @@ function perfomance_report() {
 			merchant.month = "June";
 			merchant.abMonth = "Jun";
 			merchant.pabMonth = "May";
+			merchant.pabMonthNum = "-05";
 			merchant.previousMonth = "May";
 			merchant.twoMonthsAgo = "April";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -295,6 +244,7 @@ function perfomance_report() {
 			merchant.month = "July";
 			merchant.abMonth = "Jul";
 			merchant.pabMonth = "Jun";
+			merchant.pabMonthNum = "-06";
 			merchant.previousMonth = "June";
 			merchant.twoMonthsAgo = "May";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -311,6 +261,7 @@ function perfomance_report() {
 			merchant.month = "August";
 			merchant.abMonth = "Aug";
 			merchant.pabMonth = "Jul";
+			merchant.pabMonthNum = "-07";
 			merchant.previousMonth = "July";
 			merchant.twoMonthsAgo = "June";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -327,6 +278,7 @@ function perfomance_report() {
 			merchant.month = "September";
 			merchant.abMonth = "Sep";
 			merchant.pabMonth = "Aug";
+			merchant.pabMonthNum = "-08";
 			merchant.previousMonth = "August";
 			merchant.twoMonthsAgo = "July";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -343,6 +295,7 @@ function perfomance_report() {
 			merchant.month = "October";
 			merchant.abMonth = "Oct";
 			merchant.pabMonth = "Sep";
+			merchant.pabMonthNum = "-09";
 			merchant.previousMonth = "September";
 			merchant.twoMonthsAgo = "August";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
@@ -360,6 +313,7 @@ function perfomance_report() {
 			merchant.abMonth = "Nov";
 			merchant.pabMonth = "Oct";
 			merchant.previousMonth = "October";
+			merchant.pabMonthNum = "-10";
 			merchant.twoMonthsAgo = "September";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
 			updateDivArray(
@@ -376,6 +330,7 @@ function perfomance_report() {
 			merchant.abMonth = "Dec";
 			merchant.pabMonth = "Nov";
 			merchant.previousMonth = "November";
+			merchant.pabMonthNum = "-11";
 			merchant.twoMonthsAgo = "October";
 			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
 			updateDivArray(
@@ -406,13 +361,57 @@ function perfomance_report() {
 		acceptableData = false;
 	}
 	if (acceptableData === true) {
+		// // Performance OBject
+		// // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  COME BACK TO THIS
+		// //Primary Month
+		// performanceData.primaryMonth.dayCount = daysInMonth(
+		// 	report.month.replaceAll("-", ""),
+		// 	report.year
+		// );
+		// performanceData.primaryMonth.startDate =
+		// 	report.year + report.month + "-01";
+		// performanceData.primaryMonth.endDate =
+		// 	report.year +
+		// 	report.month +
+		// 	"-" +
+		// 	performanceData.primaryMonth.dayCount;
+		// //Prior Month
+		// if(report.month =="-01"){
+		// 	performanceData.priorMonth.month = "-12"
+		// }else performanceData.priorMonth.month =
+		// performanceData.priorMonth.dayCount = daysInMonth(
+		// 	report.month.replaceAll("-", ""),
+		// 	report.year
+		// );
+		// performanceData.priorMonth.startDate =
+		// 	report.year + report.month + "-01";
+		// performanceData.priorMonth.endDate =
+		// 	report.year +
+		// 	report.month +
+		// 	"-" +
+		// 	performanceData.priorMonth.dayCount;
+		// // Prior Year
+		// performanceData.priorYear.dayCount = daysInMonth(
+		// 	report.month.replaceAll("-", ""),
+		// 	report.previousyear
+		// );
+		// performanceData.priorYear.startDate =
+		// 	report.previousyear + report.month + "-01";
+		// performanceData.priorYear.endDate =
+		// 	report.previousyear + report.month + "-" + priorDayCount;
+
+		// Performance Object END !!!!!! COME BACK TO THIS
 		let primaryDayCount = daysInMonth(
 			report.month.replaceAll("-", ""),
 			report.year
 		);
 		console.log(primaryDayCount);
-		let priorDayCount = daysInMonth(
+		let priorYearDayCount = daysInMonth(
 			report.month.replaceAll("-", ""),
+			report.previousyear
+		);
+		let priorMonthDayCount = daysInMonth(
+			merchant.pabMonthNum.replaceAll("-", ""),
 			report.previousyear
 		);
 		primaryMonth.startDate = report.year + report.month + "-01";
@@ -420,8 +419,11 @@ function perfomance_report() {
 			report.year + report.month + "-" + primaryDayCount;
 		priorMonth.startDate = report.previousyear + report.month + "-01";
 		priorMonth.endDate =
-			report.previousyear + report.month + "-" + priorDayCount;
-
+			report.previousyear + report.month + "-" + priorYearDayCount;
+		// performanceData.oneMonthAgo.startDate =
+		// 	report.year + merchant.pabMonthNum + "-01";
+		// performanceData.oneMonthAgo.endDate =
+		// 	report.year + merchant.pabMonthNum + "-" + priorMonthDayCount;
 		console.log(primaryMonth);
 		console.log(priorMonth);
 		viewReportButton.hidden = false;

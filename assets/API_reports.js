@@ -127,12 +127,27 @@ function reportStep2(xml, report_id, month) {
 					report_id: 1,
 					startDate: priorMonth.startDate,
 					endDate: priorMonth.endDate,
+					month: "lastMonth",
+				});
+			} else if (month === "lastMonth") {
+				console.log(priorMonth);
+				performanceData.priorMonth.performanceReport =
+					performanceReport;
+				runAPI({
+					report_id: 1,
+					startDate: priorMonth.startDate,
+					endDate: priorMonth.endDate,
 					month: "prior",
 				});
 			} else {
 				priorMonth.performanceReport = performanceReport;
 				console.log("TEST THIS ", performanceReport);
-				console.log(merchant, primaryMonth, priorMonth);
+				console.log(
+					merchant,
+					primaryMonth,
+					priorMonth,
+					performanceData
+				);
 				viewReportButton.innerHTML =
 					merchant.name +
 					" " +
