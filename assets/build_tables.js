@@ -97,16 +97,16 @@ function buildQuickStatsTable() {
 			.appendChild(document.createElement("th"))
 			.appendChild(document.createTextNode(summaryHeadersArray[i]));
 	}
-
 	function dollarRowValues(text, m1, m2, x) {
-		let posOrNeg = icons.up + "  +";
+		let icon = icons.up;
+		let posOrNeg = "+";
 		let value = m1 - m2;
 		let percent = ((m1 - m2) / m1).toFixed(2);
-
 		if (value < 0) {
-			posOrNeg = icons.down + "  ";
+			posOrNeg = icons.down;
+			posOrNeg = "";
 		}
-		return [text, toUSD(m1), toUSD(value), percent + "%", posOrNeg];
+		return [text, toUSD(m1), toUSD(value), posOrNeg + percent + "%", icon];
 	}
 	function otherRowValues(text, m1, m2, x) {
 		let icon = icons.up;
