@@ -7,6 +7,12 @@ body {
 	background-attachment: fixed;
 	font-family: Roboto;
 }
+h5 {
+	font-weight: bolder;
+}
+h6 {
+	font-weight: bold;
+}
 
 #affTable {
 	border-color: blue;
