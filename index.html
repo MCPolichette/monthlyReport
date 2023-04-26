@@ -555,14 +555,13 @@
 											</tbody>
 										</table>
 									</div>
-									
-									<div class="col-4">
-										
-									<img id="merchant_logo"src="https://static.avantlink.com/merchant-logos/23845.png" alt="logo" style="width:200px"><h6 id="report_merchant_name">
-										MERCHANT NAME
-									</h6>
+									<div class="col-4 justify-content-center  align-items-center">
+										<br><hr>
+									<img id="merchant_logo"src="https://static.avantlink.com/merchant-logos/23845.png" alt="logo" style="height:auto;max-width: 300px; margin:auto">
+									<hr>
+									<h5 id="report_merchant_name">								MERCHANT NAME</h5>
 								</div>
-								</div>
+								
 								<div class="row align-top">
 									<div class="col-6">
 										<h5 id="yoySummaryReportHeader">Year-over-Year</h5>
@@ -598,11 +597,41 @@
 										<table
 											id="affiliateSummaryReport"
 											class="table table-striped centered table-sm">
-											<tbody style="font-size: x-small">
+											<tbody style="font-size: small">
 												<thead id="affTableTHead">
 												</thead>
 											</tbody>
 										</table>
+									</div>
+								</div>
+								<div class="row">
+                                    <div class="col-6">
+										<h5>Top Growing YoY Performance</h5>
+										<table
+											id="growing_report"
+											class="table table-striped centered table-sm">
+											<tbody style="font-size: x-small">
+												<thead id="gTableTHead">
+												</thead>
+											</tbody>
+										</table>
+									</div>
+									<div class="col-6">
+										<h5>Top Declining YoY Performance</h5>
+										<table
+											id="declining_report"
+											class="table table-striped centered table-sm">
+											<tbody style="font-size: x-small">
+												<thead id="dTableTHead">
+												</thead>
+											</tbody>
+										</table>
+									</div>
+                                </div>
+								<div class="row">
+									<div class="col-12">
+										<p>*Affiliates with $0 Sales in either period were filtered out of the above display</p>
+										<p>NOTE: This report queries performance summary details over the reported Month, as well as for a time period of the same length exactly one year earlier. The two sets of results are then used to compute the percent change for each statistic.</p>
 									</div>
 								</div>
 								<div id ="productsRow" class="row">
@@ -619,28 +648,6 @@
 									</div>
                                 </div><div class="row">
                                     <div class="col-12">
-									</div>
-                                </div>
-								
-								<div class="row">
-                                    <div class="col-6">
-										<h5>Top Growing YoY Performance</h5>
-										<table
-											id="growing_report"
-											class="table table-striped centered table-sm">
-											<tbody style="font-size: small">
-											</tbody>
-										</table>
-									</div>
-									<div class="col-6">
-										<h5>Top Declining YoY Performance</h5>
-										<table
-											id="declining_report"
-											class="table table-striped centered table-sm">
-											<tbody style="font-size: small">
-												
-											</tbody>
-										</table>
 									</div>
                                 </div>
 								<div class = "row" id="manual-report data">
@@ -686,7 +693,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div></div>
 
 		<script src="assets/API_reports.js"></script>
 		<script src="assets/affiliate_scripts.js"></script>

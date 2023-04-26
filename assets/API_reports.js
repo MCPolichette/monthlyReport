@@ -34,6 +34,61 @@ function runAPI(report) {
 function reportStep2(xml, report_id, month) {
 	console.log("2ndreport", report_id);
 	switch (report_id) {
+		case 65:
+			let affArray = [];
+			let growthArr = [];
+			let declineArr = [];
+			xmlDoc = xml.getElementsByTagName("Table1");
+			console.log(xmlDoc);
+			console.log;
+			for (let i = 0; i < xmlDoc.length; i++) {
+				affArray.push({
+					Affiliate:
+						xmlDoc[i].getElementsByTagName("Affiliate_Name")[0]
+							.childNodes[0].nodeValue,
+					Sales_Current: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Sales_Current")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					Sales_Previous: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Sales_Previous")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					Percent_Change_in_Sales: Number(
+						xmlDoc[i]
+							.getElementsByTagName("Percent_Change_in_Sales")[0]
+							.childNodes[0].nodeValue.replaceAll(",", "")
+							.replaceAll("%", "")
+					),
+				});
+			}
+			for (j = 0; j < affArray.length; j++) {
+				if (
+					affArray[j].Sales_Previous > 0 &&
+					affArray[j].Sales_Current > 0
+				) {
+					growthArr.push(affArray[j]);
+					declineArr.push(affArray[j]);
+				}
+			}
+			console.log(affArray);
+			growthArr.sort(
+				(a, b) =>
+					parseFloat(b.Percent_Change_in_Sales) -
+					parseFloat(a.Percent_Change_in_Sales)
+			);
+			declineArr.sort(
+				(a, b) =>
+					parseFloat(a.Percent_Change_in_Sales) -
+					parseFloat(b.Percent_Change_in_Sales)
+			);
+			buildGrowthAndDeclineTables(declineArr, growthArr);
+
+			break;
 		case 48:
 			console.log(xmlDoc);
 			for (i = 0; i < 13; i++) {
@@ -367,12 +422,13 @@ function reportStep2(xml, report_id, month) {
 				for (let k = 0; k < 10; k++) {
 					topTen.push(report.yoyPerformance[k]);
 				}
-				removeDisabledButton("product_report_btn");
-				completeButton(
-					"affiliate_report_button",
-					"COMPLETED - AFfiliate Performance API"
-				);
 				buildAffiliateTable(primaryMonth.affiliateReport);
+				runAPI({
+					report_id: 65,
+					startDate: primaryMonth.startDate,
+					endDate: primaryMonth.endDate,
+					month: "primary",
+				});
 			}
 			break;
 	}

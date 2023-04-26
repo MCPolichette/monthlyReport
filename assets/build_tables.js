@@ -81,76 +81,7 @@ function updateHeaders() {
 		report.month +
 		" " +
 		report.year;
-
-	// document.getElementById("affiliate_report_button").hidden = false;
 }
-
-// !? REVIEW and REMOVE
-// function buildGrowingTable() {
-// 	let x = new Array();
-// 	for (let j = 0; j < primaryMonth.affiliateReport.length; j++) {
-// 		if (
-// 			primaryMonth.affiliateReport[j].salesYOYpercent === 0 ||
-// 			primaryMonth.affiliateReport[j].salesYOYpercent === 1 ||
-// 			primaryMonth.affiliateReport[j].salesYOYpercent == Infinity
-// 		) {
-// 			console.log("1 or 0");
-// 		} else if (isFinite(primaryMonth.affiliateReport[j].salesYOYpercent)) {
-// 			report.GrowingPerformancebyYoyPercent.push(
-// 				primaryMonth.affiliateReport[j]
-// 			);
-// 		}
-// 	}
-// 	report.GrowingPerformancebyYoyPercent.sort(
-// 		(a, b) => parseFloat(b.salesYOYpercent) - parseFloat(a.salesYOYpercent)
-// 	);
-
-// 	let growingTable = document.getElementById("growing_report");
-// 	let gHeaders = [
-// 		"Affiliate",
-// 		"Sales " + merchant.abMonth + " " + report.year,
-// 		"Sales " + merchant.abMonth + " " + report.previousyear,
-// 		"YoY %",
-// 	];
-
-// 	tableHeaders("growing_report", gHeaders);
-// 	for (let i = 0; i < 4; i++) {
-// 		build4columns(
-// 			growingTable,
-// 			i,
-// 			report.GrowingPerformancebyYoyPercent[i].Affiliate,
-// 			toUSD(report.GrowingPerformancebyYoyPercent[i].Sales),
-// 			toUSD(report.GrowingPerformancebyYoyPercent[i].lySales),
-// 			(
-// 				report.GrowingPerformancebyYoyPercent[i].salesYOYpercent * 100
-// 			).toFixed(2) + "%"
-// 		);
-// 	}
-// 	decliningTableBuild(report.GrowingPerformancebyYoyPercent);
-// }
-// function decliningTableBuild(x) {
-// 	let decliningTable = document.getElementById("declining_report");
-// 	let dHeaders = [
-// 		"Affiliate",
-// 		"Sales " + merchant.abMonth + " " + report.year,
-// 		"Sales " + merchant.abMonth + " " + report.previousyear,
-// 		"YoY %",
-// 	];
-// 	tableHeaders("declining_report", dHeaders);
-// 	x.reverse();
-// 	console.log(x);
-// 	for (let i = 0; i < 4; i++) {
-// 		build4columns(
-// 			decliningTable,
-// 			i,
-// 			x[i].Affiliate,
-// 			toUSD(x[i].Sales),
-// 			toUSD(x[i].lySales),
-// 			(x[i].salesYOYpercent * 100).toFixed(2) + "%"
-// 		);
-// 	}
-// }
-
 function buildQuickStatsTable() {
 	let table = document.getElementById("quickStats");
 	let thead = document.getElementById("qstatsHead");
@@ -158,7 +89,6 @@ function buildQuickStatsTable() {
 		" ",
 		data.monthlyPerformanceSummary[0].Month,
 		"change YOY",
-
 		"%change YOY",
 		"",
 	];
@@ -221,7 +151,6 @@ function buildQuickStatsTable() {
 			data.monthlyPerformanceSummary[12].Conversion_Rate
 		),
 	};
-
 	console.log(yoydifferences);
 	table.style.textAlign = "right";
 	buildRow(table, 0, yoydifferences.Sales);
@@ -237,7 +166,6 @@ function buildYoyTable() {
 		" ",
 		data.monthlyPerformanceSummary[0].Month,
 		data.monthlyPerformanceSummary[12].Month,
-
 		"% Change",
 		"",
 		"Nominal Change",
@@ -247,7 +175,6 @@ function buildYoyTable() {
 			.appendChild(document.createElement("th"))
 			.appendChild(document.createTextNode(summaryHeadersArray[i]));
 	}
-
 	function dollarRowValues(text, m1, m2, x) {
 		let icon = icons.up;
 		let posOrNeg = "+";
@@ -327,7 +254,6 @@ function buildYoyTable() {
 			data.monthlyPerformanceSummary[12].Number_of_Mobile_Sales
 		),
 	};
-
 	table.style.textAlign = "right";
 	buildRow(table, 0, yoydifferences.Ad_Impressions);
 	buildRow(table, 1, yoydifferences.Click_Throughs);
@@ -345,7 +271,6 @@ function buildMomTable() {
 		" ",
 		data.monthlyPerformanceSummary[0].Month,
 		data.monthlyPerformanceSummary[12].Month,
-
 		"% Change",
 		"",
 		"Nominal Change",
@@ -355,13 +280,11 @@ function buildMomTable() {
 			.appendChild(document.createElement("th"))
 			.appendChild(document.createTextNode(summaryHeadersArray[i]));
 	}
-
 	function dollarRowValues(text, m1, m2, x) {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
 		let percent = ((m1 - m2) / m1).toFixed(2);
-
 		if (value < 0) {
 			posOrNeg = icons.down;
 			icon = icons.down;
@@ -488,185 +411,55 @@ function buildAffiliateTable(array) {
 
 	affiliateReportButton.disabled = true;
 }
+function buildGrowthAndDeclineTables(declineArr, growthArr) {
+	console.log(declineArr);
+	console.log(growthArr);
+	let gTable = document.getElementById("growing_report");
+	let gThead = document.getElementById("gTableTHead");
+	let gheadArray = [
+		"Affiliate",
+		data.monthlyPerformanceSummary[0].Month,
+		data.monthlyPerformanceSummary[12].Month,
+		"% Growth",
+	];
+	for (var i = 0; i < gheadArray.length; i++) {
+		gThead
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode(gheadArray[i]));
+	}
+	for (var j = 0; j < 5; j++) {
+		buildRow(gTable, j, [
+			growthArr[j].Affiliate,
+			toUSD(growthArr[j].Sales_Current),
+			toUSD(growthArr[j].Sales_Previous),
+			growthArr[j].Percent_Change_in_Sales + "%",
+		]);
+	}
+	let dTable = document.getElementById("declining_report");
+	let dThead = document.getElementById("dTableTHead");
+	let dheadArray = [
+		"Affiliate",
+		data.monthlyPerformanceSummary[0].Month,
+		data.monthlyPerformanceSummary[12].Month,
+		"% Decline",
+	];
+	for (var k = 0; k < dheadArray.length; k++) {
+		dThead
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode(dheadArray[k]));
+	}
 
-// !? FOR REFERENCE - DELETE LATER
-
-// function numberifyAndCalculateDifferences() {
-// 	let primaryMonthData = {
-// 		Sales: Number(
-// 			primaryMonth.performanceReport.Sales.replaceAll(",", "").replaceAll(
-// 				"$",
-// 				""
-// 			)
-// 		),
-// 		Click_Throughs: Number(
-// 			primaryMonth.performanceReport.Click_Throughs.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		New_Customers: Number(
-// 			primaryMonth.performanceReport.New_Customers.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		New_Customer_Sales: Number(
-// 			primaryMonth.performanceReport.New_Customer_Sales.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		Commissions: Number(
-// 			primaryMonth.performanceReport.Commissions.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		Network_Commissions: Number(
-// 			primaryMonth.performanceReport.Network_Commissions.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		Number_of_Adjustments: Number(
-// 			primaryMonth.performanceReport.Number_of_Adjustments.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 	};
-// 	let priorMonthData = {
-// 		Sales: Number(
-// 			priorMonth.performanceReport.Sales.replaceAll(",", "").replaceAll(
-// 				"$",
-// 				""
-// 			)
-// 		),
-// 		Click_Throughs: Number(
-// 			priorMonth.performanceReport.Click_Throughs.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		New_Customers: Number(
-// 			priorMonth.performanceReport.New_Customers.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		New_Customer_Sales: Number(
-// 			priorMonth.performanceReport.New_Customer_Sales.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		Commissions: Number(
-// 			priorMonth.performanceReport.Commissions.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		Network_Commissions: Number(
-// 			priorMonth.performanceReport.Network_Commissions.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 		Number_of_Adjustments: Number(
-// 			priorMonth.performanceReport.Number_of_Adjustments.replaceAll(
-// 				",",
-// 				""
-// 			).replaceAll("$", "")
-// 		),
-// 	};
-// 	let percentageChange = {};
-// 	if (primaryMonthData.Sales === 0 || priorMonthData.Sales === 0) {
-// 		percentageChange.Sales = "N / A";
-// 	} else {
-// 		percentageChange.Sales = (
-// 			(primaryMonthData.Sales - priorMonthData.Sales) /
-// 			primaryMonthData.Sales
-// 		).toFixed(2);
-// 	}
-// 	if (
-// 		primaryMonthData.Click_Throughs === 0 ||
-// 		priorMonthData.Click_Throughs === 0
-// 	) {
-// 		percentageChange.Click_Throughs = "N / A";
-// 	} else {
-// 		percentageChange.Click_Throughs = (
-// 			(primaryMonthData.Click_Throughs - priorMonthData.Click_Throughs) /
-// 			primaryMonthData.Click_Throughs
-// 		).toFixed(2);
-// 	}
-// 	if (
-// 		primaryMonthData.New_Customer_Sales === 0 ||
-// 		priorMonthData.New_Customer_Sales === 0
-// 	) {
-// 		percentageChange.New_Customer_Sales = "N / A";
-// 	} else {
-// 		percentageChange.New_Customer_Sales = (
-// 			(primaryMonthData.New_Customer_Sales -
-// 				priorMonthData.New_Customer_Sales) /
-// 			primaryMonthData.New_Customer_Sales
-// 		).toFixed(2);
-// 	}
-// 	if (
-// 		primaryMonthData.Commissions === 0 ||
-// 		priorMonthData.Commissions === 0
-// 	) {
-// 		percentageChange.Commissions = "N / A";
-// 	} else {
-// 		percentageChange.Commissions = (
-// 			(primaryMonthData.Commissions - priorMonthData.Commissions) /
-// 			primaryMonthData.Commissions
-// 		).toFixed(2);
-// 	}
-// 	if (
-// 		primaryMonthData.Network_Commissions === 0 ||
-// 		priorMonthData.Network_Commissions === 0
-// 	) {
-// 		percentageChange.Network_Commissions = "N / A";
-// 	} else {
-// 		percentageChange.Network_Commissions = (
-// 			(primaryMonthData.Network_Commissions -
-// 				priorMonthData.Network_Commissions) /
-// 			primaryMonthData.Network_Commissions
-// 		).toFixed(2);
-// 	}
-// 	if (
-// 		primaryMonthData.Number_of_Adjustments === 0 ||
-// 		priorMonthData.Number_of_Adjustments === 0
-// 	) {
-// 		percentageChange.Number_of_Adjustments = "N / A";
-// 	} else {
-// 		percentageChange.Number_of_Adjustments = (
-// 			(primaryMonthData.Number_of_Adjustments -
-// 				priorMonthData.Number_of_Adjustments) /
-// 			primaryMonthData.Number_of_Adjustments
-// 		).toFixed(2);
-// 	}
-// 	let nominalChange = {
-// 		Sales: (primaryMonthData.Sales - priorMonthData.Sales).toFixed(2),
-// 		Click_Throughs: (
-// 			primaryMonthData.Click_Throughs - priorMonthData.Click_Throughs
-// 		).toFixed(0),
-// 		New_Customer_Sales: (
-// 			primaryMonthData.New_Customer_Sales -
-// 			priorMonthData.New_Customer_Sales
-// 		).toFixed(2),
-// 		Commissions: (
-// 			primaryMonthData.Commissions - priorMonthData.Commissions
-// 		).toFixed(2),
-// 		Network_Commissions: (
-// 			primaryMonthData.Network_Commissions -
-// 			priorMonthData.Network_Commissions
-// 		).toFixed(2),
-// 		Number_of_Adjustments: (
-// 			primaryMonthData.Number_of_Adjustments -
-// 			priorMonthData.Number_of_Adjustments
-// 		).toFixed(0),
-// 	};
-// 	return { percentageChange, nominalChange };
-// }
+	for (var l = 0; l < 5; l++) {
+		buildRow(dTable, l, [
+			declineArr[l].Affiliate,
+			toUSD(declineArr[l].Sales_Current),
+			toUSD(declineArr[l].Sales_Previous),
+			declineArr[l].Percent_Change_in_Sales + "%",
+		]);
+	}
+	removeDisabledButton("product_report_btn");
+	completeButton(
+		"affiliate_report_button",
+		"COMPLETED - AFfiliate Performance API"
+	);
+}
