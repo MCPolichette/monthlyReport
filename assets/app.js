@@ -8,16 +8,15 @@ var report = {
 	productList: [],
 	GrowingPerformancebyYoyPercent: [],
 	DecliningPerformancebyYoyPercent: [],
+	topAffiliateCount: 10,
+	itemCount: 10,
+	monthArray: [],
 };
-// NOTES:
-// PRIMARY MONTH = month we're reporting on
-// Prior Month = (primaryMonth - 1)
-// Prior Year = (primaryMonth - 12)
-var performanceData = {
-	primaryMonth: {},
-	priorMonth: {},
-	priorYear: {},
+
+var data = {
+	monthlyPerformanceSummary: [],
 };
+
 var icons = {
 	up: `<i class="fa fa-caret-square-o-up" style="color:green"></i>`,
 	down: `<i class="fa fa-caret-square-o-down" style="color:red"></i>`,
@@ -28,7 +27,7 @@ var priorMonth = { month: "prior" };
 var viewReportButton = document.getElementById("viewReport");
 var affiliateReportButton = document.getElementById("affiliate_report_button");
 
-//general functions
+//General Functions
 function toUSD(dollarInt) {
 	var formatter = new Intl.NumberFormat("en-US", {
 		style: "currency",
@@ -90,8 +89,6 @@ function updateDivArray(array, text) {
 	}
 }
 
-function testclick() {}
-
 function DateToString(date) {
 	let options = {
 		// weekday: "short", //to display the full name of the day, you can use short to indicate an abbreviation of the day
@@ -139,208 +136,172 @@ function perfomance_report() {
 
 	switch (report.month) {
 		case "-01":
-			merchant.month = "January";
-			merchant.abMonth = "Jan";
-			merchant.pabMonth = "Dec";
-			merchant.pabMonthNum = "-12";
-			merchant.previousMonth = "December";
-			merchant.twoMonthsAgo = "November";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "January";
+			data.abMonth = "Jan";
+			data.priorAbMonth = "Dec";
+			data.priorAbMonthNum = "-12";
+			data.previousMonth = "December";
+			data.twoMonthsAgo = "November";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-02":
-			merchant.month = "February";
-			merchant.abMonth = "Feb";
-			merchant.pabMonth = "Jan";
-			merchant.pabMonthNum = "-01";
-			merchant.previousMonth = "January";
-			merchant.twoMonthsAgo = "December";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "February";
+			data.abMonth = "Feb";
+			data.priorAbMonth = "Jan";
+			data.priorAbMonthNum = "-01";
+			data.previousMonth = "January";
+			data.twoMonthsAgo = "December";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-03":
-			merchant.month = "March";
-			merchant.abMonth = "Mar";
-			merchant.pabMonth = "Feb";
-			merchant.pabMonthNum = "-02";
-			merchant.previousMonth = "February";
-			merchant.twoMonthsAgo = "January";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "March";
+			data.abMonth = "Mar";
+			data.priorAbMonth = "Feb";
+			data.priorAbMonthNum = "-02";
+			data.previousMonth = "February";
+			data.twoMonthsAgo = "January";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-04":
-			merchant.month = "April";
-			merchant.abMonth = "Apr";
-			merchant.pabMonth = "Mar";
-			merchant.pabMonthNum = "-03";
-			merchant.previousMonth = "March";
-			merchant.twoMonthsAgo = "February";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "April";
+			data.abMonth = "Apr";
+			data.priorAbMonth = "Mar";
+			data.priorAbMonthNum = "-03";
+			data.previousMonth = "March";
+			data.twoMonthsAgo = "February";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-05":
-			merchant.month = "May";
-			merchant.abMonth = "May";
-			merchant.pabMonth = "Apr";
-			merchant.pabMonthNum = "-04";
-			merchant.previousMonth = "April";
-			merchant.twoMonthsAgo = "March";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "May";
+			data.abMonth = "May";
+			data.priorAbMonth = "Apr";
+			data.priorAbMonthNum = "-04";
+			data.previousMonth = "April";
+			data.twoMonthsAgo = "March";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-06":
-			merchant.month = "June";
-			merchant.abMonth = "Jun";
-			merchant.pabMonth = "May";
-			merchant.pabMonthNum = "-05";
-			merchant.previousMonth = "May";
-			merchant.twoMonthsAgo = "April";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "June";
+			data.abMonth = "Jun";
+			data.priorAbMonth = "May";
+			data.priorAbMonthNum = "-05";
+			data.previousMonth = "May";
+			data.twoMonthsAgo = "April";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-07":
-			merchant.month = "July";
-			merchant.abMonth = "Jul";
-			merchant.pabMonth = "Jun";
-			merchant.pabMonthNum = "-06";
-			merchant.previousMonth = "June";
-			merchant.twoMonthsAgo = "May";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "July";
+			data.abMonth = "Jul";
+			data.priorAbMonth = "Jun";
+			data.priorAbMonthNum = "-06";
+			data.previousMonth = "June";
+			data.twoMonthsAgo = "May";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-08":
-			merchant.month = "August";
-			merchant.abMonth = "Aug";
-			merchant.pabMonth = "Jul";
-			merchant.pabMonthNum = "-07";
-			merchant.previousMonth = "July";
-			merchant.twoMonthsAgo = "June";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "August";
+			data.abMonth = "Aug";
+			data.priorAbMonth = "Jul";
+			data.priorAbMonthNum = "-07";
+			data.previousMonth = "July";
+			data.twoMonthsAgo = "June";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-09":
-			merchant.month = "September";
-			merchant.abMonth = "Sep";
-			merchant.pabMonth = "Aug";
-			merchant.pabMonthNum = "-08";
-			merchant.previousMonth = "August";
-			merchant.twoMonthsAgo = "July";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "September";
+			data.abMonth = "Sep";
+			data.priorAbMonth = "Aug";
+			data.priorAbMonthNum = "-08";
+			data.previousMonth = "August";
+			data.twoMonthsAgo = "July";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-10":
-			merchant.month = "October";
-			merchant.abMonth = "Oct";
-			merchant.pabMonth = "Sep";
-			merchant.pabMonthNum = "-09";
-			merchant.previousMonth = "September";
-			merchant.twoMonthsAgo = "August";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "October";
+			data.abMonth = "Oct";
+			data.priorAbMonth = "Sep";
+			data.priorAbMonthNum = "-09";
+			data.previousMonth = "September";
+			data.twoMonthsAgo = "August";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-11":
-			merchant.month = "November";
-			merchant.abMonth = "Nov";
-			merchant.pabMonth = "Oct";
-			merchant.previousMonth = "October";
-			merchant.pabMonthNum = "-10";
-			merchant.twoMonthsAgo = "September";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "November";
+			data.abMonth = "Nov";
+			data.priorAbMonth = "Oct";
+			data.previousMonth = "October";
+			data.priorAbMonthNum = "-10";
+			data.twoMonthsAgo = "September";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-12":
-			merchant.month = "December";
-			merchant.abMonth = "Dec";
-			merchant.pabMonth = "Nov";
-			merchant.previousMonth = "November";
-			merchant.pabMonthNum = "-11";
-			merchant.twoMonthsAgo = "October";
-			updateDivArray(["newAffMonth1", "thisMonthList"], merchant.month);
+			data.month = "December";
+			data.abMonth = "Dec";
+			data.priorAbMonth = "Nov";
+			data.previousMonth = "November";
+			data.priorAbMonthNum = "-11";
+			data.twoMonthsAgo = "October";
+			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
 			updateDivArray(
 				["newAffMonth2", "lastMonthList"],
-				merchant.previousMonth
+				data.previousMonth
 			);
-			updateDivArray(
-				["newAffMonth3", "twoMonthsAgo"],
-				merchant.twoMonthsAgo
-			);
+			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 	}
 	let selectedYear = document.getElementById("selectedYear").value;
@@ -361,46 +322,6 @@ function perfomance_report() {
 		acceptableData = false;
 	}
 	if (acceptableData === true) {
-		// // Performance OBject
-		// // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  COME BACK TO THIS
-		// //Primary Month
-		// performanceData.primaryMonth.dayCount = daysInMonth(
-		// 	report.month.replaceAll("-", ""),
-		// 	report.year
-		// );
-		// performanceData.primaryMonth.startDate =
-		// 	report.year + report.month + "-01";
-		// performanceData.primaryMonth.endDate =
-		// 	report.year +
-		// 	report.month +
-		// 	"-" +
-		// 	performanceData.primaryMonth.dayCount;
-		// //Prior Month
-		// if(report.month =="-01"){
-		// 	performanceData.priorMonth.month = "-12"
-		// }else performanceData.priorMonth.month =
-		// performanceData.priorMonth.dayCount = daysInMonth(
-		// 	report.month.replaceAll("-", ""),
-		// 	report.year
-		// );
-		// performanceData.priorMonth.startDate =
-		// 	report.year + report.month + "-01";
-		// performanceData.priorMonth.endDate =
-		// 	report.year +
-		// 	report.month +
-		// 	"-" +
-		// 	performanceData.priorMonth.dayCount;
-		// // Prior Year
-		// performanceData.priorYear.dayCount = daysInMonth(
-		// 	report.month.replaceAll("-", ""),
-		// 	report.previousyear
-		// );
-		// performanceData.priorYear.startDate =
-		// 	report.previousyear + report.month + "-01";
-		// performanceData.priorYear.endDate =
-		// 	report.previousyear + report.month + "-" + priorDayCount;
-
-		// Performance Object END !!!!!! COME BACK TO THIS
 		let primaryDayCount = daysInMonth(
 			report.month.replaceAll("-", ""),
 			report.year
@@ -411,7 +332,7 @@ function perfomance_report() {
 			report.previousyear
 		);
 		let priorMonthDayCount = daysInMonth(
-			merchant.pabMonthNum.replaceAll("-", ""),
+			data.priorAbMonthNum.replaceAll("-", ""),
 			report.previousyear
 		);
 		primaryMonth.startDate = report.year + report.month + "-01";
@@ -420,21 +341,18 @@ function perfomance_report() {
 		priorMonth.startDate = report.previousyear + report.month + "-01";
 		priorMonth.endDate =
 			report.previousyear + report.month + "-" + priorYearDayCount;
-		// performanceData.oneMonthAgo.startDate =
-		// 	report.year + merchant.pabMonthNum + "-01";
-		// performanceData.oneMonthAgo.endDate =
-		// 	report.year + merchant.pabMonthNum + "-" + priorMonthDayCount;
 		console.log(primaryMonth);
 		console.log(priorMonth);
 		viewReportButton.hidden = false;
 		runAPI({
-			report_id: 1,
-			startDate: primaryMonth.startDate,
+			report_id: 48,
+			startDate: priorMonth.startDate,
 			endDate: primaryMonth.endDate,
 			month: "primary",
 		});
 	}
 }
+//THESE TWO SCRIPTS REQUIRE NO EDITS:
 function affiliate_report() {
 	document.getElementById("first_loading_bar").hidden = false;
 	document.getElementById(

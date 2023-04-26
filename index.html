@@ -11,6 +11,7 @@
 		></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -538,12 +539,11 @@
 						<div class="accordion-body">
 							<div class="container" id="report_pdf">
 								<div class="row">
-									
 									<img src="assets/AvantLink Logo.png" alt="AvantLink Support Help Center home page"
 									style="width:300px"
 									></div>
 									<div class="row">
-									<div class="col-5">
+									<div class="col-8">
 										<h5>Quick Stats</h5>
 										<table
 											id="quickStats"
@@ -555,52 +555,50 @@
 											</tbody>
 										</table>
 									</div>
-									<div class="col-1"></div>
-									<div class="col-5">
-										<h6 id="report_merchant_name">
+									
+									<div class="col-4">
+										
+									<img id="merchant_logo"src="https://static.avantlink.com/merchant-logos/23845.png" alt="logo" style="width:200px"><h6 id="report_merchant_name">
 										MERCHANT NAME
 									</h6>
-									<img id="merchant_logo"src="https://static.avantlink.com/merchant-logos/23845.png" alt="logo" style="width:200px">
 								</div>
-									
 								</div>
 								<div class="row align-top">
 									<div class="col-6">
-										<h5>Monthly YoY Performance</h5>
+										<h5 id="yoySummaryReportHeader">Year-over-Year</h5>
 										<table
-											id="performanceSummaryReport"
+											id="yoySummaryReport"
 											class="table table-striped centered table-sm"
 										>
-											<tbody style="font-size: small">
-												<thead id="primaryTHead">
+											<tbody style="font-size: x-small">
+												<thead id="yoySummaryTHead">
 												</thead>
 											</tbody>
 										</table>
 									</div>
 									<div class="col-6">
-										<h5>New Partner Performance</h5>
-                                        <table
-											id="newPartnerReport"
+										<h5 id="momSummaryReportHeader">Month-over-Month</h5>
+										<table
+											id="momSummaryReport"
 											class="table table-striped centered table-sm"
 										>
-                                        <thead>
-											<tr>
-												<thclass="intentionallyBlank"></th>
-												<th>New Partners</th>
-												<th id="newPartnerPerformanceTitle">Performance this Month</th>
-												<th>Notable Performers</th>
-											</tr>
-										</thead>
-                                        </table>
+											<tbody style="font-size: x-small">
+												<thead id="momSummaryTHead">
+												</thead>
+											</tbody>
+										</table>
+									</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-12">
+										<h5>Monthly Sales Performance </h5>
+										<div id="chart1" style="width:auto; "></div>
 										<h5>Top Affiliate YOY Performances</h5>
 										<table
 											id="affiliateSummaryReport"
 											class="table table-striped centered table-sm">
-											<tbody style="font-size: small">
+											<tbody style="font-size: x-small">
 												<thead id="affTableTHead">
 												</thead>
 											</tbody>
@@ -621,7 +619,6 @@
 									</div>
                                 </div><div class="row">
                                     <div class="col-12">
-										
 									</div>
                                 </div>
 								
@@ -667,6 +664,21 @@
 									</div><div class="row">
 									<div class ="col-4"><br><button type="button"  onclick="generatePDF()" class="btn btn-info">Download this report as a PDF</button>
 									</div>
+									<!-- !? REBUILD THIS REPORT AND PUT IT SOMEWHERE ELSE -->
+										<!-- <h5>New Partner Performance</h5>
+                                        <table
+											id="newPartnerReport"
+											class="table table-striped centered table-sm"
+										>
+                                        <thead>
+											<tr>
+												<thclass="intentionallyBlank"></th>
+												<th>New Partners</th>
+												<th id="newPartnerPerformanceTitle">Performance this Month</th>
+												<th>Notable Performers</th>
+											</tr>
+										</thead>
+                                        </table> -->
 								</div>
 								</div>
 							</div>
@@ -677,9 +689,11 @@
 		</div>
 
 		<script src="assets/API_reports.js"></script>
-		<script src="assets/new_affiliate_scripts.js"></script>
+		<script src="assets/affiliate_scripts.js"></script>
 		<script src="assets/build_tables.js"></script>
+		<script src="assets/products_scripts.js"></script>
 		<script src="assets/app.js"></script>
+		<script src="assets/graphs.js"></script>
 		<script src="assets/export_files.js"></script>
 		<!-- Option 1: Bootstrap Bundle with Popper -->
 		<script

@@ -30,16 +30,126 @@ function runAPI(report) {
 			reportStep2(data, report_id, month)
 		);
 }
+
 function reportStep2(xml, report_id, month) {
 	console.log("2ndreport", report_id);
 	switch (report_id) {
+		case 48:
+			console.log(xmlDoc);
+			for (i = 0; i < 13; i++) {
+				let m = {};
+				m.Month =
+					xmlDoc.getElementsByTagName("Month")[
+						i
+					].childNodes[0].nodeValue;
+				m.Ad_Impressions = Number(
+					xmlDoc
+						.getElementsByTagName("Ad_Impressions")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Click_Throughs = Number(
+					xmlDoc
+						.getElementsByTagName("Click_Throughs")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Sales = Number(
+					xmlDoc
+						.getElementsByTagName("Sales")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Number_of_Sales = Number(
+					xmlDoc
+						.getElementsByTagName("Number_of_Sales")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Mobile_Sales = Number(
+					xmlDoc
+						.getElementsByTagName("Mobile_Sales")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Number_of_Mobile_Sales = Number(
+					xmlDoc
+						.getElementsByTagName("Number_of_Mobile_Sales")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Commissions = Number(
+					xmlDoc
+						.getElementsByTagName("Commissions")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Incentives = Number(
+					xmlDoc
+						.getElementsByTagName("Incentives")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Network_Commissions = Number(
+					xmlDoc
+						.getElementsByTagName("Network_Commissions")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Number_of_Adjustments = Number(
+					xmlDoc
+						.getElementsByTagName("Number_of_Adjustments")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Conversion_Rate = Number(
+					xmlDoc
+						.getElementsByTagName("Conversion_Rate")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("%", "")
+				);
+				m.New_Customers = Number(
+					xmlDoc
+						.getElementsByTagName("New_Customers")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.New_Customer_Sales = Number(
+					xmlDoc
+						.getElementsByTagName("New_Customer_Sales")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Average_Sale_Amount = Number(
+					xmlDoc
+						.getElementsByTagName("Average_Sale_Amount")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				m.Click_Through_Rate = Number(
+					xmlDoc
+						.getElementsByTagName("Click_Through_Rate")
+						[i].childNodes[0].nodeValue.replaceAll(",", "")
+						.replaceAll("$", "")
+				);
+				data.monthlyPerformanceSummary.push(m);
+			}
+			console.log(data);
+			runAPI({
+				report_id: 1,
+				startDate: primaryMonth.startDate,
+				endDate: primaryMonth.endDate,
+				month: "primary",
+			});
+			buildQuickStatsTable();
+			buildYoyTable();
+			buildMomTable();
+			report.monthArray = data.monthlyPerformanceSummary;
+			drawChart1();
+			break;
 		case 18:
 			console.log(xmlDoc.getElementsByTagName("Product_SKU").length);
-			for (
-				let i = 0;
-				i < 10;
-				i++ //!? MAKE THE ITEM COUNT DYNAMIC!?
-			) {
+			for (let i = 0; i < report.itemCount; i++) {
 				let x = {};
 				x.Product_SKU =
 					xmlDoc.getElementsByTagName("Product_SKU")[i].textContent;
@@ -65,103 +175,22 @@ function reportStep2(xml, report_id, month) {
 			break;
 		case 1: //Performance Summary
 			console.log(xml);
-			let performanceReport = {};
 			merchant.name =
 				xmlDoc.getElementsByTagName(
 					"Merchant"
 				)[0].childNodes[0].nodeValue;
-			performanceReport.Ad_Impressions =
-				xmlDoc.getElementsByTagName(
-					"Ad_Impressions"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.Click_Throughs =
-				xmlDoc.getElementsByTagName(
-					"Click_Throughs"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.Sales =
-				xmlDoc.getElementsByTagName("Sales")[0].childNodes[0].nodeValue;
-			performanceReport.Number_of_Sales =
-				xmlDoc.getElementsByTagName(
-					"Number_of_Sales"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.Mobile_Sales =
-				xmlDoc.getElementsByTagName(
-					"Mobile_Sales"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.Number_of_Mobile_Sales =
-				xmlDoc.getElementsByTagName(
-					"Number_of_Mobile_Sales"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.Commissions =
-				xmlDoc.getElementsByTagName(
-					"Commissions"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.Incentives =
-				xmlDoc.getElementsByTagName(
-					"Incentives"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.Network_Commissions = xmlDoc.getElementsByTagName(
-				"Network_Commissions"
-			)[0].childNodes[0].nodeValue;
-			performanceReport.Number_of_Adjustments =
-				xmlDoc.getElementsByTagName(
-					"Number_of_Adjustments"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.New_Customers =
-				xmlDoc.getElementsByTagName(
-					"New_Customers"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.New_Customer_Sales =
-				xmlDoc.getElementsByTagName(
-					"New_Customer_Sales"
-				)[0].childNodes[0].nodeValue;
-			performanceReport.Average_Sale_Amount = xmlDoc.getElementsByTagName(
-				"Average_Sale_Amount"
-			)[0].childNodes[0].nodeValue;
-			console.log(performanceReport);
-			console.log(month);
-			if (month === "primary") {
-				console.log(priorMonth);
-				primaryMonth.performanceReport = performanceReport;
-				runAPI({
-					report_id: 1,
-					startDate: priorMonth.startDate,
-					endDate: priorMonth.endDate,
-					month: "lastMonth",
-				});
-			} else if (month === "lastMonth") {
-				console.log(priorMonth);
-				performanceData.priorMonth.performanceReport =
-					performanceReport;
-				runAPI({
-					report_id: 1,
-					startDate: priorMonth.startDate,
-					endDate: priorMonth.endDate,
-					month: "prior",
-				});
-			} else {
-				priorMonth.performanceReport = performanceReport;
-				console.log("TEST THIS ", performanceReport);
-				console.log(
-					merchant,
-					primaryMonth,
-					priorMonth,
-					performanceData
-				);
-				viewReportButton.innerHTML =
-					merchant.name +
-					" " +
-					merchant.month +
-					" " +
-					report.year +
-					" Report";
-				updateHeaders();
-				buildFirstTable();
-				buildQuickStatsTable();
-				completeButton("submitBtn", "Merchant & Date Selected");
-				removeDisabledButton("affiliate_report_button");
-				removeDisabledButton("viewReport");
-			}
+
+			viewReportButton.innerHTML =
+				merchant.name +
+				" " +
+				merchant.month +
+				" " +
+				report.year +
+				" Report";
+			updateHeaders();
+			completeButton("submitBtn", "Merchant & Date Selected");
+			removeDisabledButton("affiliate_report_button");
+			removeDisabledButton("viewReport");
 			break;
 		case 15: //Performance Summary by Affiliate for selected dates
 			let affiliates = [];
@@ -345,7 +374,6 @@ function reportStep2(xml, report_id, month) {
 				);
 				buildAffiliateTable(primaryMonth.affiliateReport);
 			}
-
 			break;
 	}
 }
