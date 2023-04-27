@@ -235,17 +235,17 @@ function reportStep2(xml, report_id, month) {
 					"Merchant"
 				)[0].childNodes[0].nodeValue;
 
-			viewReportButton.innerHTML =
-				merchant.name +
-				" " +
-				merchant.month +
-				" " +
-				report.year +
-				" Report";
+			// viewReportButton.innerHTML =
+			// 	merchant.name +
+			// 	" " +
+			// 	merchant.month +
+			// 	" " +
+			// 	report.year +
+			// 	" Report";
 			updateHeaders();
 			completeButton("submitBtn", "Merchant & Date Selected");
 			removeDisabledButton("affiliate_report_button");
-			removeDisabledButton("viewReport");
+			// removeDisabledButton("viewReport");
 			break;
 		case 15: //Performance Summary by Affiliate for selected dates
 			let affiliates = [];

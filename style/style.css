@@ -21,3 +21,16 @@ h6 {
 #productsRow {
 	margin-top: 100px;
 }
+#report_pdf {
+	background-color: white;
+	@page {
+		size: auto;
+		margin: 25mm 25mm 25mm 25mm;
+	}
+	@media print {
+		#search,
+		.printPage {
+			display: none !important;
+		}
+	}
+}

@@ -412,6 +412,10 @@ function buildAffiliateTable(array) {
 	affiliateReportButton.disabled = true;
 }
 function buildGrowthAndDeclineTables(declineArr, growthArr) {
+	let numberOfAffiliates = 5;
+	if (declineArr.length < numberOfAffiliates) {
+		numberOfAffiliates = declineArr.length;
+	}
 	console.log(declineArr);
 	console.log(growthArr);
 	let gTable = document.getElementById("growing_report");
@@ -427,7 +431,7 @@ function buildGrowthAndDeclineTables(declineArr, growthArr) {
 			.appendChild(document.createElement("th"))
 			.appendChild(document.createTextNode(gheadArray[i]));
 	}
-	for (var j = 0; j < 5; j++) {
+	for (var j = 0; j < numberOfAffiliates; j++) {
 		buildRow(gTable, j, [
 			growthArr[j].Affiliate,
 			toUSD(growthArr[j].Sales_Current),
@@ -449,7 +453,7 @@ function buildGrowthAndDeclineTables(declineArr, growthArr) {
 			.appendChild(document.createTextNode(dheadArray[k]));
 	}
 
-	for (var l = 0; l < 5; l++) {
+	for (var l = 0; l < numberOfAffiliates; l++) {
 		buildRow(dTable, l, [
 			declineArr[l].Affiliate,
 			toUSD(declineArr[l].Sales_Current),
