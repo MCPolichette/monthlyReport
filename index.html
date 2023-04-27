@@ -415,10 +415,28 @@
 										<div class="col-10 mx-auto">
 											<p>new process:</p>
 											<ul>
-												<li>Have the User pload a downloaded Active Affiliates - with instructions</li>
-												<li>Run a loop through all Affiliates Approval date, and create an array for the three most recent months </li>
-												<li>Cross reference the Affilaite's Performance report with new Affiliates.  </li>
-												<li>Build a table for each of the three prior months below the Affiliate Growth and Decline tables.</li>
+												<li>
+													Have the User pload a
+													downloaded Active Affiliates
+													- with instructions
+												</li>
+												<li>
+													Run a loop through all
+													Affiliates Approval date,
+													and create an array for the
+													three most recent months
+												</li>
+												<li>
+													Cross reference the
+													Affilaite's Performance
+													report with new Affiliates.
+												</li>
+												<li>
+													Build a table for each of
+													the three prior months below
+													the Affiliate Growth and
+													Decline tables.
+												</li>
 											</ul>
 											<div class="d-grid gap-2">
 												<button
@@ -453,46 +471,64 @@
 											</div> -->
 										</div>
 									</div>
-									<div class ="row">
-									<div class ="col-10">
-										<hr>
-										<h5>Notes Title:</h5>
-										<div class="form-floating">
-											  <input class="form-control" type="text" placeholder="Default input" id="manualTitleText" aria-label="Notes Title"></div><div>
-											  <h5>Notes Text:</h5>
-											<textarea class="form-control" placeholder="NOTES GO HERE!" id="manualNotesText" wrap='hard' style="height: 100px"></textarea>
-											  </div>
-											  <button class="btn btn-primary" onclick="addNote()" type="button">Add Manual Note</button>
-									
-									
-									
-								</div>
-									<!-- </div> -->
+									<div class="row">
+										<div class="col-10">
+											<hr />
+											<h5>Notes Title:</h5>
+											<div class="form-floating">
+												<input
+													class="form-control"
+													type="text"
+													placeholder="Default input"
+													id="manualTitleText"
+													aria-label="Notes Title"
+												/>
+											</div>
+											<div>
+												<h5>Notes Text:</h5>
+												<textarea
+													class="form-control"
+													placeholder="NOTES GO HERE!"
+													id="manualNotesText"
+													wrap="hard"
+													style="height: 100px"
+												></textarea>
+											</div>
+											<button
+												class="btn btn-primary"
+												onclick="addNote()"
+												type="button"
+											>
+												Add Manual Note
+											</button>
+										</div>
+										<!-- </div> -->
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="accordion-item">
-							<h2 class="accordion-header" id="reportHeader">
-								<button
-									class="accordion-button collapsed"
-									type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#reportAccordian"
-									aria-expanded="false"
-									aria-controls="reportAccordian"
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="reportHeader">
+									<button
+										class="accordion-button collapsed"
+										type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#reportAccordian"
+										aria-expanded="false"
+										aria-controls="reportAccordian"
+									>
+										<strong> Report</strong>
+									</button>
+								</h2>
+								<div
+									id="reportAccordian"
+									class="accordion-collapse collapse"
+									aria-labelledby="reportHeader"
+									data-bs-parent="#reportAccordian"
 								>
-									<strong> Report</strong>
-								</button>
-							</h2>
-							<div
-								id="reportAccordian"
-								class="accordion-collapse collapse"
-								aria-labelledby="reportHeader"
-								data-bs-parent="#reportAccordian"
-							>
-								<div class="accordion-body">
-									Intentionally Blank, Report below:
+									<div class="accordion-body">
+										Intentionally Blank, Report below:
+									</div>
 								</div>
 							</div>
 						</div>
@@ -659,8 +695,16 @@
 					</div>
 					<div class="row" id="manual-report data">
 						<div class="col-12">
-							<div class ="col-4"><br><button type="button"  onclick="generatePDF()" class="btn btn-info">Click Button to remove the Menu Option above to print as PDF</button>
-									</div>
+							<div class="col-4">
+								<br /><button
+									type="button"
+									onclick="generatePDF()"
+									class="btn btn-info"
+								>
+									Click Button to remove the Menu Option above
+									to print as PDF
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
