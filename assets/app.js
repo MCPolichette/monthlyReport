@@ -112,7 +112,7 @@ function password_check() {
 	switch (API_KEY.length) {
 		case 32:
 			window.localStorage.setItem("test", API_KEY);
-			unhide(["monthlyReport"]);
+			unhide(["monthlyReport", "report_display"]);
 			hide(["title"]);
 			document.getElementById("first_display").remove();
 			break;
@@ -170,12 +170,12 @@ function perfomance_report() {
 			data.priorAbMonthNum = "-02";
 			data.previousMonth = "February";
 			data.twoMonthsAgo = "January";
-			updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
-			updateDivArray(
-				["newAffMonth2", "lastMonthList"],
-				data.previousMonth
-			);
-			updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
+			// updateDivArray(["newAffMonth1", "thisMonthList"], data.month);
+			// updateDivArray(
+			// 	["newAffMonth2", "lastMonthList"],
+			// 	data.previousMonth
+			// );
+			// updateDivArray(["newAffMonth3", "twoMonthsAgo"], data.twoMonthsAgo);
 			break;
 		case "-04":
 			data.month = "April";
@@ -343,7 +343,7 @@ function perfomance_report() {
 			report.previousyear + report.month + "-" + priorYearDayCount;
 		console.log(primaryMonth);
 		console.log(priorMonth);
-		viewReportButton.hidden = false;
+		// viewReportButton.hidden = false;
 		runAPI({
 			report_id: 48,
 			startDate: priorMonth.startDate,

@@ -29,19 +29,6 @@
 // }
 
 function generatePDF() {
-	var frame = document.getElementById("report_pdf");
-	var data = frame.innerHTML;
-	var win = window.open("", "", "height=500,width=1200");
-	win.document.write(
-		"<style>@page{size:landscape;}</style><html><head><title></title>"
-	);
-	win.document.write("</head><body >");
-	win.document.write(data);
-	win.document.write("</body></html>");
-	setTimeout(function () {
-		mywindow.print();
-	}, 1000);
-
-	// win.close();
-	return true;
+	document.getElementById("title").hidden = true;
+	document.getElementById("monthlyReport").hidden = true;
 }
