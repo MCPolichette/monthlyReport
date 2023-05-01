@@ -87,8 +87,8 @@ function updateHeaders() {
 		merchant.name +
 		" - ID: " +
 		merchant.id +
-		" - Performance Report - " +
-		report.month +
+		" - Performance Report for " +
+		data.month +
 		" " +
 		report.year;
 }
@@ -420,6 +420,7 @@ function buildAffiliateTable(array) {
 
 	affiliateReportButton.disabled = true;
 }
+
 function buildGrowthAndDeclineTables(declineArr, growthArr) {
 	let numberOfAffiliates = 5;
 	if (declineArr.length < numberOfAffiliates) {
@@ -476,5 +477,39 @@ function buildGrowthAndDeclineTables(declineArr, growthArr) {
 		"affiliate_report_button",
 		"COMPLETED - AFfiliate Performance API"
 	);
-	// removeDisabledButton("subAffiliate_report_btn");
+	removeDisabledButton("subAffiliate_report_btn");
 }
+function buildSubAffTable(array) {
+	let table = document.getElementById("subAffiliateSummaryReport");
+	let thead = document.getElementById("subAffTableTHead");
+	let headArray = [
+		"Sub Affiliate",
+		data.abMonth + " " + report.year + " Sales",
+		data.abMonth + " " + report.year + " Clicks",
+		data.abMonth + " " + report.year + " TotalSpend",
+		data.abMonth + " " + report.year + " ROAS",
+	];
+	for (var i = 0; i < headArray.length; i++) {
+		thead
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode(headArray[i]));
+	}
+	table.style.textAlign = "right";
+	for (let i = 0; i < report.topAffiliateCount; i++) {
+		buildRow(table, i, [
+			array[i].Affiliate + " - " + array[i].Sub_Affiliate_Domain,
+			toUSD(array[i].Sales),
+			array[i].Click_Throughs,
+			toUSD(array[i].Total_Commission.toFixed(2)),
+			toUSD(array[i].roa.toFixed(2)),
+		]);
+	}
+
+	affiliateReportButton.disabled = true;
+	completeButton(
+		"subAffiliate_report_btn",
+		"COMPLETED - SubAFfiliate Performance API"
+	);
+}
+
+function buildybuildye(array) {}

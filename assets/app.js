@@ -6,6 +6,7 @@ var report = {
 	newAffsMonth2: [],
 	newAffsMonth3: [],
 	productList: [],
+	subAffiliates: [],
 	GrowingPerformancebyYoyPercent: [],
 	DecliningPerformancebyYoyPercent: [],
 	topAffiliateCount: 10,
@@ -314,7 +315,7 @@ function perfomance_report() {
 		});
 	}
 }
-//THESE TWO SCRIPTS REQUIRE NO EDITS:
+//THESE  SCRIPTS REQUIRE NO EDITS:
 function affiliate_report() {
 	document.getElementById("first_loading_bar").hidden = false;
 	document.getElementById(
