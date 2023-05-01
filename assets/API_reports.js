@@ -30,10 +30,12 @@ function runAPI(report) {
 			reportStep2(data, report_id, month)
 		);
 }
-
 function reportStep2(xml, report_id, month) {
-	console.log("2ndreport", report_id);
+	console.log("API STEP 2:", report_id);
 	switch (report_id) {
+		case 96:
+			console.log(xml);
+			break;
 		case 65:
 			let affArray = [];
 			let growthArr = [];
@@ -234,14 +236,6 @@ function reportStep2(xml, report_id, month) {
 				xmlDoc.getElementsByTagName(
 					"Merchant"
 				)[0].childNodes[0].nodeValue;
-
-			// viewReportButton.innerHTML =
-			// 	merchant.name +
-			// 	" " +
-			// 	merchant.month +
-			// 	" " +
-			// 	report.year +
-			// 	" Report";
 			updateHeaders();
 			completeButton("submitBtn", "Merchant & Date Selected");
 			removeDisabledButton("affiliate_report_button");

@@ -4,18 +4,10 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-		<script
-			type="text/javascript"
-			src="https://html2canvas.hertzen.com/dist/html2canvas.js"
-		></script> -->
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 		/>
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script> -->
 		<script
 			type="text/javascript"
 			src="https://www.gstatic.com/charts/loader.js"
@@ -202,7 +194,7 @@
 														aria-describedby="selectedYear"
 													/>
 												</div>
-												<div class="form-check">
+												<!-- <div class="form-check">
 													<input
 														class="form-check-input"
 														type="radio"
@@ -238,8 +230,27 @@
 														compare month over the
 														same month last year.
 													</label>
+												</div> -->
+<div
+													hidden
+													id="first_loading_bar"
+													class="text-center"
+												>
+													<h5>Running APIs</h5>
+													<div
+														class="spinner-border"
+														style="
+															width: 6rem;
+															height: 6rem;
+														"
+														role="status"
+													>
+														<span
+															class="visually-hidden"
+															>Loading...</span
+														>
+													</div>
 												</div>
-
 												<div class="d-grid gap-2">
 													<button
 														class="btn btn-primary"
@@ -319,6 +330,18 @@
 														Report API
 													</button>
 												</div>
+												<!-- <br />
+												<div class="d-grid gap-2">
+													<button
+														disabled
+														id="subAffiliate_report_btn"
+														class="btn btn-outline-success"
+														onclick="subAffiliate_report()"
+														type="button"
+													>
+														NEXT STEP: run Sub-Affiliate Report API
+													</button>
+												</div> -->
 												<br />
 												<div class="d-grid gap-2">
 													<button
@@ -336,37 +359,8 @@
 														reports:
 													</button>
 												</div>
-												<!-- <div class="d-grid gap-2">
-														<button
-														id="select_affiliates_btn"
-														class="btn success"
-														type="button"
-														onclick="testclick()"
-														type="button"
-														>
-															TEST
-														</button>	
-												</div> -->
-												<div
-													hidden
-													id="first_loading_bar"
-													class="text-center"
-												>
-													<h5>Running APIs</h5>
-													<div
-														class="spinner-border"
-														style="
-															width: 6rem;
-															height: 6rem;
-														"
-														role="status"
-													>
-														<span
-															class="visually-hidden"
-															>Loading...</span
-														>
-													</div>
-												</div>
+												
+												
 											</div>
 										</div>
 									</div>
@@ -395,7 +389,7 @@
 								<div class="accordion-body">
 									<div class="row">
 										<h5>Data for New Affiliates</h5>
-										<div class="col-6">
+										<div class="col-12">
 											<!-- MORE QUESTIONS!? -->
 											<p>
 												The current API doesn't return
@@ -412,7 +406,7 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-10 mx-auto">
+										<div class="col-6 mx-auto">
 											<p>new process:</p>
 											<ul>
 												<li>
@@ -438,37 +432,72 @@
 													Decline tables.
 												</li>
 											</ul>
-											<div class="d-grid gap-2">
-												<button
-													onclick="buildNewPerformersTable()"
-													class="btn btn-primary disabled"
-												>
-													Generate reports for
-													selected NEW Affiliates
-												</button>
+											<label
+												for="AffCommission"
+												class="form-label"
+											>
+												Affiliate Table to get their
+												approval dates</label
+											>
+											<div class="input-group max-width">
+												<input
+													class="form-inline alert-danger"
+													type="file"
+													onchange="read_file(this)"
+													id="affiliateFormFile"
+												/>
 											</div>
-
-											<!-- <div class="d-grid gap-2">
-												<button
-													class="btn btn-outline-success"
-													id="viewReport"
-													hidden
-													disabled
-													type="button"
-													data-bs-toggle="collapse"
-													data-bs-target="#reportAccordian"
-													aria-expanded="false"
-												>
-													<div
-														class="spinner-border text-primary"
-														role="status"
-													>
-														<span
-															class="visually-hidden"
-														></span>
-													</div>
-												</button>
-											</div> -->
+											<p>
+												To find the Active Affiliates
+												report, Log in as the Merchant
+												on the Dashboard and navigate:
+											</p>
+											<p>
+												<strong>
+													Affiliates > Affiliate
+													Program Applications >
+													Affiliate Status: ACTIVE >
+													Download Affiliates (button)
+												</strong>
+											</p>
+											<p>
+												Please download as a .CSV file.
+											</p>
+											</div>
+											<div class="col-6">
+												<h4>
+													Select Notable Performers
+												</h4>
+												<p>
+													In the table below, we will
+													list all New Affilaites in
+													the last 3 months. You may
+													select any 'Notable
+													Performers' from the table
+													below to be displayed in the
+													report.
+												</p>
+												<table
+								id="notablePerformers"
+								class="table table-striped centered table-sm"
+							>
+								<thead>
+									<tr>
+										<th class="intentionallyBlank">
+											Month
+										</th>
+										<th>Partner ID</th>
+										<th >Sales</th>
+										</th>
+										<th># Of Sales</th>
+										<th>Conversion Rate</th>
+										<th>Select?</th>
+									</tr>
+								</thead>
+								
+							</table>
+							<button id="addNotablesBtn" type="button" class="btn btn-lg btn-primary" onclick="updateNotablePerformers()" disabled>Add selected Performers to Report</button>
+											</div>
 										</div>
 									</div>
 									<div class="row">
@@ -623,6 +652,28 @@
 					</div>
 					<div class="row">
 						<div class="col-6">
+							<h5>New Partner Performance</h5>
+							<table
+								id="newPartnerReport"
+								class="table table-striped centered table-sm"
+							>
+								<thead>
+									<tr>
+										<th class="intentionallyBlank">
+											Month
+										</th>
+										<th>New Partners</th>
+										<th id="newPartnerPerformanceTitle">
+											Performance this Month
+										</th>
+										<th>Notable Performers</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
 							<h5>Top Growing YoY Performance</h5>
 							<table
 								id="growing_report"
@@ -674,25 +725,7 @@
 							</table>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-12">
-							<!-- !? REBUILD THIS REPORT AND PUT IT SOMEWHERE ELSE -->
-							<!-- <h5>New Partner Performance</h5>
-                                        <table
-											id="newPartnerReport"
-											class="table table-striped centered table-sm"
-										>
-                                        <thead>
-											<tr>
-												<thclass="intentionallyBlank"></th>
-												<th>New Partners</th>
-												<th id="newPartnerPerformanceTitle">Performance this Month</th>
-												<th>Notable Performers</th>
-											</tr>
-										</thead>
-                                        </table> -->
-						</div>
-					</div>
+
 					<div class="row" id="manual-report data">
 						<div class="col-12">
 							<div class="col-4">
@@ -717,6 +750,7 @@
 		<script src="assets/build_tables.js"></script>
 		<script src="assets/products_scripts.js"></script>
 		<script src="assets/app.js"></script>
+		<script src="assets/read_file.js"></script>
 		<script src="assets/graphs.js"></script>
 		<script src="assets/export_files.js"></script>
 		<!-- Option 1: Bootstrap Bundle with Popper -->
