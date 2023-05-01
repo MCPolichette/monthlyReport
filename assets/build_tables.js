@@ -4,6 +4,16 @@ function buildRow(table, row, columns) {
 		var cell = (row.insertCell(i).innerHTML = columns[i]);
 	}
 }
+function updateTableCell(tableId, rowNum, colNum, newText) {
+	console.log(tableId, rowNum, colNum, newText);
+	// Get a reference to the table
+	let table = document.querySelector(tableId);
+	// Get a reference to the cell
+	let row = table.row[rowNum];
+	let cell = row.cell[colNum];
+	// Update the innerHTML of the cell
+	cell.innerHTML = newText;
+}
 
 function build2columns(table, row, col1, col2) {
 	var row = table.insertRow(row);
@@ -369,7 +379,6 @@ function buildMomTable() {
 	buildRow(table, 6, momdifferences.Average_Sale_Amount);
 	buildRow(table, 7, momdifferences.Conversion_Rate);
 }
-
 function buildAffiliateTable(array) {
 	let table = document.getElementById("affiliateSummaryReport");
 	let thead = document.getElementById("affTableTHead");
@@ -462,8 +471,10 @@ function buildGrowthAndDeclineTables(declineArr, growthArr) {
 		]);
 	}
 	removeDisabledButton("product_report_btn");
+
 	completeButton(
 		"affiliate_report_button",
 		"COMPLETED - AFfiliate Performance API"
 	);
+	// removeDisabledButton("subAffiliate_report_btn");
 }
