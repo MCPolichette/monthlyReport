@@ -330,7 +330,7 @@
 														Report API
 													</button>
 												</div>
-												<!-- <br />
+												<br />
 												<div class="d-grid gap-2">
 													<button
 														disabled
@@ -341,7 +341,7 @@
 													>
 														NEXT STEP: run Sub-Affiliate Report API
 													</button>
-												</div> -->
+												</div>
 												<br />
 												<div class="d-grid gap-2">
 													<button
@@ -567,11 +567,13 @@
 			<div id="report_display" hidden>
 				<div class="container-fluid" id="report_pdf">
 					<div class="row">
+						<div class="col-4">
 						<img
 							src="assets/AvantLink Logo.png"
 							alt="AvantLink Support Help Center home page"
 							style="width: 300px"
-						/>
+						/></div>
+						<div class="col-8"><h4 id="report_merchant_name">MERCHANT NAME</h4></div>
 					</div>
 					<div class="row">
 						<div class="col-8 test">
@@ -594,11 +596,14 @@
 								id="merchant_logo"
 								src="https://static.avantlink.com/merchant-logos/10048.png"
 								alt="logo"
-								style="max-width: 300px; margin: auto"
+								style=" max-width: 300px;
+  max-height: 150px;
+  width: auto;
+  height: auto; margin: auto"
 								class="img-fluid"
 							/>
 							<hr />
-							<h5 id="report_merchant_name">MERCHANT NAME</h5>
+							
 						</div>
 
 						<div class="row align-top">
@@ -646,6 +651,20 @@
 							>
 								<tbody style="font-size: small">
 									<thead id="affTableTHead"></thead>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<br />
+						<div class="col-12">
+							<h5>Sub Affiliate Report</h5>
+							<table
+								id="subAffiliateSummaryReport"
+								class="table table-striped centered table-sm"
+							>
+								<tbody style="font-size: small">
+									<thead id="subAffTableTHead"></thead>
 								</tbody>
 							</table>
 						</div>
