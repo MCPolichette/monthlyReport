@@ -15,50 +15,6 @@ function updateTableCell(tableId, rowNum, colNum, newText) {
 	cell.innerHTML = newText;
 }
 
-function build2columns(table, row, col1, col2) {
-	var row = table.insertRow(row);
-	var cell1 = (row.insertCell(0).innerHTML = col1);
-	var cell2 = (row.insertCell(1).innerHTML = col2);
-}
-function build5columns(table, row, col1, col2, col3, col4, col5) {
-	var row = table.insertRow(row);
-	var cell1 = (row.insertCell(0).innerHTML = col1);
-	var cell2 = (row.insertCell(1).innerHTML = col2);
-	var cell3 = (row.insertCell(2).innerHTML = col3);
-	var cell4 = (row.insertCell(3).innerHTML = col4);
-	var cell5 = (row.insertCell(4).innerHTML = col5);
-}
-function build4columns(table, row, col1, col2, col3, col4) {
-	var row = table.insertRow(row);
-	var cell1 = (row.insertCell(0).innerHTML = col1);
-	var cell2 = (row.insertCell(1).innerHTML = col2);
-	var cell3 = (row.insertCell(2).innerHTML = col3);
-	var cell4 = (row.insertCell(3).innerHTML = col4);
-}
-function build9columns(
-	table,
-	row,
-	col1,
-	col2,
-	col3,
-	col4,
-	col5,
-	col6,
-	col7,
-	col8,
-	col9
-) {
-	var row = table.insertRow(row);
-	var cell1 = (row.insertCell(0).innerHTML = col1);
-	var cell2 = (row.insertCell(1).innerHTML = col2);
-	var cell3 = (row.insertCell(2).innerHTML = col3);
-	var cell4 = (row.insertCell(3).innerHTML = col4);
-	var cell5 = (row.insertCell(4).innerHTML = col5);
-	var cell1 = (row.insertCell(5).innerHTML = col6);
-	var cell2 = (row.insertCell(6).innerHTML = col7);
-	var cell3 = (row.insertCell(7).innerHTML = col8);
-	var cell4 = (row.insertCell(8).innerHTML = col9);
-}
 function add_borders(table_id, column) {
 	var table = document.getElementById(table_id);
 	var totalRowCount = table.rows.length - 1;
@@ -400,9 +356,7 @@ function buildAffiliateTable(array) {
 	}
 	table.style.textAlign = "right";
 	for (let i = 0; i < report.topAffiliateCount; i++) {
-		build9columns(
-			table,
-			i,
+		buildRow(table, i, [
 			array[i].Affiliate,
 			toUSD(array[i].Sales),
 			(array[i].salesYOYpercent * 100).toFixed(2) + "%",
@@ -411,8 +365,8 @@ function buildAffiliateTable(array) {
 			toUSD(array[i].Total_Commission.toFixed(2)),
 			(array[i].totalCommissionYOYPercent * 100).toFixed(2) + "%",
 			toUSD(array[i].roa.toFixed(2)),
-			(array[i].roaroaYOYPercent * 100).toFixed(2) + "%"
-		);
+			(array[i].roaroaYOYPercent * 100).toFixed(2) + "%",
+		]);
 	}
 	add_borders("affiliateSummaryReport", 3);
 	add_borders("affiliateSummaryReport", 5);
@@ -504,12 +458,10 @@ function buildSubAffTable(array) {
 			toUSD(array[i].roa.toFixed(2)),
 		]);
 	}
-
 	affiliateReportButton.disabled = true;
 	completeButton(
 		"subAffiliate_report_btn",
 		"COMPLETED - SubAFfiliate Performance API"
 	);
 }
-
 function buildybuildye(array) {}

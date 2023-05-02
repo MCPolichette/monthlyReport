@@ -15,14 +15,16 @@ function build_products_sold_table() {
 	}
 	// table.style.textAlign = "right";
 	for (let i = 0; i < report.productList.length; i++) {
-		build5columns(
+		buildRow(
 			table,
 			[i],
-			report.productList[i].Product_SKU,
-			report.productList[i].Product_Name,
-			report.productList[i].Sale_Count,
-			report.productList[i].Mobile_Sale_Count,
-			report.productList[i].Total_Product_Sale_Amount
+			[
+				report.productList[i].Product_SKU,
+				report.productList[i].Product_Name,
+				report.productList[i].Sale_Count,
+				report.productList[i].Mobile_Sale_Count,
+				report.productList[i].Total_Product_Sale_Amount,
+			]
 		);
 	}
 }

@@ -194,44 +194,7 @@
 														aria-describedby="selectedYear"
 													/>
 												</div>
-												<!-- <div class="form-check">
-													<input
-														class="form-check-input"
-														type="radio"
-														name="monthOverPreviosMonth"
-														id="monthOverPreviosMonth"
-														disabled
-													/>
-													<label
-														class="form-check-label"
-														for="monthOverPreviosMonth"
-													>
-														Merchant is active less
-														than a year. If
-														selected, we will
-														compare month over last
-														month.
-													</label>
-												</div>
-												<div class="form-check">
-													<input
-														class="form-check-input"
-														type="radio"
-														name="monthOverLastYearMonth"
-														id="monthOverLastYearMonth"
-														checked
-														disabled
-													/>
-													<label
-														class="form-check-label"
-														for="monthOverLastYearMonth"
-													>
-														Default - Merchant will
-														compare month over the
-														same month last year.
-													</label>
-												</div> -->
-<div
+												<div
 													hidden
 													id="first_loading_bar"
 													class="text-center"
@@ -359,8 +322,6 @@
 														reports:
 													</button>
 												</div>
-												
-												
 											</div>
 										</div>
 									</div>
@@ -407,46 +368,6 @@
 									</div>
 									<div class="row">
 										<div class="col-6 mx-auto">
-											<p>new process:</p>
-											<ul>
-												<li>
-													Have the User pload a
-													downloaded Active Affiliates
-													- with instructions
-												</li>
-												<li>
-													Run a loop through all
-													Affiliates Approval date,
-													and create an array for the
-													three most recent months
-												</li>
-												<li>
-													Cross reference the
-													Affilaite's Performance
-													report with new Affiliates.
-												</li>
-												<li>
-													Build a table for each of
-													the three prior months below
-													the Affiliate Growth and
-													Decline tables.
-												</li>
-											</ul>
-											<label
-												for="AffCommission"
-												class="form-label"
-											>
-												Affiliate Table to get their
-												approval dates</label
-											>
-											<div class="input-group max-width">
-												<input
-													class="form-inline alert-danger"
-													type="file"
-													onchange="read_file(this)"
-													id="affiliateFormFile"
-												/>
-											</div>
 											<p>
 												To find the Active Affiliates
 												report, Log in as the Merchant
@@ -463,6 +384,22 @@
 											<p>
 												Please download as a .CSV file.
 											</p>
+											<label
+												for="AffCommission"
+												class="form-label"
+											>
+												Affiliate Table to get their
+												approval dates</label
+											>
+											<div class="input-group max-width">
+												<input
+													class="form-inline alert-danger"
+													type="file"
+													onchange="read_file(this)"
+													id="affiliateFormFile"
+												/>
+											</div>
+											
 											</div>
 											<div class="col-6">
 												<h4>
@@ -596,10 +533,7 @@
 								id="merchant_logo"
 								src="https://static.avantlink.com/merchant-logos/10048.png"
 								alt="logo"
-								style=" max-width: 300px;
-  max-height: 150px;
-  width: auto;
-  height: auto; margin: auto"
+								style=" max-width: 300px; max-height: 150px; width: auto; height: auto; margin: auto"
 								class="img-fluid"
 							/>
 							<hr />

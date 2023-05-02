@@ -18,7 +18,6 @@ var data = {
 	notablePerformers: { one: [], two: [], three: [] },
 	newAffs: {},
 };
-
 var icons = {
 	up: `<i class="fa fa-caret-square-o-up" style="color:green"></i>`,
 	down: `<i class="fa fa-caret-square-o-down" style="color:red"></i>`,
@@ -28,7 +27,6 @@ var primaryMonth = { month: "primary", affiliateReport: [] };
 var priorMonth = { month: "prior" };
 var viewReportButton = document.getElementById("viewReport");
 var affiliateReportButton = document.getElementById("affiliate_report_button");
-
 //General Functions
 function toUSD(dollarInt) {
 	var formatter = new Intl.NumberFormat("en-US", {
@@ -307,6 +305,9 @@ function perfomance_report() {
 		console.log(primaryMonth);
 		console.log(priorMonth);
 		// viewReportButton.hidden = false;
+		document.getElementById("merchant_ID_input").disabled = true;
+		document.getElementById("selectedMonth").disabled = true;
+		document.getElementById("selectedYear").disabled = true;
 		runAPI({
 			report_id: 48,
 			startDate: priorMonth.startDate,
