@@ -437,8 +437,16 @@ function reportStep2(xml, report_id, month) {
 					affiliates[i].Commissions +
 					affiliates[i].Network_Commissions +
 					affiliates[i].Incentives;
-				affiliates[i].roa =
-					affiliates[i].Sales / affiliates[i].Total_Commission;
+				affiliates[i].roa = Number(
+					affiliates[i].Sales /
+						affiliates[i].Total_Commission.toFixed(2)
+				);
+				// console.log(
+				// 	"THIS IS THE VALUE I'M LOOKING FOR",
+				// 	affiliates[i].Affiliate,
+				// 	affiliates[i].roa,
+				// 	month
+				// );
 			}
 			if (month === "primary") {
 				primaryMonth.affiliateReport = affiliates;
@@ -482,19 +490,21 @@ function reportStep2(xml, report_id, month) {
 								i
 							].Click_ThroughsYOYpercent = y;
 							let lyROA;
-							if (priorMonth.affiliateReport[j].roa) {
-								lyROA = Number(
-									priorMonth.affiliateReport[j].roa
-								);
-							} else {
+							if (isNaN(priorMonth.affiliateReport[j].roa)) {
 								lyROA = 0;
+							} else {
+								lyROA = Number(
+									priorMonth.affiliateReport[j].roa.toFixed(2)
+								);
 							}
 							let tyROA = Number(
-								primaryMonth.affiliateReport[i].roa
+								primaryMonth.affiliateReport[i].roa.toFixed(2)
 							);
+							console.log("HELP ME +", tyROA, lyROA);
 							let roayoy = (tyROA - lyROA) / tyROA;
+							console.log(roayoy);
 							primaryMonth.affiliateReport[i].roaYOYPercent =
-								roayoy;
+								roayoy.toFixed(3);
 							let totalCommissionYoy = (
 								(primaryMonth.affiliateReport[i]
 									.Total_Commission -
