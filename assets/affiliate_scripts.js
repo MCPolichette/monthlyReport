@@ -1,33 +1,3 @@
-function addAffiliateToThisMonth() {
-	let affiliateId = document.getElementById("addNewAffMonth1").value;
-	addAffiliate(
-		affiliateId,
-		report.newAffsMonth1,
-		"thisMonthListOfAffiliates",
-		"addNewAffMonth1"
-	);
-	affiliateId.value = "";
-}
-function addAffiliateToLastMonth() {
-	let affiliateId = document.getElementById("addNewAffMonth2").value;
-	addAffiliate(
-		affiliateId,
-		report.newAffsMonth2,
-		"lastMonthListOfAffiliates",
-		"addNewAffMonth2"
-	);
-	affiliateId.value = "";
-}
-function addAffiliateTwoMonths() {
-	let affiliateId = document.getElementById("addNewAffMonth3").value;
-	addAffiliate(
-		affiliateId,
-		report.newAffsMonth3,
-		"twoMonthsAgoListOfAffiliates",
-		"addNewAffMonth3"
-	);
-	affiliateId.value = "";
-}
 function displayNewAffiliates(array, id) {
 	document.getElementById(id).innerHTML = "";
 	for (j = 0; j < array.length; j++) {
@@ -200,6 +170,19 @@ function updateNotablePerformers() {
 
 function buildNewPerformersTable(y1, y2, y3) {
 	let table = document.getElementById("newPartnerReport");
+	let tHead = document.getElementById("newPartnerPerformanceTitle");
+	tHead
+		.appendChild(document.createElement("th"))
+		.appendChild(document.createTextNode("Month"));
+	tHead
+		.appendChild(document.createElement("th"))
+		.appendChild(document.createTextNode("New Partners"));
+	tHead
+		.appendChild(document.createElement("th"))
+		.appendChild(document.createTextNode("Performance This Month"));
+	tHead
+		.appendChild(document.createElement("th"))
+		.appendChild(document.createTextNode("Notable Performers"));
 	let notablePerformersTable = document.getElementById("notablePerformers");
 	table.style.textAlign = "right";
 	let NotablePerformers = [];
@@ -243,7 +226,7 @@ function buildNewPerformersTable(y1, y2, y3) {
 			}
 		}
 	}
-	buildRow(table, 1, [
+	buildRow(table, 0, [
 		data.month,
 		report.newAffsMonth2.length,
 		"$" + month1Total,
@@ -282,7 +265,7 @@ function buildNewPerformersTable(y1, y2, y3) {
 			}
 		}
 	}
-	buildRow(table, 2, [
+	buildRow(table, 1, [
 		data.previousMonth,
 		report.newAffsMonth3.length,
 		"$" + month2Total,
@@ -320,7 +303,7 @@ function buildNewPerformersTable(y1, y2, y3) {
 			}
 		}
 	}
-	buildRow(table, 3, [
+	buildRow(table, 2, [
 		data.twoMonthsAgo,
 		report.newAffsMonth3.length,
 		"$" + month3Total,

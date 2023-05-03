@@ -236,7 +236,7 @@ function buildMomTable() {
 	let summaryHeadersArray = [
 		" ",
 		data.monthlyPerformanceSummary[0].Month,
-		data.monthlyPerformanceSummary[12].Month,
+		data.monthlyPerformanceSummary[1].Month,
 		"% Change",
 		"",
 		"Nominal Change",
@@ -365,7 +365,7 @@ function buildAffiliateTable(array) {
 			toUSD(array[i].Total_Commission.toFixed(2)),
 			(array[i].totalCommissionYOYPercent * 100).toFixed(2) + "%",
 			toUSD(array[i].roa.toFixed(2)),
-			(array[i].roaroaYOYPercent * 100).toFixed(2) + "%",
+			(array[i].roaYOYPercent * 100).toFixed(2) + "%",
 		]);
 	}
 	add_borders("affiliateSummaryReport", 3);
