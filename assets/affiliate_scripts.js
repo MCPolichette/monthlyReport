@@ -69,103 +69,128 @@ function addNotableAffiliate(ID, row) {
 	console.log(data.notablePerformers);
 }
 function updateNotablePerformers() {
-	let oneTable = document.createElement("table");
-	let x = [];
-	const oneTopRow = document.createElement("thead");
-	oneTable.appendChild(oneTopRow);
-	oneTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Affiliate"));
-	oneTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Sales"));
-	oneTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Number Of Sales"));
-	oneTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Conversion Rate"));
+	var el = document.getElementById("newAffCol");
+	el.classList.remove("col-6");
+	el.classList.add("col-12");
+	if (data.notablePerformers.one.length > 0) {
+		let notableTable1 = document.getElementById("notableTable1");
+		let notableThead1 = document.getElementById("notableThead1");
+		notableTable1.appendChild(notableThead1);
+		notableThead1
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Affiliate"));
+		notableThead1
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Sales"));
+		notableThead1
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Number Of Sales"));
+		notableThead1
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Conversion Rate"));
+		console.log("ATTENTION");
+		console.log(data.notablePerformers.one.length);
 
-	for (l = 0; l < data.notablePerformers.one.length; l++) {
-		for (m = 0; m < primaryMonth.affiliateReport.length; m++) {
-			if (
-				data.notablePerformers.one[l] ===
-				primaryMonth.affiliateReport[m].Affiliate_Id
-			) {
-				buildRow(oneTable, i, [
-					primaryMonth.affiliateReport[m].Affiliate,
-					primaryMonth.affiliateReport[m].Sales,
-					primaryMonth.affiliateReport[m].Number_of_Sales,
-					primaryMonth.affiliateReport[m].Conversion_Rate,
-				]);
+		for (l = 0; l < data.notablePerformers.one.length; l++) {
+			for (m = 0; m < primaryMonth.affiliateReport.length; m++) {
+				console.log(
+					data.notablePerformers.one[l],
+					primaryMonth.affiliateReport[m].Affiliate_Id
+				);
+				if (
+					data.notablePerformers.one[l] ==
+					primaryMonth.affiliateReport[m].Affiliate_Id
+				) {
+					buildRow(notableTable1, l, [
+						primaryMonth.affiliateReport[m].Affiliate,
+						primaryMonth.affiliateReport[m].Sales,
+						primaryMonth.affiliateReport[m].Number_of_Sales,
+						primaryMonth.affiliateReport[m].Conversion_Rate,
+					]);
+				}
 			}
 		}
 	}
-	updateTableCell("newPartnerReport", 1, 2, oneTable);
 
-	let twoTable = document.createElement("table");
-	const twoTopRow = document.createElement("thead");
-	twoTable.appendChild(twoTopRow);
-	twoTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Affiliate"));
-	twoTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Sales"));
-	twoTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Number Of Sales"));
-	twoTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Conversion Rate"));
-	for (n = 0; n < data.notablePerformers.one.length; n++) {
-		for (o = 0; o < primaryMonth.affiliateReport.length; o++) {
-			if (
-				data.notablePerformers.one[n] ===
-				primaryMonth.affiliateReport[o].Affiliate_Id
-			) {
-				buildRow(oneTable, i, [
-					primaryMonth.affiliateReport[o].Affiliate,
-					primaryMonth.affiliateReport[o].Sales,
-					primaryMonth.affiliateReport[o].Number_of_Sales,
-					primaryMonth.affiliateReport[o].Conversion_Rate,
-				]);
+	if (data.notablePerformers.two.length > 0) {
+		let notableTable2 = document.getElementById("notableTable2");
+		let notableThead2 = document.getElementById("notableThead2");
+		notableTable2.appendChild(notableThead2);
+		notableThead2
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Affiliate"));
+		notableThead2
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Sales"));
+		notableThead2
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Number Of Sales"));
+		notableThead2
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Conversion Rate"));
+		console.log("ATTENTION");
+		console.log(data.notablePerformers.two.length);
+
+		for (n = 0; n < data.notablePerformers.two.length; n++) {
+			for (o = 0; o < primaryMonth.affiliateReport.length; o++) {
+				console.log(
+					data.notablePerformers.two[n],
+					primaryMonth.affiliateReport[o].Affiliate_Id
+				);
+				if (
+					data.notablePerformers.two[n] ==
+					primaryMonth.affiliateReport[o].Affiliate_Id
+				) {
+					buildRow(notableTable2, n, [
+						primaryMonth.affiliateReport[o].Affiliate,
+						primaryMonth.affiliateReport[o].Sales,
+						primaryMonth.affiliateReport[o].Number_of_Sales,
+						primaryMonth.affiliateReport[o].Conversion_Rate,
+					]);
+				}
 			}
 		}
 	}
-	updateTableCell("newPartnerReport", 2, 2, twoTable);
-	let threeTable = document.createElement("table");
-	let z = data.notablePerformers.threeData;
-	const threeTopRow = document.createElement("thead");
-	threeTable.appendChild(threeTopRow);
-	threeTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Affiliate"));
-	threeTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Sales"));
-	threeTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Number Of Sales"));
-	threeTopRow
-		.appendChild(document.createElement("th"))
-		.appendChild(document.createTextNode("Conversion Rate"));
-	for (p = 0; p < data.notablePerformers.one.length; p++) {
-		for (q = 0; q < primaryMonth.affiliateReport.length; q++) {
-			if (
-				data.notablePerformers.one[p] ===
-				primaryMonth.affiliateReport[q].Affiliate_Id
-			) {
-				buildRow(oneTable, i, [
-					primaryMonth.affiliateReport[q].Affiliate,
-					primaryMonth.affiliateReport[q].Sales,
-					primaryMonth.affiliateReport[q].Number_of_Sales,
-					primaryMonth.affiliateReport[q].Conversion_Rate,
-				]);
+
+	if (data.notablePerformers.three.length > 0) {
+		let notableTable3 = document.getElementById("notableTable3");
+		let notableThead3 = document.getElementById("notableThead3");
+		notableTable3.appendChild(notableThead3);
+		notableThead3
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Affiliate"));
+		notableThead3
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Sales"));
+		notableThead3
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Number Of Sales"));
+		notableThead3
+			.appendChild(document.createElement("th"))
+			.appendChild(document.createTextNode("Conversion Rate"));
+		console.log("ATTENTION");
+		console.log(data.notablePerformers.three.length);
+
+		for (p = 0; p < data.notablePerformers.three.length; p++) {
+			for (q = 0; q < primaryMonth.affiliateReport.length; q++) {
+				console.log(
+					data.notablePerformers.three[p],
+					primaryMonth.affiliateReport[q].Affiliate_Id
+				);
+				if (
+					data.notablePerformers.three[p] ==
+					primaryMonth.affiliateReport[q].Affiliate_Id
+				) {
+					buildRow(notableTable3, p, [
+						primaryMonth.affiliateReport[q].Affiliate,
+						primaryMonth.affiliateReport[q].Sales,
+						primaryMonth.affiliateReport[q].Number_of_Sales,
+						primaryMonth.affiliateReport[q].Conversion_Rate,
+					]);
+				}
 			}
 		}
 	}
-	updateTableCell("newPartnerReport", 1, 3, threeTable);
 }
 
 function buildNewPerformersTable(y1, y2, y3) {
@@ -230,7 +255,9 @@ function buildNewPerformersTable(y1, y2, y3) {
 		data.month,
 		report.newAffsMonth2.length,
 		"$" + month1Total,
-		"N/A",
+		`<table class="table table-striped centered table-sm" id="notableTable1"><tbody style="font-size: small">
+									<thead id="notableThead1"></thead>
+								</tbody></table>`,
 	]);
 	for (k = 0; k < report.newAffsMonth2.length; k++) {
 		for (l = 0; l < primaryMonth.affiliateReport.length; l++) {
@@ -269,7 +296,9 @@ function buildNewPerformersTable(y1, y2, y3) {
 		data.previousMonth,
 		report.newAffsMonth3.length,
 		"$" + month2Total,
-		"N/A",
+		`<table class="table table-striped centered table-sm" id="notableTable2"><tbody style="font-size: small">
+									<thead id="notableThead2"></thead>
+								</tbody></table>`,
 	]);
 	for (m = 0; m < report.newAffsMonth3.length; m++) {
 		for (n = 0; n < primaryMonth.affiliateReport.length; n++) {
@@ -307,7 +336,9 @@ function buildNewPerformersTable(y1, y2, y3) {
 		data.twoMonthsAgo,
 		report.newAffsMonth3.length,
 		"$" + month3Total,
-		"N/A",
+		`<table class="table table-striped centered table-sm" id="notableTable3"><tbody style="font-size: small">
+									<thead id="notableThead3"></thead>
+								</tbody></table>`,
 	]);
 	removeDisabledButton("addNotablesBtn");
 }

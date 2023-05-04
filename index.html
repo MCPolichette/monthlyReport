@@ -35,13 +35,12 @@
 	<body>
 		<div class="container-sm fixed-top">
 			<div id="title" class="row">
-				<div class="col-4">
+				<div class="col-6">
 					<h5
 						onclick="use_local_storage()"
 						class="justify-content-center"
 					>
 						<strong>AvantLink Merchant Monthly Comparison </strong>
-						<!--  -->
 					</h5>
 				</div>
 			</div>
@@ -589,26 +588,13 @@
 							</table>
 						</div>
 					</div>
+					
 					<div class="row">
-						<br />
-						<div class="col-12">
-							<h5>Sub Affiliate Report</h5>
-							<table
-								id="subAffiliateSummaryReport"
-								class="table table-striped centered table-sm"
-							>
-								<tbody style="font-size: small">
-									<thead id="subAffTableTHead"></thead>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6">
+						<div id="newAffCol" class="col-6">
 							<h5>New Partner Performance</h5>
 							<table
 								id="newPartnerReport"
-								class="table table-striped centered table-sm"
+								class="table table-striped centered "
 							><tbody style="font-size: small">
 								<thead id="newPartnerPerformanceTitle">
 								
@@ -656,22 +642,36 @@
 							</p>
 						</div>
 					</div>
+					<div class="row">
+						<br />
+						<div class="col-12">
+							<h5>Sub Affiliate Report</h5>
+							<table
+								id="subAffiliateSummaryReport"
+								class="table table-striped centered table-sm"
+							>
+								<tbody style="font-size: small">
+									<thead id="subAffTableTHead"></thead>
+								</tbody>
+							</table>
+						</div>
+					</div>
 					<div id="productsRow" class="row">
 						<div class="col-12">
 							<h5>Products Sold Report</h5>
 							<table
 								id="productsSoldReport"
 								class="table table-striped centered table-sm"
-							>
+							><thead id="productTHead"></thead>
 								<tbody style="font-size: small">
-									<thead id="productTHead"></thead>
+									
 								</tbody>
 							</table>
 						</div>
 					</div>
 
-					<div class="row" id="manual-report data">
-						<div class="col-12">
+					<div class="row" id="manual-report-data">
+						
 							<div class="col-4">
 								<br /><button
 									type="button"
@@ -682,7 +682,7 @@
 									to print as PDF
 								</button>
 							</div>
-						</div>
+						
 					</div>
 				</div>
 				<div class="container-fluid"></div>
