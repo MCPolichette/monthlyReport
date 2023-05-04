@@ -354,24 +354,30 @@ function buildAffiliateTable(array) {
 			.appendChild(document.createElement("th"))
 			.appendChild(document.createTextNode(headArray[i]));
 	}
+	function percentNaNCheck(value) {
+		if (isNaN(value)) {
+			return "N/A";
+		} else {
+			return (value * 100).toFixed(2) + "%";
+		}
+	}
 	table.style.textAlign = "right";
 	for (let i = 0; i < report.topAffiliateCount; i++) {
 		buildRow(table, i, [
 			array[i].Affiliate,
 			toUSD(array[i].Sales),
-			(array[i].salesYOYpercent * 100).toFixed(2) + "%",
+			percentNaNCheck(array[i].salesYOYpercent),
 			array[i].Click_Throughs,
-			(array[i].Click_ThroughsYOYpercent * 100).toFixed(2) + "%",
+			percentNaNCheck(array[i].Click_ThroughsYOYpercent),
 			toUSD(array[i].Total_Commission.toFixed(2)),
-			(array[i].totalCommissionYOYPercent * 100).toFixed(2) + "%",
+			percentNaNCheck(array[i].totalCommissionYOYPercent),
 			toUSD(array[i].roa.toFixed(2)),
-			(array[i].roaYOYPercent * 100).toFixed(2) + "%",
+			percentNaNCheck(array[i].roaYOYPercent),
 		]);
 	}
 	add_borders("affiliateSummaryReport", 3);
 	add_borders("affiliateSummaryReport", 5);
 	add_borders("affiliateSummaryReport", 7);
-
 	affiliateReportButton.disabled = true;
 }
 
