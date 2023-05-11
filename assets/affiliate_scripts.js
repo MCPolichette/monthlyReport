@@ -342,3 +342,21 @@ function buildNewPerformersTable(y1, y2, y3) {
 	]);
 	removeDisabledButton("addNotablesBtn");
 }
+function updateTopPerformers() {
+	let content = document.getElementById("updateTopPerformers").value;
+	console.log(content);
+	let num = Number(content);
+	if (isNumber(num)) {
+		if (num > primaryMonth.affiliateReport.length) {
+			alert(
+				"the selected number is Larger than the amount of active Affiliates for this Merchant"
+			);
+		} else {
+			console.log(num);
+			report.topAffiliateCount = num;
+			buildAffiliateTable(primaryMonth.affiliateReport);
+		}
+	} else {
+		alert("Please use a Numerical Value");
+	}
+}

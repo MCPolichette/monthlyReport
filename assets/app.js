@@ -18,6 +18,9 @@ var data = {
 	notablePerformers: { one: [], two: [], three: [] },
 	newAffs: {},
 };
+function isNumber(value) {
+	return typeof value === "number" && isFinite(value);
+}
 var icons = {
 	up: `<i class="fa fa-caret-square-o-up" style="color:green"></i>`,
 	down: `<i class="fa fa-caret-square-o-down" style="color:red"></i>`,

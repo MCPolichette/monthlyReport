@@ -392,7 +392,7 @@
 											>
 											<div class="input-group max-width">
 												<input
-													class="form-inline alert-danger"
+													class="form-inline form-control-lg alert-danger"
 													type="file"
 													onchange="read_file(this)"
 													id="affiliateFormFile"
@@ -577,7 +577,10 @@
 					<div class="row">
 						<br />
 						<div class="col-12">
-							<h5>Top Affiliate YOY Performances</h5>
+							<h5>Top Affiliate YOY Performances</h5><div class="input-group mb-3">
+  <input type="text"id="updateTopPerformers" class="form-control" placeholder="Change Number of Affiliates" aria-label="Change Number of Affiliates" aria-describedby="updateTopPerformers">
+  <button class="btn btn-outline-secondary" onclick="updateTopPerformers()"type="button" >Click to Change # of Performers</button>
+</div>
 							<table
 								id="affiliateSummaryReport"
 								class="table table-striped centered table-sm"
@@ -678,8 +681,7 @@
 									onclick="generatePDF()"
 									class="btn btn-info"
 								>
-									Click Button to remove the Menu Option above
-									to print as PDF
+									Click Button to remove the Menu Options above, so that you can print as a PDF
 								</button>
 							</div>
 						

@@ -337,6 +337,7 @@ function buildMomTable() {
 }
 function buildAffiliateTable(array) {
 	let table = document.getElementById("affiliateSummaryReport");
+	table.innerHTML = `<thead id="affTableTHead"></thead>`;
 	let thead = document.getElementById("affTableTHead");
 	let headArray = [
 		"Affiliate",
@@ -435,7 +436,7 @@ function buildGrowthAndDeclineTables(declineArr, growthArr) {
 
 	completeButton(
 		"affiliate_report_button",
-		"COMPLETED - AFfiliate Performance API"
+		"COMPLETED - Affiliate Performance API"
 	);
 	removeDisabledButton("subAffiliate_report_btn");
 }

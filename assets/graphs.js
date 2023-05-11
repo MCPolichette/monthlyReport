@@ -8,7 +8,6 @@ function drawChart1() {
 		array.push([report.monthArray[i].Month, report.monthArray[i].Sales]);
 	}
 	const data = google.visualization.arrayToDataTable(array);
-
 	const options = {
 		title: "Sales Performance By Month",
 		width: 1100,
@@ -19,7 +18,6 @@ function drawChart1() {
 			gridlines: { color: "black", minSpacing: 20 },
 		},
 	};
-
 	const chart = new google.visualization.ColumnChart(
 		document.getElementById("chart1")
 	);
