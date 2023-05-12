@@ -441,12 +441,6 @@ function reportStep2(xml, report_id, month) {
 					affiliates[i].Sales /
 						affiliates[i].Total_Commission.toFixed(2)
 				);
-				// console.log(
-				// 	"THIS IS THE VALUE I'M LOOKING FOR",
-				// 	affiliates[i].Affiliate,
-				// 	affiliates[i].roa,
-				// 	month
-				// );
 			}
 			if (month === "primary") {
 				primaryMonth.affiliateReport = affiliates;
@@ -500,9 +494,7 @@ function reportStep2(xml, report_id, month) {
 							let tyROA = Number(
 								primaryMonth.affiliateReport[i].roa.toFixed(2)
 							);
-							console.log("HELP ME +", tyROA, lyROA);
 							let roayoy = (tyROA - lyROA) / tyROA;
-							console.log(roayoy);
 							primaryMonth.affiliateReport[i].roaYOYPercent =
 								roayoy.toFixed(3);
 							let totalCommissionYoy = (

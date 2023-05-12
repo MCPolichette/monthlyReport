@@ -12,6 +12,7 @@ var report = {
 	topAffiliateCount: 10,
 	itemCount: 10,
 	monthArray: [],
+	showMobile: true,
 };
 var data = {
 	monthlyPerformanceSummary: [],

@@ -49,7 +49,7 @@ function updateHeaders() {
 		report.year;
 }
 function buildQuickStatsTable() {
-	let table = document.getElementById("quickStats");
+	let tablex = document.getElementById("quickStats");
 	let thead = document.getElementById("qstatsHead");
 	let summaryHeadersArray = [
 		" ",
@@ -96,6 +96,12 @@ function buildQuickStatsTable() {
 			data.monthlyPerformanceSummary[0].Sales,
 			data.monthlyPerformanceSummary[12].Sales
 		),
+
+		Number_of_Sales: otherRowValues(
+			"Number_of_Sales",
+			data.monthlyPerformanceSummary[0].Number_of_Sales,
+			data.monthlyPerformanceSummary[12].Number_of_Sales
+		),
 		Mobile_Sales: dollarRowValues(
 			"Mobile Sales",
 			data.monthlyPerformanceSummary[0].Mobile_Sales,
@@ -118,12 +124,24 @@ function buildQuickStatsTable() {
 		),
 	};
 	console.log(yoydifferences);
-	table.style.textAlign = "right";
-	buildRow(table, 0, yoydifferences.Sales);
-	buildRow(table, 1, yoydifferences.Mobile_Sales);
-	buildRow(table, 2, yoydifferences.Click_Throughs);
-	buildRow(table, 3, yoydifferences.Average_Sale_Amount);
-	buildRow(table, 4, yoydifferences.Conversion_Rate);
+	tablex.style.textAlign = "right";
+	let quickstatArr = [
+		yoydifferences.Sales,
+		yoydifferences.Number_of_Sales,
+		yoydifferences.Mobile_Sales,
+		yoydifferences.Click_Throughs,
+		yoydifferences.Average_Sale_Amount,
+		yoydifferences.Conversion_Rate,
+	];
+	console.log(quickstatArr, quickstatArr.length);
+	console.log(document.getElementById("mobileSalesCheck".checked));
+	if (document.getElementById("mobileSalesCheck").checked === false) {
+		quickstatArr.splice(2, 1);
+	}
+	for (let row = 0; row < quickstatArr.length; row++) {
+		console.log(row);
+		buildRow(tablex, row, quickstatArr[row]);
+	}
 }
 function buildYoyTable() {
 	let table = document.getElementById("yoySummaryReport");

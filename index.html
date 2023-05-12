@@ -193,6 +193,12 @@
 														aria-describedby="selectedYear"
 													/>
 												</div>
+												<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="mobileSalesCheck" checked>
+  <label class="form-check-label" for="mobileSalesCheck">
+    Display Mobile Sales in quickStats
+  </label>
+</div>
 												<div
 													hidden
 													id="first_loading_bar"
@@ -571,15 +577,15 @@
 					<div class="row">
 						<div class="col-12">
 							<h5>Monthly Sales Performance</h5>
-							<div id="chart1" style="width: auto"></div>
+							<div id="monthlyPerformanceGraph" style="width: auto"></div>
 						</div>
 					</div>
 					<div class="row">
 						<br />
 						<div class="col-12">
 							<h5>Top Affiliate YOY Performances</h5><div class="input-group mb-3">
-  <input type="text"id="updateTopPerformers" class="form-control" placeholder="Change Number of Affiliates" aria-label="Change Number of Affiliates" aria-describedby="updateTopPerformers">
-  <button class="btn btn-outline-secondary" onclick="updateTopPerformers()"type="button" >Click to Change # of Performers</button>
+  <input type="text"id="updateTopPerformers" class="form-control bg-warning removeForPrint" placeholder="Change Number of Affiliates" aria-label="Change Number of Affiliates" aria-describedby="updateTopPerformers">
+  <button class="btn btn-warning removeForPrint" onclick="updateTopPerformers()"type="button" >Click to Change # of Performers</button>
 </div>
 							<table
 								id="affiliateSummaryReport"

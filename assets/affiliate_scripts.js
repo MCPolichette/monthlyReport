@@ -344,7 +344,6 @@ function buildNewPerformersTable(y1, y2, y3) {
 }
 function updateTopPerformers() {
 	let content = document.getElementById("updateTopPerformers").value;
-	console.log(content);
 	let num = Number(content);
 	if (isNumber(num)) {
 		if (num > primaryMonth.affiliateReport.length) {
@@ -352,7 +351,6 @@ function updateTopPerformers() {
 				"the selected number is Larger than the amount of active Affiliates for this Merchant"
 			);
 		} else {
-			console.log(num);
 			report.topAffiliateCount = num;
 			buildAffiliateTable(primaryMonth.affiliateReport);
 		}
