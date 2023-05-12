@@ -341,4 +341,21 @@ function buildNewPerformersTable(y1, y2, y3) {
 								</tbody></table>`,
 	]);
 	removeDisabledButton("addNotablesBtn");
+	buildQuickStatsTable();
+}
+function updateTopPerformers() {
+	let content = document.getElementById("updateTopPerformers").value;
+	let num = Number(content);
+	if (isNumber(num)) {
+		if (num > primaryMonth.affiliateReport.length) {
+			alert(
+				"the selected number is Larger than the amount of active Affiliates for this Merchant"
+			);
+		} else {
+			report.topAffiliateCount = num;
+			buildAffiliateTable(primaryMonth.affiliateReport);
+		}
+	} else {
+		alert("Please use a Numerical Value");
+	}
 }
