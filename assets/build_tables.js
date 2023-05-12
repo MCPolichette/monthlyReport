@@ -125,7 +125,6 @@ function buildQuickStatsTable() {
 			data.monthlyPerformanceSummary[12].Conversion_Rate
 		),
 	};
-	console.log(yoydifferences);
 	tablex.style.textAlign = "right";
 	let quickstatArr = [
 		yoydifferences.Sales,
@@ -134,14 +133,17 @@ function buildQuickStatsTable() {
 		yoydifferences.Click_Throughs,
 		yoydifferences.Average_Sale_Amount,
 		yoydifferences.Conversion_Rate,
+		[
+			"New Affiliates",
+			report.newAffsMonth2.length,
+			"note:",
+			"move stat eslewhere",
+		],
 	];
-	console.log(quickstatArr, quickstatArr.length);
-	console.log(document.getElementById("mobileSalesCheck".checked));
 	if (document.getElementById("mobileSalesCheck").checked === false) {
 		quickstatArr.splice(2, 1);
 	}
 	for (let row = 0; row < quickstatArr.length; row++) {
-		console.log(row);
 		buildRow(tablex, row, quickstatArr[row]);
 	}
 }

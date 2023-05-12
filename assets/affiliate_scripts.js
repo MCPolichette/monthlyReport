@@ -341,6 +341,7 @@ function buildNewPerformersTable(y1, y2, y3) {
 								</tbody></table>`,
 	]);
 	removeDisabledButton("addNotablesBtn");
+	buildQuickStatsTable();
 }
 function updateTopPerformers() {
 	let content = document.getElementById("updateTopPerformers").value;

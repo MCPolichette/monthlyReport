@@ -301,7 +301,7 @@ function reportStep2(xml, report_id, month) {
 				endDate: primaryMonth.endDate,
 				month: "primary",
 			});
-			buildQuickStatsTable();
+
 			buildYoyTable();
 			buildMomTable();
 			report.monthArray = data.monthlyPerformanceSummary;
