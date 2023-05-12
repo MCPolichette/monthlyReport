@@ -68,8 +68,10 @@ function buildQuickStatsTable() {
 		let posOrNeg = "+";
 		let value = m1 - m2;
 		let percent = ((m1 - m2) / m1).toFixed(2);
+		console.log("ATTENTION");
+		console.log(percent, value, icon);
 		if (value < 0) {
-			posOrNeg = icons.down;
+			icon = icons.down;
 			posOrNeg = "";
 		}
 		return [text, toUSD(m1), toUSD(value), posOrNeg + percent + "%", icon];
@@ -160,14 +162,13 @@ function buildYoyTable() {
 			.appendChild(document.createTextNode(summaryHeadersArray[i]));
 	}
 	function dollarRowValues(text, m1, m2, x) {
-		let icon = icons.up;
+		let dollarIcon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
 		let percent = ((m1 - m2) / m1).toFixed(2);
-
+		console.log(value);
 		if (value < 0) {
-			posOrNeg = icons.down + "  ";
-			icon = icons.down;
+			dollarIcon = icons.down;
 			posOrNeg = "";
 		}
 		return [
@@ -175,7 +176,7 @@ function buildYoyTable() {
 			toUSD(m1),
 			toUSD(m2),
 			percent + "%",
-			icon,
+			dollarIcon,
 			posOrNeg + toUSD(value),
 		];
 	}
