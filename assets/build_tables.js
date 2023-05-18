@@ -49,6 +49,7 @@ function updateHeaders() {
 		report.year;
 }
 function buildQuickStatsTable() {
+	console.log("Quick-stats Table");
 	let tablex = document.getElementById("quickStats");
 	let thead = document.getElementById("qstatsHead");
 	let summaryHeadersArray = [
@@ -146,6 +147,7 @@ function buildQuickStatsTable() {
 	for (let row = 0; row < quickstatArr.length; row++) {
 		buildRow(tablex, row, quickstatArr[row]);
 	}
+	console.log("QUICKSTATS DONE");
 }
 function buildYoyTable() {
 	let table = document.getElementById("yoySummaryReport");

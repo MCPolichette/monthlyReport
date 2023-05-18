@@ -305,7 +305,13 @@ function reportStep2(xml, report_id, month) {
 			buildYoyTable();
 			buildMomTable();
 			report.monthArray = data.monthlyPerformanceSummary;
-			drawChart1();
+			// drawChart1();
+			drawSalesVConversionChart(
+				"Monthly Sales and Conversions",
+				"monthlyPerformanceGraph",
+				"test"
+			);
+
 			break;
 		case 18:
 			console.log(xmlDoc.getElementsByTagName("Product_SKU").length);
@@ -335,6 +341,36 @@ function reportStep2(xml, report_id, month) {
 				"COMPLETED - Products Sold API"
 			);
 			build_products_sold_table();
+			break;
+		case 12:
+			let days = xmlDoc.getElementsByTagName("Sales").length;
+			console.log(days);
+			let dailyArr = [["Day", "Sales", "Conversion Rate"]];
+			for (let i = 0; i < days; i++) {
+				dailyArr.push([
+					removeYearFromDate(
+						xmlDoc.getElementsByTagName("Date")[i].textContent
+					),
+					Number(
+						xmlDoc
+							.getElementsByTagName("Sales")
+							[i].innerHTML.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					Number(
+						xmlDoc
+							.getElementsByTagName("Conversion_Rate")
+							[i].innerHTML.replaceAll("%", "")
+					) / 100,
+				]);
+			}
+			console.log(dailyArr);
+			data.dailyPerformance = dailyArr;
+			drawDailySalesVConversionChart(
+				"Daily Sales and Conversions",
+				"dailyPerformanceGraph",
+				"sales"
+			);
 			break;
 		case 1: //Performance Summary
 			console.log(xml);

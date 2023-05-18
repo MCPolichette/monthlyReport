@@ -22,6 +22,12 @@ var data = {
 function isNumber(value) {
 	return typeof value === "number" && isFinite(value);
 }
+function removeYearFromDate(dateString) {
+	var parts = dateString.split("/");
+	var month = parts[0];
+	var day = parts[1];
+	return month + "/" + day;
+}
 var icons = {
 	up: `<i class="fa fa-caret-square-o-up" style="color:green"></i>`,
 	down: `<i class="fa fa-caret-square-o-down" style="color:red"></i>`,
@@ -352,5 +358,13 @@ function subAffiliate_report() {
 		startDate: primaryMonth.startDate,
 		endDate: primaryMonth.endDate,
 		month: "primary",
+	});
+}
+function runtestfunction() {
+	runAPI({
+		report_id: 12,
+		startDate: primaryMonth.startDate,
+		endDate: primaryMonth.endDate,
+		month: "next",
 	});
 }
