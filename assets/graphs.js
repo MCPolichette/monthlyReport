@@ -64,12 +64,6 @@ function drawSalesVConversionChart(title, divId, hAxisTitle) {
 		document.getElementById("monthlyPerformanceGraph")
 	);
 	chart.draw(chartData, options);
-	runAPI({
-		report_id: 12,
-		startDate: primaryMonth.startDate,
-		endDate: primaryMonth.endDate,
-		month: "next",
-	});
 }
 function drawDailySalesVConversionChart(title, divId, hAxisTitle) {
 	//build an array like the example below, ( Month, Sales $number, CR percentage.)

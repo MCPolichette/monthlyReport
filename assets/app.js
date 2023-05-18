@@ -360,7 +360,7 @@ function subAffiliate_report() {
 		month: "primary",
 	});
 }
-function runtestfunction() {
+function runDailyChart() {
 	runAPI({
 		report_id: 12,
 		startDate: primaryMonth.startDate,
