@@ -134,12 +134,7 @@ function buildQuickStatsTable() {
 		yoydifferences.Click_Throughs,
 		yoydifferences.Average_Sale_Amount,
 		yoydifferences.Conversion_Rate,
-		[
-			"New Affiliates",
-			report.newAffsMonth2.length,
-			"note:",
-			"move stat eslewhere",
-		],
+		["New Affiliates", report.newAffsMonth2.length],
 	];
 	if (document.getElementById("mobileSalesCheck").checked === false) {
 		quickstatArr.splice(2, 1);
@@ -169,7 +164,7 @@ function buildYoyTable() {
 		let dollarIcon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m1).toFixed(2);
+		let percent = ((m1 - m2) / m2).toFixed(2);
 		console.log(value);
 		if (value < 0) {
 			dollarIcon = icons.down;
@@ -188,7 +183,7 @@ function buildYoyTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m1).toFixed(2);
+		let percent = ((m1 - m2) / m2).toFixed(2);
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
@@ -273,7 +268,7 @@ function buildMomTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m1).toFixed(2);
+		let percent = ((m1 - m2) / m2).toFixed(2);
 		if (value < 0) {
 			posOrNeg = icons.down;
 			icon = icons.down;
@@ -292,7 +287,7 @@ function buildMomTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m1).toFixed(2);
+		let percent = ((m1 - m2) / m2).toFixed(2);
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
@@ -479,6 +474,7 @@ function buildSubAffTable(array) {
 			.appendChild(document.createTextNode(headArray[i]));
 	}
 	table.style.textAlign = "right";
+
 	for (let i = 0; i < report.topAffiliateCount; i++) {
 		buildRow(table, i, [
 			array[i].Affiliate + " - " + array[i].Sub_Affiliate_Domain,

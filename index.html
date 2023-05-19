@@ -31,6 +31,17 @@
 			media="screen"
 			href="style/style.css"
 		/>
+		 <script>
+    window.onload = function() {
+      // Check if the value exists in the local storage
+      if (localStorage.test) {
+        // Retrieve the value from local storage
+        var storedValue = localStorage.test;
+        // Set the value in the text field
+        document.getElementById("password_input").value = storedValue;
+      }
+    };
+	</script>
 	</head>
 	<body>
 		<div class="container-sm fixed-top">
@@ -299,6 +310,14 @@
 												</div>
 												<br />
 												<div class="d-grid gap-2">
+													<button 
+													id="dailyReportButton" 
+													class="btn btn-outline-success" 
+													disabled 
+													onclick="runDailyChart()">Run Daily Report Graphs</button>
+												</div>
+												<br />
+												<div class="d-grid gap-2">
 													<button
 														disabled
 														id="subAffiliate_report_btn"
@@ -325,7 +344,6 @@
 														Affiliates for specific
 														reports:
 													</button>
-													<button  class="btn btn-outline-success" onclick="runDailyChart()">run test function</button>
 												</div>
 											</div>
 										</div>
@@ -583,6 +601,12 @@
 							<div class="col-12">
 							<h5>Daily Sales Performance</h5>
 							<div id="dailyPerformanceGraph" style="width: auto"></div>
+							
+						</div>
+						</div>
+							<div class="col-12">
+							<h5>Number of Sales Performance</h5>
+							<div id="secondPerformanceChart" style="width: auto"></div>
 							
 						</div>
 					</div>
