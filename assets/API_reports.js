@@ -135,6 +135,9 @@ function reportStep2(xml, report_id, month) {
 				subAffiliates[i].roa =
 					subAffiliates[i].Sales / subAffiliates[i].Total_Commission;
 			}
+			subAffiliates.sort(function (a, b) {
+				return b.Sales - a.Sales;
+			});
 			console.log(subAffiliates);
 			report.subAffiliates = subAffiliates;
 			buildSubAffTable(report.subAffiliates);
@@ -346,6 +349,7 @@ function reportStep2(xml, report_id, month) {
 			let days = xmlDoc.getElementsByTagName("Sales").length;
 			console.log(days);
 			let dailyArr = [["Day", "Sales", "Conversion Rate"]];
+			let secondArr = [["Day", "Number of Sales", "Conversion Rate"]];
 			for (let i = 0; i < days; i++) {
 				dailyArr.push([
 					removeYearFromDate(
@@ -363,8 +367,25 @@ function reportStep2(xml, report_id, month) {
 							[i].innerHTML.replaceAll("%", "")
 					) / 100,
 				]);
+				secondArr.push([
+					removeYearFromDate(
+						xmlDoc.getElementsByTagName("Date")[i].textContent
+					),
+					Number(
+						xmlDoc
+							.getElementsByTagName("Number_of_Sales")
+							[i].innerHTML.replaceAll(",", "")
+							.replaceAll("$", "")
+					),
+					Number(
+						xmlDoc
+							.getElementsByTagName("Conversion_Rate")
+							[i].innerHTML.replaceAll("%", "")
+					) / 100,
+				]);
 			}
 			console.log(dailyArr);
+			data.SaleNumPerformance = secondArr;
 			data.dailyPerformance = dailyArr;
 			drawDailySalesVConversionChart(
 				"Daily Sales and Conversions",
@@ -381,6 +402,7 @@ function reportStep2(xml, report_id, month) {
 			updateHeaders();
 			completeButton("submitBtn", "Merchant & Date Selected");
 			removeDisabledButton("affiliate_report_button");
+			removeDisabledButton("dailyReportButton");
 			// removeDisabledButton("viewReport");
 			break;
 		case 15: //Performance Summary by Affiliate for selected dates

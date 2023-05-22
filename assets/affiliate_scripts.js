@@ -173,10 +173,6 @@ function updateNotablePerformers() {
 
 		for (p = 0; p < data.notablePerformers.three.length; p++) {
 			for (q = 0; q < primaryMonth.affiliateReport.length; q++) {
-				console.log(
-					data.notablePerformers.three[p],
-					primaryMonth.affiliateReport[q].Affiliate_Id
-				);
 				if (
 					data.notablePerformers.three[p] ==
 					primaryMonth.affiliateReport[q].Affiliate_Id

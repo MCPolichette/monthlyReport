@@ -1,61 +1,46 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
-		<title>Column and Line Chart with Google Charts - Example</title>
-		<script
-			type="text/javascript"
-			src="https://www.gstatic.com/charts/loader.js"
-		></script>
-		<script type="text/javascript">
-			google.charts.load("current", { packages: ["corechart"] });
-			google.charts.setOnLoadCallback(drawChart);
-
-			function drawChart() {
-				var data = google.visualization.arrayToDataTable([
-					["Month", "Sales", "Profit Margin"],
-					["Jan", 1000, 25],
-					["Feb", 2000, 20],
-					["Mar", 3000, 15],
-					["Apr", 2500, 10],
-					["May", 1500, 5],
-				]);
-
-				var options = {
-					title: "Sales and Profit Margin",
-					hAxis: {
-						title: "Month",
-						titleTextStyle: { color: "#333" },
-					},
-					vAxis: { minValue: 0 },
-					series: {
-						0: { type: "bars" },
-						1: {
-							type: "line",
-							targetAxisIndex: 1,
-							format: "#'%'",
-							tooltip: { format: "#,###%" },
-						},
-					},
-					vAxes: {
-						0: { title: "Sales" },
-						1: {
-							title: "Profit Margin",
-							format: "#'%'",
-							minValue: 0,
-							maxValue: 1,
-						},
-					},
-				};
-
-				var chart = new google.visualization.ComboChart(
-					document.getElementById("chart_div")
-				);
-				chart.draw(data, options);
-			}
-		</script>
+		<title>Notes Management</title>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		/>
 	</head>
 	<body>
-		<div id="chart_div" style="width: 900px; height: 500px"></div>
+		<div class="container mt-4">
+			<h1>Notes App</h1>
+
+			<!-- Section for inputting notes -->
+			<div id="noteInputSection">
+				<h2>Add Note</h2>
+				<div class="form-group">
+					<label for="noteTitle">Note Title:</label>
+					<input type="text" class="form-control" id="noteTitle" />
+				</div>
+				<div class="form-group">
+					<label for="noteText">Note Text:</label>
+
+					<textarea
+						class="form-control"
+						placeholder="NOTES GO HERE!"
+						id="noteText"
+						wrap="hard"
+						style="height: 100px"
+					></textarea>
+				</div>
+				<button class="btn btn-primary" id="addNoteBtn">
+					Add Note
+				</button>
+			</div>
+
+			<!-- Section for displaying notes -->
+			<div id="noteDisplaySection">
+				<h2>Notes</h2>
+				<div id="notesContainer"></div>
+			</div>
+		</div>
+
+		<script src="assets/notes.js"></script>
 	</body>
 </html>

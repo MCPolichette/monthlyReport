@@ -46,6 +46,7 @@ function toUSD(dollarInt) {
 	dollarUSD = formatter.format(dollarInt);
 	return dollarUSD;
 }
+
 function removeDisabledButton(id) {
 	let btn = document.getElementById(id);
 	btn.disabled = false;
