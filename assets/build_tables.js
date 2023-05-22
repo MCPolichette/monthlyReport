@@ -164,7 +164,7 @@ function buildYoyTable() {
 		let dollarIcon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m2).toFixed(2);
+		let percent = (((m1 - m2) / m2) * 100).toFixed(2);
 		console.log(value);
 		if (value < 0) {
 			dollarIcon = icons.down;
@@ -183,7 +183,7 @@ function buildYoyTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m2).toFixed(2);
+		let percent = (((m1 - m2) / m2) * 100).toFixed(2);
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
@@ -268,7 +268,7 @@ function buildMomTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m2).toFixed(2);
+		let percent = (((m1 - m2) / m2) * 100).toFixed(2);
 		if (value < 0) {
 			posOrNeg = icons.down;
 			icon = icons.down;
@@ -287,7 +287,7 @@ function buildMomTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m2).toFixed(2);
+		let percent = (((m1 - m2) / m2) * 100).toFixed(2);
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";

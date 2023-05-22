@@ -34,3 +34,13 @@ h6 {
 		}
 	}
 }
+.noteBox {
+	position: relative;
+}
+
+.noteBox .close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 5px;
+}

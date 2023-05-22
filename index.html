@@ -462,34 +462,7 @@
 									</div>
 									<div class="row">
 										<div class="col-10">
-											<hr />
-											<h5>Notes Title:</h5>
-											<div class="form-floating">
-												<input
-													class="form-control"
-													type="text"
-													placeholder="Default input"
-													id="manualTitleText"
-													aria-label="Notes Title"
-												/>
-											</div>
-											<div>
-												<h5>Notes Text:</h5>
-												<textarea
-													class="form-control"
-													placeholder="NOTES GO HERE!"
-													id="manualNotesText"
-													wrap="hard"
-													style="height: 100px"
-												></textarea>
-											</div>
-											<button
-												class="btn btn-primary"
-												onclick="addNote()"
-												type="button"
-											>
-												Add Manual Note
-											</button>
+											<p>Notes can be added in the document below</p>
 										</div>
 										<!-- </div> -->
 									</div>
@@ -525,7 +498,7 @@
 				</div>
 			</div>
 			<div id="report_display" hidden>
-				<div class="container-fluid" id="report_pdf">
+				<div class="container-lg shadow" id="report_pdf">
 					<div class="row">
 						<div class="col-4">
 						<img
@@ -609,12 +582,12 @@
 							<div id="secondPerformanceChart" style="width: auto"></div>
 							
 						</div>
-					</div>
+					
 					<div class="row">
 						<br />
 						<div class="col-12">
 							<h5>Top Affiliate YOY Performances</h5>
-							<div class="input-group mb-3">
+							<div class="input-group mb-3 border border-warning removeForPrint border-4">
   								<input type="text"id="updateTopPerformers" class="form-control bg-warning removeForPrint" placeholder="Change Number of displayed Affiliates" aria-label="Change Number of Affiliates" aria-describedby="updateTopPerformers">
   								<button class="btn btn-warning removeForPrint" onclick="updateTopPerformers()"type="button" >Click to Change # of displayed Performers</button>
 							</div>
@@ -709,6 +682,36 @@
 							</table>
 						</div>
 					</div>
+					<div id="noteInputSection" class="row border border-warning border-4 removeForPrint">
+						<div class="col-8 ">
+				<h5>Add Note</h5>
+				<p>(This input display will be removed for printing/exporting)</p>
+				<div class="form-group">
+					<label for="noteTitle">Note Title:</label>
+					<input type="text" class="form-control" id="noteTitle" />
+				</div>
+				<div class="form-group">
+					<label for="noteText">Note Text:</label>
+
+					<textarea
+						class="form-control"
+						placeholder="NOTES GO HERE!"
+						id="noteText"
+						wrap="hard"
+						style="height: 100px"
+					></textarea>
+				</div>
+				<button class="btn btn-warning" id="addNoteBtn">
+					Add Note
+				</button>
+			</div></div>
+
+			<!-- Section for displaying notes -->
+			<div class="col-12">
+			<div id="noteDisplaySection">
+				<h2>Additional Notes:</h2>
+				<div id="notesContainer"></div>
+			</div></div>
 
 					<div class="row" id="manual-report-data">
 						
@@ -726,7 +729,7 @@
 				</div>
 				<div class="container-fluid"></div>
 			</div>
-		</div>
+		</div></div>
 
 		<script src="assets/API_reports.js"></script>
 		<script src="assets/affiliate_scripts.js"></script>
@@ -736,6 +739,7 @@
 		<script src="assets/read_file.js"></script>
 		<script src="assets/graphs.js"></script>
 		<script src="assets/export_files.js"></script>
+		<script src="assets/notes.js"></script>
 		<!-- Option 1: Bootstrap Bundle with Popper -->
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
