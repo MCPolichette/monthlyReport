@@ -583,6 +583,7 @@ function reportStep2(xml, report_id, month) {
 					topTen.push(report.yoyPerformance[k]);
 				}
 				buildAffiliateTable(primaryMonth.affiliateReport);
+				buildQuickStatsTable();
 				runAPI({
 					report_id: 65,
 					startDate: primaryMonth.startDate,

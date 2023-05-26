@@ -21,6 +21,9 @@ h6 {
 #productsRow {
 	margin-top: 100px;
 }
+#noteInputSection {
+	background-color: rgb(240, 210, 121);
+}
 #report_pdf {
 	background-color: white;
 	@page {

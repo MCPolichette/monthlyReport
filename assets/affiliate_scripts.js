@@ -337,7 +337,9 @@ function buildNewPerformersTable(y1, y2, y3) {
 								</tbody></table>`,
 	]);
 	removeDisabledButton("addNotablesBtn");
-	buildQuickStatsTable();
+
+	let tablex = document.getElementById("quickStats");
+	buildRow(tablex, 0, ["New Affiliates", report.newAffsMonth2.length]);
 }
 function updateTopPerformers() {
 	let content = document.getElementById("updateTopPerformers").value;

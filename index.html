@@ -464,7 +464,6 @@
 										<div class="col-10">
 											<p>Notes can be added in the document below</p>
 										</div>
-										<!-- </div> -->
 									</div>
 								</div>
 							</div>
@@ -489,7 +488,15 @@
 									data-bs-parent="#reportAccordian"
 								>
 									<div class="accordion-body">
-										Intentionally Blank, Report below:
+										
+										<div class="row">
+											<div class ='col-12'>
+												<h4> Notes about the report below</h4>
+												<div class = 'noteInputSection'>
+													All Yellow buttons and Highlighted sections will be removed with teh print button at the bottom of the screen
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -533,10 +540,12 @@
 								class="img-fluid"
 							/>
 							<hr />
-							
 						</div>
-
-						<div class="row align-top">
+						<div class=" removeForPrint close justify-content-md-end">
+							<button type="button" id= 'yoyAndMomRowBtn'onclick="hideRow('yoyAndMomRow', 'yoyAndMomRowBtn')" class="close btn btn-sm btn-warning " aria-label="Close"> Hide the Display Below </button>
+						</div>
+						<div class="row align-top" id='yoyAndMomRow'>
+							
 							<div class="col-6">
 								<h5 id="yoySummaryReportHeader">
 									Year-over-Year
@@ -582,10 +591,14 @@
 							<div id="secondPerformanceChart" style="width: auto"></div>
 							
 						</div>
-					
-					<div class="row">
+					<div class=" removeForPrint close justify-content-md-end">
+							<button type="button" id= 'topAffRowBtn'onclick="hideRow('topAffRow', 'topAffRowBtn')" class="close btn btn-sm btn-warning " aria-label="Close"> Hide the Display Below </button>
+						</div>
+					<div class="row" id="topAffRow">
+						
 						<br />
 						<div class="col-12">
+
 							<h5>Top Affiliate YOY Performances</h5>
 							<div class="input-group mb-3 border border-warning removeForPrint border-4">
   								<input type="text"id="updateTopPerformers" class="form-control bg-warning removeForPrint" placeholder="Change Number of displayed Affiliates" aria-label="Change Number of Affiliates" aria-describedby="updateTopPerformers">
@@ -601,8 +614,11 @@
 							</table>
 						</div>
 					</div>
-					
-					<div class="row">
+					<div class=" removeForPrint close justify-content-md-end">
+							<button type="button" id= 'newPartnerRowBtn'onclick="hideRow('newPartnerRow', 'newPartnerRowBtn')" class="close btn btn-sm btn-warning " aria-label="Close"> Hide the Display Below </button>
+						</div>
+					<div class="row"id="newPartnerRow">
+						
 						<div id="newAffCol" class="col-6">
 							<h5>New Partner Performance</h5>
 							<table
@@ -614,8 +630,11 @@
 								</thead></tbody>
 							</table>
 						</div>
-					</div>
-					<div class="row">
+					</div><div class=" removeForPrint close justify-content-md-end">
+							<button type="button" id= 'growAndDeclineRowBtn'onclick="hideRow('growAndDeclineRow', 'growAndDeclineRowBtn')" class="close btn btn-sm btn-warning " aria-label="Close"> Hide the Display Below </button>
+						</div>
+					<div class="row" id="growAndDeclineRow">
+						
 						<div class="col-6">
 							<h5>Top Growing YoY Performance</h5>
 							<table
@@ -638,8 +657,8 @@
 								</tbody>
 							</table>
 						</div>
-					</div>
-					<div class="row">
+					
+					<!-- <div class="row"> -->
 						<div class="col-12">
 							<p>
 								*Affiliates with $0 Sales in either period were
@@ -653,9 +672,12 @@
 								used to compute the percent change for each
 								statistic.
 							</p>
-						</div>
 					</div>
-					<div class="row">
+					</div><div class=" removeForPrint close justify-content-md-end">
+							<button type="button" id= 'subAffRowBtn'onclick="hideRow('subAffRow', 'subAffRowBtn')" class="close btn btn-sm btn-warning " aria-label="Close"> Hide the Display Below </button>
+						</div>
+					<div class="row"id="subAffRow">
+						
 						<br />
 						<div class="col-12">
 							<h5>Sub Affiliate Report</h5>
@@ -668,7 +690,9 @@
 								</tbody>
 							</table>
 						</div>
-					</div>
+					</div><div class=" removeForPrint close justify-content-md-end">
+							<button type="button" id= 'productRowBtn'onclick="hideRow('productsRow', 'productRowBtn')" class="close btn btn-sm btn-warning " aria-label="Close"> Hide the Display Below </button>
+						</div>
 					<div id="productsRow" class="row">
 						<div class="col-12">
 							<h5>Products Sold Report</h5>
@@ -682,7 +706,19 @@
 							</table>
 						</div>
 					</div>
-					<div id="noteInputSection" class="row border border-warning border-4 removeForPrint">
+					
+
+			<!-- Section for displaying notes -->
+			<div class=" removeForPrint close justify-content-md-end">
+							<button type="button" id= 'notesRowBtn'onclick="hideRow('notesRow', 'notesRowBtn')" class="close btn btn-sm btn-warning " aria-label="Close"> Hide the Display Below </button>
+						</div>
+			<div class="col-12" id="notesRow">
+				
+			<div id="noteDisplaySection">
+				<h2>Additional Notes:</h2>
+				<div id="notesContainer"></div>
+			</div></div>
+			<div id="noteInputSection" class="row border border-warning border-4 removeForPrint">
 						<div class="col-8 ">
 				<h5>Add Note</h5>
 				<p>(This input display will be removed for printing/exporting)</p>
@@ -704,13 +740,6 @@
 				<button class="btn btn-warning" id="addNoteBtn">
 					Add Note
 				</button>
-			</div></div>
-
-			<!-- Section for displaying notes -->
-			<div class="col-12">
-			<div id="noteDisplaySection">
-				<h2>Additional Notes:</h2>
-				<div id="notesContainer"></div>
 			</div></div>
 
 					<div class="row" id="manual-report-data">

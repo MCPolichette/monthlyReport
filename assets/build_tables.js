@@ -68,7 +68,7 @@ function buildQuickStatsTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m1).toFixed(2);
+		let percent = (((m1 - m2) / m1) * 100).toFixed(2);
 		console.log("ATTENTION");
 		console.log(percent, value, icon);
 		if (value < 0) {
@@ -81,7 +81,7 @@ function buildQuickStatsTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = ((m1 - m2) / m1).toFixed(2);
+		let percent = (((m1 - m2) / m1) * 100).toFixed(2);
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
@@ -134,7 +134,6 @@ function buildQuickStatsTable() {
 		yoydifferences.Click_Throughs,
 		yoydifferences.Average_Sale_Amount,
 		yoydifferences.Conversion_Rate,
-		["New Affiliates", report.newAffsMonth2.length],
 	];
 	if (document.getElementById("mobileSalesCheck").checked === false) {
 		quickstatArr.splice(2, 1);
