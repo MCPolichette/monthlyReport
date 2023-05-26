@@ -46,7 +46,17 @@ function toUSD(dollarInt) {
 	dollarUSD = formatter.format(dollarInt);
 	return dollarUSD;
 }
-
+function hideRow(rowId, btnId) {
+	let row = document.getElementById(rowId);
+	let btn = document.getElementById(btnId);
+	if (row.hidden) {
+		btn.innerHTML = "Hide the Display Below";
+		row.hidden = false;
+	} else {
+		btn.innerHTML = "Show Hidden Row";
+		row.hidden = true;
+	}
+}
 function removeDisabledButton(id) {
 	let btn = document.getElementById(id);
 	btn.disabled = false;
