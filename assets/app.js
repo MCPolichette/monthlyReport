@@ -1,6 +1,7 @@
 // global variables
 var merchant = {};
 var report = {
+	hideYoY: true,
 	yoyPerformance: [],
 	newAffsMonth1: [],
 	newAffsMonth2: [],
@@ -152,17 +153,24 @@ function perfomance_report() {
 	console.log(today);
 	merchant.id = document.getElementById("merchant_ID_input").value;
 	report.month = document.getElementById("selectedMonth").value;
-	document.getElementById("merchant_logo").src =
-		"https://static.avantlink.com/merchant-logos/" + merchant.id + ".png";
+	let merchantLogo =
+		"https://static.avantlink.com/merchant-logos/" + merchant.id;
+	if (merchant.id != "23437") {
+		merchantLogo += ".png"; // Append the file extension
+	}
+	document.getElementById("merchant_logo").src = merchantLogo;
+
 	let selectedYear = document.getElementById("selectedYear").value;
 	report.year = Number(selectedYear);
-
+	if (document.getElementById("yoyDisplayCheck")) {
+		report.hideYoY = true;
+	}
 	switch (report.month) {
 		case "-01":
 			data.month = "January";
 			data.abMonth = "Jan";
 			data.priorAbMonth = "Dec";
-			data.thisMonthArray = [01, report.year];
+			data.thisMonthArray = [1, report.year];
 			data.oneMonthAgoArray = [12, report.year - 1];
 			data.twoMonthsAgoArray = [11, report.year - 1];
 			data.previousMonth = "December";
@@ -172,8 +180,8 @@ function perfomance_report() {
 			data.month = "February";
 			data.abMonth = "Feb";
 			data.priorAbMonth = "Jan";
-			data.thisMonthArray = [02, report.year];
-			data.oneMonthAgoArray = [01, report.year];
+			data.thisMonthArray = [2, report.year];
+			data.oneMonthAgoArray = [1, report.year];
 			data.twoMonthsAgoArray = [12, report.year - 1];
 			data.previousMonth = "January";
 			data.twoMonthsAgo = "December";
@@ -183,9 +191,9 @@ function perfomance_report() {
 			data.month = "March";
 			data.abMonth = "Mar";
 			data.priorAbMonth = "Feb";
-			data.thisMonthArray = [03, report.year];
-			data.oneMonthAgoArray = [02, report.year];
-			data.twoMonthsAgoArray = [01, report.year];
+			data.thisMonthArray = [3, report.year];
+			data.oneMonthAgoArray = [2, report.year];
+			data.twoMonthsAgoArray = [1, report.year];
 			data.previousMonth = "February";
 			data.twoMonthsAgo = "January";
 
@@ -194,9 +202,9 @@ function perfomance_report() {
 			data.month = "April";
 			data.abMonth = "Apr";
 			data.priorAbMonth = "Mar";
-			data.thisMonthArray = [04, report.year];
-			data.oneMonthAgoArray = [03, report.year];
-			data.twoMonthsAgoArray = [02, report.year];
+			data.thisMonthArray = [4, report.year];
+			data.oneMonthAgoArray = [3, report.year];
+			data.twoMonthsAgoArray = [2, report.year];
 			data.previousMonth = "March";
 			data.twoMonthsAgo = "February";
 
@@ -205,9 +213,9 @@ function perfomance_report() {
 			data.month = "May";
 			data.abMonth = "May";
 			data.priorAbMonth = "Apr";
-			data.thisMonthArray = [05, report.year];
-			data.oneMonthAgoArray = [04, report.year];
-			data.twoMonthsAgoArray = [03, report.year];
+			data.thisMonthArray = [5, report.year];
+			data.oneMonthAgoArray = [4, report.year];
+			data.twoMonthsAgoArray = [3, report.year];
 			data.previousMonth = "April";
 			data.twoMonthsAgo = "March";
 
@@ -216,9 +224,9 @@ function perfomance_report() {
 			data.month = "June";
 			data.abMonth = "Jun";
 			data.priorAbMonth = "May";
-			data.thisMonthArray = [06, report.year];
-			data.oneMonthAgoArray = [05, report.year];
-			data.twoMonthsAgoArray = [04, report.year];
+			data.thisMonthArray = [6, report.year];
+			data.oneMonthAgoArray = [5, report.year];
+			data.twoMonthsAgoArray = [4, report.year];
 			data.previousMonth = "May";
 			data.twoMonthsAgo = "April";
 
@@ -227,9 +235,9 @@ function perfomance_report() {
 			data.month = "July";
 			data.abMonth = "Jul";
 			data.priorAbMonth = "Jun";
-			data.thisMonthArray = [07, report.year];
-			data.oneMonthAgoArray = [06, report.year];
-			data.twoMonthsAgoArray = [05, report.year];
+			data.thisMonthArray = [7, report.year];
+			data.oneMonthAgoArray = [6, report.year];
+			data.twoMonthsAgoArray = [5, report.year];
 			data.previousMonth = "June";
 			data.twoMonthsAgo = "May";
 
@@ -238,9 +246,9 @@ function perfomance_report() {
 			data.month = "August";
 			data.abMonth = "Aug";
 			data.priorAbMonth = "Jul";
-			data.thisMonthArray = [08, report.year];
-			data.oneMonthAgoArray = [07, report.year];
-			data.twoMonthsAgoArray = [06, report.year];
+			data.thisMonthArray = [8, report.year];
+			data.oneMonthAgoArray = [7, report.year];
+			data.twoMonthsAgoArray = [6, report.year];
 			data.previousMonth = "July";
 			data.twoMonthsAgo = "June";
 
@@ -249,9 +257,9 @@ function perfomance_report() {
 			data.month = "September";
 			data.abMonth = "Sep";
 			data.priorAbMonth = "Aug";
-			data.thisMonthArray = [09, report.year];
-			data.oneMonthAgoArray = [08, report.year];
-			data.twoMonthsAgoArray = [07, report.year];
+			data.thisMonthArray = [9, report.year];
+			data.oneMonthAgoArray = [8, report.year];
+			data.twoMonthsAgoArray = [7, report.year];
 			data.previousMonth = "August";
 			data.twoMonthsAgo = "July";
 
@@ -261,8 +269,8 @@ function perfomance_report() {
 			data.abMonth = "Oct";
 			data.priorAbMonth = "Sep";
 			data.thisMonthArray = [10, report.year];
-			data.oneMonthAgoArray = [09, report.year];
-			data.twoMonthsAgoArray = [08, report.year];
+			data.oneMonthAgoArray = [9, report.year];
+			data.twoMonthsAgoArray = [8, report.year];
 			data.previousMonth = "September";
 			data.twoMonthsAgo = "August";
 
@@ -274,7 +282,7 @@ function perfomance_report() {
 			data.previousMonth = "October";
 			data.thisMonthArray = [11, report.year];
 			data.oneMonthAgoArray = [10, report.year];
-			data.twoMonthsAgoArray = [09, report.year];
+			data.twoMonthsAgoArray = [9, report.year];
 			data.twoMonthsAgo = "September";
 
 			break;

@@ -23,6 +23,18 @@ function add_borders(table_id, column) {
 			"border-left-width :2px;  border-style:solid; border-left-color: #000000";
 	}
 }
+function hideColumn(tableId, columnIndex) {
+	console.log("hiding Columns");
+	let table = document.getElementById(tableId);
+	let rows = table.rows;
+
+	for (let i = 0; i < rows.length; i++) {
+		let cells = rows[i].cells;
+		if (cells.length > columnIndex) {
+			cells[columnIndex].style.display = "none";
+		}
+	}
+}
 function tableHeaders(tableID, array) {
 	let table = document.getElementById(tableID);
 	let thead = document.createElement("thead");
