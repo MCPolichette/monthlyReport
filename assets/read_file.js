@@ -21,6 +21,8 @@ function read_file(input) {
 			} else {
 				secondButtonBoolean = true;
 				console.log("TRUE!? " + secondButtonBoolean);
+				console.log(allLines.length);
+				console.log(allLines[0], allLines[1]);
 				for (i = 1; i < allLines.length - 1; i++) {
 					let thisRow = allLines[i].split(",");
 					let approvalDate = thisRow[10].toString().split("/");

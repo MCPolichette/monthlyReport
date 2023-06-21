@@ -212,7 +212,9 @@ function buildNewPerformersTable(y1, y2, y3) {
 	let month3Total = 0;
 	let nextRow = 1;
 	var newObject = {};
-
+	notableRows = [];
+	console.log(report.newAffsMonth1.length);
+	console.log(primaryMonth.affiliateReport.length);
 	for (i = 0; i < report.newAffsMonth1.length; i++) {
 		for (j = 0; j < primaryMonth.affiliateReport.length; j++) {
 			if (
@@ -230,27 +232,27 @@ function buildNewPerformersTable(y1, y2, y3) {
 				NotablePerformers.push(arr1);
 				newObject[primaryMonth.affiliateReport[j].Affiliate_ID] = [];
 				console.log(newObject);
-				buildRow(notablePerformersTable, nextRow, [
+				notableRows.push([
 					data.month,
 					primaryMonth.affiliateReport[j].Affiliate,
-					primaryMonth.affiliateReport[j].Sales,
+					toUSD(primaryMonth.affiliateReport[j].Sales),
 					primaryMonth.affiliateReport[j].Number_of_Sales,
 					primaryMonth.affiliateReport[j].Conversion_Rate,
-					`<div class="form-check form-switch">
-  <input class="form-check-input" onchange='addNotableAffiliate(` +
+					`<div class="form-check form-switch"><input class="form-check-input" onchange='addNotableAffiliate(` +
 						[primaryMonth.affiliateReport[j].Affiliate_Id, 1] +
 						`)' type="checkbox" id="` +
 						primaryMonth.affiliateReport[j].Affiliate_Id +
 						`"></div>`,
 				]);
-				nextRow = nextRow + 1;
+
+				// console.log(report.newAffsMonth1[i]);
 			}
 		}
 	}
 	buildRow(table, 0, [
 		data.month,
 		report.newAffsMonth2.length,
-		"$" + month1Total,
+		toUSD(month1Total),
 		`<table class="table table-striped centered table-sm" id="notableTable1"><tbody style="font-size: small">
 									<thead id="notableThead1"></thead>
 								</tbody></table>`,
@@ -271,10 +273,10 @@ function buildNewPerformersTable(y1, y2, y3) {
 					month2Total + primaryMonth.affiliateReport[l].Sales;
 				console.log(month2Total);
 				NotablePerformers.push(arr2);
-				buildRow(notablePerformersTable, nextRow, [
+				notableRows.push([
 					data.previousMonth,
 					primaryMonth.affiliateReport[l].Affiliate,
-					primaryMonth.affiliateReport[l].Sales,
+					toUSD(primaryMonth.affiliateReport[l].Sales),
 					primaryMonth.affiliateReport[l].Number_of_Sales,
 					primaryMonth.affiliateReport[l].Conversion_Rate,
 					`<div class="form-check form-switch">
@@ -284,14 +286,13 @@ function buildNewPerformersTable(y1, y2, y3) {
 						primaryMonth.affiliateReport[l].Affiliate_Id +
 						`"></div>`,
 				]);
-				nextRow = nextRow + 1;
 			}
 		}
 	}
 	buildRow(table, 1, [
 		data.previousMonth,
 		report.newAffsMonth3.length,
-		"$" + month2Total,
+		toUSD(month2Total),
 		`<table class="table table-striped centered table-sm" id="notableTable2"><tbody style="font-size: small">
 									<thead id="notableThead2"></thead>
 								</tbody></table>`,
@@ -311,10 +312,10 @@ function buildNewPerformersTable(y1, y2, y3) {
 				month3Total =
 					month3Total + primaryMonth.affiliateReport[n].Sales;
 				NotablePerformers.push(arr3);
-				buildRow(notablePerformersTable, nextRow, [
+				notableRows.push([
 					data.twoMonthsAgo,
 					primaryMonth.affiliateReport[n].Affiliate,
-					primaryMonth.affiliateReport[n].Sales,
+					toUSD(primaryMonth.affiliateReport[n].Sales),
 					primaryMonth.affiliateReport[n].Number_of_Sales,
 					primaryMonth.affiliateReport[n].Conversion_Rate,
 					`<div class="form-check form-switch">
@@ -324,14 +325,17 @@ function buildNewPerformersTable(y1, y2, y3) {
 						primaryMonth.affiliateReport[n].Affiliate_Id +
 						`"></div>`,
 				]);
-				nextRow = nextRow + 1;
 			}
 		}
+	}
+	console.log(notableRows);
+	for (z = 0; z < notableRows.length; z++) {
+		buildRow(notablePerformersTable, z + 1, notableRows[z]);
 	}
 	buildRow(table, 2, [
 		data.twoMonthsAgo,
 		report.newAffsMonth3.length,
-		"$" + month3Total,
+		toUSD(month3Total),
 		`<table class="table table-striped centered table-sm" id="notableTable3"><tbody style="font-size: small">
 									<thead id="notableThead3"></thead>
 								</tbody></table>`,
