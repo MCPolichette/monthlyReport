@@ -726,18 +726,32 @@
 			<div id="noteDisplaySection">
 				<h2>Additional Notes:</h2>
 				<div class="row removeForPrint">
-				<div class="col-12">
-					<h5>Choose Images</h5>
-					<input
+					<div class="col-12">
+						<h5>Choose Image 1</h5>
+						<input
 						type="file"
-						id="file-input"
+						id="file-input1"
 						accept=".png"
 						multiple
 						onchange="handleFileSelect(event, 'image-container1')"
-					/>
+						/>
+					</div>
 				</div>
-			</div>
-			<div class="row" id="image-container1"></div>
+				<div class="row" id="image-container2"></div>
+				<br>
+				<div class="row removeForPrint">
+					<div class="col-12">
+						<h5>Choose Image 2</h5>
+						<input
+						type="file"
+						id="file-input2"
+						accept=".png"
+						multiple
+						onchange="handleFileSelect(event, 'image-container2')"
+						/>
+					</div>
+				</div>
+				<div class="row" id="image-container1"></div>
 				<div id="notesContainer"></div>
 			</div></div>
 			<div id="noteInputSection" class="row border border-warning border-4 removeForPrint">
