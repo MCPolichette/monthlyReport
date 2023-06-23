@@ -204,35 +204,39 @@
 														aria-describedby="selectedYear"
 													/>
 												</div>
-												<div class="form-check">
+												<!-- Hiding these forms, and created a seperate document for ECHOS, who requested these features. !? -->
+												<div class="form-check" hidden>
   													<input class="form-check-input" type="checkbox" value="" id="mobileSalesCheck" checked>
   													<label class="form-check-label" for="mobileSalesCheck">Display Mobile Sales in quickStats
   													</label></div>
-													<div class="form-check">
+													<div class="form-check" hidden>
 														<input class="form-check-input" type="checkbox" value="" id="yoyDisplayCheck" checked>
   													<label class="form-check-label" for="yoyDisplayCheck">Display yoy data in Affiliate report
-  													</label>
+  													</label></div>
+												
+												<!-- End of hidden Forms. !? -->
+												<h6>Select a Network</h6>
+												<div class="form-check">
+												  <input class="form-check-input" type="radio" name="networkRadio" id="networkRadioUS" 						value="US" checked>
+												  <label class="form-check-label" for="networkRadioUS">
+												    US Account
+												  </label>
 												</div>
-												<div
-													hidden
-													id="first_loading_bar"
-													class="text-center"
-												>
-													<h5>Running APIs</h5>
-													<div
-														class="spinner-border"
-														style="
-															width: 6rem;
-															height: 6rem;
-														"
-														role="status"
-													>
-														<span
-															class="visually-hidden"
-															>Loading...</span
-														>
-													</div>
+												<div class="form-check">
+												  <input class="form-check-input" type="radio" name="networkRadio" id="networkRadioCA" 						value="CA">
+												  <label class="form-check-label" for="networkRadioCA">
+												    CA Account
+												  </label>
 												</div>
+												<div class="form-check">
+												  <input class="form-check-input" type="radio" name="networkRadio" id="networkRadioAU" 						value="AU" disabled>
+												  <label class="form-check-label" for="networkRadioAU">
+												    AU Account
+												  </label>
+												</div>
+												
+											
+												<br>
 												<div class="d-grid gap-2">
 													<button
 														class="btn btn-primary"
@@ -254,7 +258,9 @@
 													<div
 														class="card-body text-primary"
 													>
-														<h5
+													<div class="row">
+														<div class="col-6">
+															<h5
 															id="merchantCard"
 															class="card-title"
 														>
@@ -285,6 +291,32 @@
 																Year
 															</li>
 														</ul>
+
+														</div>
+														<div class="col-6">
+																<div
+													hidden
+													id="first_loading_bar"
+													class="text-center"
+												>
+													<h5>Running APIs</h5>
+													<div
+														class="spinner-border"
+														style="
+															width: 6rem;
+															height: 6rem;
+														"
+														role="status"
+													>
+														<span
+															class="visually-hidden"
+															>Loading...</span
+														>
+													</div>
+												</div>
+														</div>
+													</div>
+														
 													</div>
 												</div>
 												<div class="d-grid gap-2">
