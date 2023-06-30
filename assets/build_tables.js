@@ -80,23 +80,28 @@ function buildQuickStatsTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = (((m1 - m2) / m1) * 100).toFixed(2);
-		console.log("ATTENTION");
-		console.log(percent, value, icon);
+		let percent;
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
+			percent = "-" + (((m2 - m1) / m1) * 100).toFixed(2);
+		} else {
+			percent = (((m1 - m2) / m1) * 100).toFixed(2);
 		}
+		console.log(percent, value, icon);
 		return [text, toUSD(m1), toUSD(value), posOrNeg + percent + "%", icon];
 	}
 	function otherRowValues(text, m1, m2, x) {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = (((m1 - m2) / m1) * 100).toFixed(2);
+		let percent;
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
+			percent = "-" + (((m2 - m1) / m1) * 100).toFixed(2);
+		} else {
+			percent = (((m1 - m2) / m1) * 100).toFixed(2);
 		}
 		if (text === "Conversion Rate") {
 			m1 = m1 + "%";
@@ -172,14 +177,17 @@ function buildYoyTable() {
 			.appendChild(document.createTextNode(summaryHeadersArray[i]));
 	}
 	function dollarRowValues(text, m1, m2, x) {
+		console.log("OTHER ROWS _ __ _ _ @@@@@@@@@@@@@@@@@");
 		let dollarIcon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = (((m1 - m2) / m2) * 100).toFixed(2);
-		console.log(value);
+		let percent;
 		if (value < 0) {
 			dollarIcon = icons.down;
 			posOrNeg = "";
+			percent = "-" + (((m2 - m1) / m1) * 100).toFixed(2);
+		} else {
+			percent = (((m1 - m2) / m1) * 100).toFixed(2);
 		}
 		return [
 			text,
@@ -194,16 +202,20 @@ function buildYoyTable() {
 		let icon = icons.up;
 		let posOrNeg = "+";
 		let value = m1 - m2;
-		let percent = (((m1 - m2) / m2) * 100).toFixed(2);
+		let percent;
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
+			percent = "-" + (((m2 - m1) / m1) * 100).toFixed(2);
+		} else {
+			percent = (((m1 - m2) / m1) * 100).toFixed(2);
 		}
 		if (text === "Conversion Rate") {
 			m1 = m1 + "%";
 			m2 = m2 + "%";
 			value = value.toFixed(2) + "%";
 		}
+		console.log(icon);
 		return [text, m1, m2, percent + "%", icon, posOrNeg + value];
 	}
 	console.log(data.monthlyPerformanceSummary);
@@ -213,7 +225,7 @@ function buildYoyTable() {
 			data.monthlyPerformanceSummary[0].Sales,
 			data.monthlyPerformanceSummary[12].Sales
 		),
-		Number_of_Sales: dollarRowValues(
+		Number_of_Sales: otherRowValues(
 			"# of Sales",
 			data.monthlyPerformanceSummary[0].Number_of_Sales,
 			data.monthlyPerformanceSummary[12].Number_of_Sales
@@ -317,7 +329,7 @@ function buildMomTable() {
 			data.monthlyPerformanceSummary[0].Sales,
 			data.monthlyPerformanceSummary[1].Sales
 		),
-		Number_of_Sales: dollarRowValues(
+		Number_of_Sales: otherRowValues(
 			"# of Sales",
 			data.monthlyPerformanceSummary[0].Number_of_Sales,
 			data.monthlyPerformanceSummary[1].Number_of_Sales
