@@ -213,7 +213,7 @@ function buildYoyTable() {
 			data.monthlyPerformanceSummary[0].Sales,
 			data.monthlyPerformanceSummary[12].Sales
 		),
-		Number_of_Sales: dollarRowValues(
+		Number_of_Sales: otherRowValues(
 			"# of Sales",
 			data.monthlyPerformanceSummary[0].Number_of_Sales,
 			data.monthlyPerformanceSummary[12].Number_of_Sales
@@ -317,7 +317,7 @@ function buildMomTable() {
 			data.monthlyPerformanceSummary[0].Sales,
 			data.monthlyPerformanceSummary[1].Sales
 		),
-		Number_of_Sales: dollarRowValues(
+		Number_of_Sales: otherRowValues(
 			"# of Sales",
 			data.monthlyPerformanceSummary[0].Number_of_Sales,
 			data.monthlyPerformanceSummary[1].Number_of_Sales
