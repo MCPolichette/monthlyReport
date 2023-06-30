@@ -387,3 +387,47 @@ function runDailyChart() {
 		month: "next",
 	});
 }
+function handleFileSelect(event, id) {
+	var files = event.target.files;
+	var imageContainer = document.getElementById(id);
+	imageContainer.innerHTML = ""; // Clear previous content
+
+	for (var i = 0; i < files.length; i++) {
+		var file = files[i];
+		if (file.type.match("image/png")) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				var imageElement = document.createElement("img");
+				imageElement.classList.add("image-preview");
+				imageElement.src = e.target.result;
+
+				var removeButton = document.createElement("button");
+				removeButton.classList.add(
+					"btn",
+					"btn-danger",
+					"btn-sm",
+					"my-2",
+					"close",
+					"removeForPrint"
+				);
+				removeButton.textContent = "Remove";
+				removeButton.addEventListener("click", function () {
+					var imageContainerDiv = this.parentNode;
+					imageContainerDiv.remove();
+				});
+
+				var imageContainerDiv = document.createElement("div");
+				imageContainerDiv.classList.add(
+					"noteBox",
+					"col-12",
+					"text-center"
+				);
+				imageContainerDiv.appendChild(imageElement);
+				imageContainerDiv.appendChild(removeButton);
+
+				imageContainer.appendChild(imageContainerDiv);
+			};
+			reader.readAsDataURL(file);
+		}
+	}
+}

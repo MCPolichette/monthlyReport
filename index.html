@@ -23,7 +23,6 @@
 			href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap"
 			rel="stylesheet"
 		/>
-
 		<title>AvantLink Monthly report v2.0</title>
 		<link
 			rel="stylesheet"
@@ -229,13 +228,11 @@
 												  </label>
 												</div>
 												<div class="form-check">
-												  <input class="form-check-input" type="radio" name="networkRadio" id="networkRadioAU" 						value="AU" disabled>
+												  <input class="form-check-input" type="radio" name="networkRadio" id="networkRadioAU" 	value="AU" >
 												  <label class="form-check-label" for="networkRadioAU">
 												    AU Account
 												  </label>
 												</div>
-												
-											
 												<br>
 												<div class="d-grid gap-2">
 													<button
@@ -458,7 +455,6 @@
 													id="affiliateFormFile"
 												/>
 											</div>
-											
 											</div>
 											<div class="col-6">
 												<h4>
@@ -475,13 +471,10 @@
 												</p>
 												<table
 								id="notablePerformers"
-								class="table table-striped centered table-sm"
-							>
+								class="table table-striped centered table-sm">
 								<thead>
 									<tr>
-										<th class="intentionallyBlank">
-											Month
-										</th>
+										<th class="intentionallyBlank">	Month</th>
 										<th>Partner ID</th>
 										<th >Sales</th>
 										</th>
@@ -490,7 +483,6 @@
 										<th>Select?</th>
 									</tr>
 								</thead>
-								
 							</table>
 							<button id="addNotablesBtn" type="button" class="btn btn-lg btn-primary" onclick="updateNotablePerformers()" disabled>Add selected Performers to Report</button>
 											</div>
@@ -503,7 +495,6 @@
 									</div>
 								</div>
 							</div>
-
 							<div class="accordion-item">
 								<h2 class="accordion-header" id="reportHeader">
 									<button
@@ -512,8 +503,7 @@
 										data-bs-toggle="collapse"
 										data-bs-target="#reportAccordian"
 										aria-expanded="false"
-										aria-controls="reportAccordian"
-									>
+										aria-controls="reportAccordian">
 										<strong> Report</strong>
 									</button>
 								</h2>
@@ -524,12 +514,11 @@
 									data-bs-parent="#reportAccordian"
 								>
 									<div class="accordion-body">
-										
 										<div class="row">
 											<div class ='col-12'>
 												<h4> Notes about the report below</h4>
 												<div class = 'noteInputSection'>
-													All Yellow buttons and Highlighted sections will be removed with teh print button at the bottom of the screen
+													All Yellow buttons and Highlighted sections will be removed with the print button at the bottom of the screen
 												</div>
 											</div>
 										</div>
@@ -556,16 +545,14 @@
 							<h5>Quick Stats</h5>
 							<table
 								id="quickStats"
-								class="table table-striped centered table-sm"
-							>
+								class="table table-striped centered table-sm">
 								<tbody style="font-size: small">
 									<thead id="qstatsHead"></thead>
 								</tbody>
 							</table>
 						</div>
 						<div
-							class="col-4 justify-content-center align-items-center"
-						>
+							class="col-4 justify-content-center align-items-center">
 							<br />
 							<hr />
 							<img
@@ -588,8 +575,7 @@
 								</h5>
 								<table
 									id="yoySummaryReport"
-									class="table table-striped centered table-sm"
-								>
+									class="table table-striped centered table-sm">
 									<tbody style="font-size: x-small">
 										<thead id="yoySummaryTHead"></thead>
 									</tbody>
@@ -601,8 +587,7 @@
 								</h5>
 								<table
 									id="momSummaryReport"
-									class="table table-striped centered table-sm"
-								>
+									class="table table-striped centered table-sm">
 									<tbody style="font-size: x-small">
 										<thead id="momSummaryTHead"></thead>
 									</tbody>
@@ -614,27 +599,22 @@
 						<div class="col-12">
 							<h5>Monthly Sales Performance</h5>
 							<div id="monthlyPerformanceGraph" style="width: auto"></div>
-
 						</div>
 							<div class="col-12">
 							<h5>Daily Sales Performance</h5>
 							<div id="dailyPerformanceGraph" style="width: auto"></div>
-							
 						</div>
 						</div>
 							<div class="col-12">
 							<h5>Number of Sales Performance</h5>
 							<div id="secondPerformanceChart" style="width: auto"></div>
-							
 						</div>
 					<div class=" removeForPrint close justify-content-md-end">
 							<button type="button" id= 'topAffRowBtn'onclick="hideRow('topAffRow', 'topAffRowBtn')" class="close btn btn-sm btn-warning " aria-label="Close"> Hide the Display Below </button>
 						</div>
 					<div class="row" id="topAffRow">
-						
 						<br />
 						<div class="col-12">
-
 							<h5>Top Affiliate YOY Performances</h5>
 							<div class="input-group mb-3 border border-warning removeForPrint border-4">
   								<input type="text"id="updateTopPerformers" class="form-control bg-warning removeForPrint" placeholder="Change Number of displayed Affiliates" aria-label="Change Number of Affiliates" aria-describedby="updateTopPerformers">
@@ -642,8 +622,7 @@
 							</div>
 							<table
 								id="affiliateSummaryReport"
-								class="table table-striped centered table-sm"
-							>
+								class="table table-striped centered table-sm">
 								<tbody style="font-size: small">
 									<thead id="affTableTHead"></thead>
 								</tbody>
@@ -684,16 +663,12 @@
 						</div>
 						<div class="col-6">
 							<h5>Top Declining YoY Performance</h5>
-							<table
-								id="declining_report"
-								class="table table-striped centered table-sm"
-							>
+							<table id="declining_report" class="table table-striped centered table-sm">
 								<tbody style="font-size: x-small">
 									<thead id="dTableTHead"></thead>
 								</tbody>
 							</table>
 						</div>
-					
 					<!-- <div class="row"> -->
 						<div class="col-12">
 							<p>
@@ -713,7 +688,6 @@
 							<button type="button" id= 'subAffRowBtn'onclick="hideRow('subAffRow', 'subAffRowBtn')" class="close btn btn-sm btn-warning " aria-label="Close"> Hide the Display Below </button>
 						</div>
 					<div class="row"id="subAffRow">
-						
 						<br />
 						<div class="col-12">
 							<h5>Sub Affiliate Report</h5>
@@ -737,7 +711,6 @@
 								class="table table-striped centered table-sm"
 							><thead id="productTHead"></thead>
 								<tbody style="font-size: small">
-									
 								</tbody>
 							</table>
 						</div>
@@ -752,6 +725,33 @@
 				
 			<div id="noteDisplaySection">
 				<h2>Additional Notes:</h2>
+				<div class="row removeForPrint">
+					<div class="col-12">
+						<h5>Choose Image 1</h5>
+						<input
+						type="file"
+						id="file-input1"
+						accept=".png"
+						multiple
+						onchange="handleFileSelect(event, 'image-container1')"
+						/>
+					</div>
+				</div>
+				<div class="row" id="image-container2"></div>
+				<br>
+				<div class="row removeForPrint">
+					<div class="col-12">
+						<h5>Choose Image 2</h5>
+						<input
+						type="file"
+						id="file-input2"
+						accept=".png"
+						multiple
+						onchange="handleFileSelect(event, 'image-container2')"
+						/>
+					</div>
+				</div>
+				<div class="row" id="image-container1"></div>
 				<div id="notesContainer"></div>
 			</div></div>
 			<div id="noteInputSection" class="row border border-warning border-4 removeForPrint">
@@ -794,7 +794,8 @@
 				</div>
 				<div class="container-fluid"></div>
 			</div>
-		</div></div>
+		</div>
+		</div>
 
 		<script src="assets/API_reports.js"></script>
 		<script src="assets/affiliate_scripts.js"></script>

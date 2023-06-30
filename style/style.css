@@ -47,3 +47,7 @@ h6 {
 	right: 0;
 	margin: 5px;
 }
+.image-preview {
+	max-width: 100%;
+	height: auto;
+}

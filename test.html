@@ -1,46 +1,79 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Notes Management</title>
+		<title>Image Uploader</title>
 		<link
 			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+			href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/css/bootstrap.min.css"
 		/>
+		<style>
+			.image-preview {
+				max-width: 100%;
+				height: auto;
+			}
+		</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
+		<script>
+			function handleFileSelect(event) {
+				var files = event.target.files;
+				var imageContainer = document.getElementById("image-container");
+				imageContainer.innerHTML = ""; // Clear previous content
+
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
+					if (file.type.match("image/png")) {
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							var imageElement = document.createElement("img");
+							imageElement.classList.add("image-preview");
+							imageElement.src = e.target.result;
+
+							var removeButton = document.createElement("button");
+							removeButton.classList.add(
+								"btn",
+								"btn-danger",
+								"btn-sm",
+								"my-2"
+							);
+							removeButton.textContent = "Remove";
+							removeButton.addEventListener("click", function () {
+								var imageContainerDiv = this.parentNode;
+								imageContainerDiv.remove();
+							});
+
+							var imageContainerDiv =
+								document.createElement("div");
+							imageContainerDiv.classList.add(
+								"col-6",
+								"col-md-4",
+								"col-lg-3",
+								"text-center"
+							);
+							imageContainerDiv.appendChild(imageElement);
+							imageContainerDiv.appendChild(removeButton);
+
+							imageContainer.appendChild(imageContainerDiv);
+						};
+						reader.readAsDataURL(file);
+					}
+				}
+			}
+		</script>
 	</head>
 	<body>
-		<div class="container mt-4">
-			<h1>Notes App</h1>
-
-			<!-- Section for inputting notes -->
-			<div id="noteInputSection">
-				<h2>Add Note</h2>
-				<div class="form-group">
-					<label for="noteTitle">Note Title:</label>
-					<input type="text" class="form-control" id="noteTitle" />
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<input
+						type="file"
+						id="file-input"
+						accept=".png"
+						multiple
+						onchange="handleFileSelect(event)"
+					/>
 				</div>
-				<div class="form-group">
-					<label for="noteText">Note Text:</label>
-
-					<textarea
-						class="form-control"
-						placeholder="NOTES GO HERE!"
-						id="noteText"
-						wrap="hard"
-						style="height: 100px"
-					></textarea>
-				</div>
-				<button class="btn btn-primary" id="addNoteBtn">
-					Add Note
-				</button>
 			</div>
-
-			<!-- Section for displaying notes -->
-			<div id="noteDisplaySection">
-				<h2>Notes</h2>
-				<div id="notesContainer"></div>
-			</div>
+			<div class="row" id="image-container"></div>
 		</div>
-
-		<script src="assets/notes.js"></script>
 	</body>
 </html>

@@ -393,17 +393,19 @@ function buildAffiliateTable(array) {
 	}
 	table.style.textAlign = "right";
 	for (let i = 0; i < report.topAffiliateCount; i++) {
-		buildRow(table, i, [
-			array[i].Affiliate,
-			toUSD(array[i].Sales),
-			percentNaNCheck(array[i].salesYOYpercent),
-			array[i].Click_Throughs,
-			percentNaNCheck(array[i].Click_ThroughsYOYpercent),
-			toUSD(array[i].Total_Commission.toFixed(2)),
-			percentNaNCheck(array[i].totalCommissionYOYPercent),
-			toUSD(array[i].roa.toFixed(2)),
-			percentNaNCheck(array[i].roaYOYPercent),
-		]);
+		if (array[i].Sales > 0) {
+			buildRow(table, i, [
+				array[i].Affiliate,
+				toUSD(array[i].Sales),
+				percentNaNCheck(array[i].salesYOYpercent),
+				array[i].Click_Throughs,
+				percentNaNCheck(array[i].Click_ThroughsYOYpercent),
+				toUSD(array[i].Total_Commission.toFixed(2)),
+				percentNaNCheck(array[i].totalCommissionYOYPercent),
+				toUSD(array[i].roa.toFixed(2)),
+				percentNaNCheck(array[i].roaYOYPercent),
+			]);
+		}
 	}
 	add_borders("affiliateSummaryReport", 3);
 	add_borders("affiliateSummaryReport", 5);
@@ -487,13 +489,15 @@ function buildSubAffTable(array) {
 	table.style.textAlign = "right";
 
 	for (let i = 0; i < report.topAffiliateCount; i++) {
-		buildRow(table, i, [
-			array[i].Affiliate + " - " + array[i].Sub_Affiliate_Domain,
-			toUSD(array[i].Sales),
-			array[i].Click_Throughs,
-			toUSD(array[i].Total_Commission.toFixed(2)),
-			toUSD(array[i].roa.toFixed(2)),
-		]);
+		if (array[i].Sales > 0) {
+			buildRow(table, i, [
+				array[i].Affiliate + " - " + array[i].Sub_Affiliate_Domain,
+				toUSD(array[i].Sales),
+				array[i].Click_Throughs,
+				toUSD(array[i].Total_Commission.toFixed(2)),
+				toUSD(array[i].roa.toFixed(2)),
+			]);
+		}
 	}
 	affiliateReportButton.disabled = true;
 	completeButton(
