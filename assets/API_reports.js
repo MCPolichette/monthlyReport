@@ -554,22 +554,53 @@ function reportStep2(xml, report_id, month) {
 						) {
 							primaryMonth.affiliateReport[i].lySales =
 								priorMonth.affiliateReport[j].Sales;
-							let x = (
-								(primaryMonth.affiliateReport[i].Sales -
-									priorMonth.affiliateReport[j].Sales) /
-								primaryMonth.affiliateReport[i].Sales
-							).toFixed(2);
+							let x;
+							if (
+								primaryMonth.affiliateReport[i].Sales >
+								priorMonth.affiliateReport[j].Sales
+							) {
+								x = (
+									(primaryMonth.affiliateReport[i].Sales -
+										priorMonth.affiliateReport[j].Sales) /
+									primaryMonth.affiliateReport[i].Sales
+								).toFixed(2);
+							} else {
+								x = (
+									(primaryMonth.affiliateReport[i].Sales -
+										priorMonth.affiliateReport[j].Sales) /
+									priorMonth.affiliateReport[j].Sales
+								).toFixed(2);
+							}
+
 							primaryMonth.affiliateReport[i].salesYOYpercent =
 								Number(x);
 							primaryMonth.affiliateReport[i].lyClick_Throughs =
 								priorMonth.affiliateReport[j].Click_Throughs;
-							let y = (
-								(primaryMonth.affiliateReport[i]
-									.Click_Throughs -
-									priorMonth.affiliateReport[j]
-										.Click_Throughs) /
-								primaryMonth.affiliateReport[i].Click_Throughs
-							).toFixed(2);
+
+							let y;
+							if (
+								primaryMonth.affiliateReport[i].Click_Throughs >
+								priorMonth.affiliateReport[j].Click_Throughs
+							) {
+								y = (
+									(primaryMonth.affiliateReport[i]
+										.Click_Throughs -
+										priorMonth.affiliateReport[j]
+											.Click_Throughs) /
+									primaryMonth.affiliateReport[i]
+										.Click_Throughs
+								).toFixed(2);
+							} else {
+								y = (
+									(primaryMonth.affiliateReport[i]
+										.Click_Throughs -
+										priorMonth.affiliateReport[j]
+											.Click_Throughs) /
+									priorMonth.affiliateReport[j].Click_Throughs
+								).toFixed(2);
+							}
+							console.log(y);
+
 							primaryMonth.affiliateReport[
 								i
 							].Click_ThroughsYOYpercent = y;
@@ -581,19 +612,49 @@ function reportStep2(xml, report_id, month) {
 									priorMonth.affiliateReport[j].roa.toFixed(2)
 								);
 							}
+
 							let tyROA = Number(
 								primaryMonth.affiliateReport[i].roa.toFixed(2)
 							);
 							let roayoy = (tyROA - lyROA) / tyROA;
 							primaryMonth.affiliateReport[i].roaYOYPercent =
 								roayoy.toFixed(3);
-							let totalCommissionYoy = (
-								(primaryMonth.affiliateReport[i]
-									.Total_Commission -
+							//
+							let totalCommissionYoy;
+							if (
+								primaryMonth.affiliateReport[i]
+									.Total_Commission >
+								priorMonth.affiliateReport[j].Total_Commission
+							) {
+								totalCommissionYoy = (
+									(primaryMonth.affiliateReport[i]
+										.Total_Commission -
+										priorMonth.affiliateReport[j]
+											.Total_Commission) /
+									primaryMonth.affiliateReport[i]
+										.Total_Commission
+								).toFixed(2);
+							} else {
+								totalCommissionYoy = (
+									(primaryMonth.affiliateReport[i]
+										.Total_Commission -
+										priorMonth.affiliateReport[j]
+											.Total_Commission) /
 									priorMonth.affiliateReport[j]
-										.Total_Commission) /
-								primaryMonth.affiliateReport[i].Total_Commission
-							).toFixed(2);
+										.Total_Commission
+								).toFixed(2);
+							}
+
+							//
+
+							// let totalCommissionYoy = (
+							// 	(primaryMonth.affiliateReport[i]
+							// 		.Total_Commission -
+							// 		priorMonth.affiliateReport[j]
+							// 			.Total_Commission) /
+							// 	primaryMonth.affiliateReport[i].Total_Commission
+							// ).toFixed(2);
+
 							primaryMonth.affiliateReport[
 								i
 							].totalCommissionYOYPercent = totalCommissionYoy;
@@ -601,14 +662,35 @@ function reportStep2(xml, report_id, month) {
 							report.yoyPerformance.push(
 								primaryMonth.affiliateReport[i]
 							);
+
 							// }
 						}
 					}
 				}
+				console.log(
+					"##################################################################"
+				);
+				console.log(primaryMonth.affiliateReport[70]);
+				console.log(primaryMonth.affiliateReport.length);
+				primaryMonth.affiliateReport.sort(
+					(a, b) => b.Click_Throughs - a.Click_Throughs
+				);
+				report.yoyPerformance.sort(function (a, b) {
+					return b.Click_Throughs - a.Click_Throughs;
+				});
 				primaryMonth.affiliateReport.sort((a, b) => b.Sales - a.Sales);
 				report.yoyPerformance.sort(function (a, b) {
 					return b.Sales - a.Sales;
 				});
+				for (xy = 0; xy < primaryMonth.affiliateReport.length; xy++) {
+					console.log(primaryMonth.affiliateReport[xy].Sales);
+					if (
+						primaryMonth.affiliateReport[xy].Affiliate_Id ===
+						"142482"
+					) {
+						console.log("HERE");
+					}
+				}
 				console.log(primaryMonth);
 				let topTen = [];
 				for (let k = 0; k < 10; k++) {
