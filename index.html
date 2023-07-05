@@ -39,6 +39,11 @@
         // Set the value in the text field
         document.getElementById("password_input").value = storedValue;
       }
+	   // Get the current year
+    var currentYear = new Date().getFullYear();
+
+    // Populate the input field with the current year
+    document.getElementById("selectedYear").value = currentYear;
     };
 	</script>
 	</head>

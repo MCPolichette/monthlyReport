@@ -350,6 +350,13 @@ function reportStep2(xml, report_id, month) {
 			break;
 		case 18:
 			console.log(xmlDoc.getElementsByTagName("Product_SKU").length);
+			if (
+				xmlDoc.getElementsByTagName("Product_SKU").length <
+				report.itemCount
+			) {
+				report.itemCount =
+					xmlDoc.getElementsByTagName("Product_SKU").length;
+			}
 			for (let i = 0; i < report.itemCount; i++) {
 				let x = {};
 				x.Product_SKU =

@@ -84,9 +84,9 @@ function buildQuickStatsTable() {
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
-			percent = "-" + (((m2 - m1) / m1) * 100).toFixed(2);
+			percent = "-" + (((m2 - m1) / m2) * 100).toFixed(2);
 		} else {
-			percent = (((m1 - m2) / m1) * 100).toFixed(2);
+			percent = (((m1 - m2) / m2) * 100).toFixed(2);
 		}
 		console.log(percent, value, icon);
 		return [text, toUSD(m1), toUSD(value), posOrNeg + percent + "%", icon];
@@ -99,9 +99,9 @@ function buildQuickStatsTable() {
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
-			percent = "-" + (((m2 - m1) / m1) * 100).toFixed(2);
+			percent = "-" + (((m2 - m1) / m2) * 100).toFixed(2);
 		} else {
-			percent = (((m1 - m2) / m1) * 100).toFixed(2);
+			percent = (((m1 - m2) / m2) * 100).toFixed(2);
 		}
 		if (text === "Conversion Rate") {
 			m1 = m1 + "%";
@@ -185,9 +185,9 @@ function buildYoyTable() {
 		if (value < 0) {
 			dollarIcon = icons.down;
 			posOrNeg = "";
-			percent = "-" + (((m2 - m1) / m1) * 100).toFixed(2);
+			percent = "-" + (((m2 - m1) / m2) * 100).toFixed(2);
 		} else {
-			percent = (((m1 - m2) / m1) * 100).toFixed(2);
+			percent = (((m1 - m2) / m2) * 100).toFixed(2);
 		}
 		return [
 			text,
@@ -206,9 +206,9 @@ function buildYoyTable() {
 		if (value < 0) {
 			icon = icons.down;
 			posOrNeg = "";
-			percent = "-" + (((m2 - m1) / m1) * 100).toFixed(2);
+			percent = "-" + (((m2 - m1) / m2) * 100).toFixed(2);
 		} else {
-			percent = (((m1 - m2) / m1) * 100).toFixed(2);
+			percent = (((m1 - m2) / m2) * 100).toFixed(2);
 		}
 		if (text === "Conversion Rate") {
 			m1 = m1 + "%";
