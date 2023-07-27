@@ -21,30 +21,49 @@ function read_file(input) {
 			} else {
 				secondButtonBoolean = true;
 				console.log("File Read!? " + secondButtonBoolean);
-				console.log(allLines);
+				console.log(allLines.length);
 				console.log(allLines[0], allLines[1]);
 				for (i = 1; i < allLines.length - 1; i++) {
 					let thisRow = allLines[i].split(",");
-					let approvalDate = thisRow[10].toString().split("/");
-					if (
-						Number(approvalDate[0]) == data.thisMonthArray[0] &&
-						Number(approvalDate[2]) == data.thisMonthArray[1]
-					) {
-						report.newAffsMonth1.push(thisRow[0]);
-					}
-					if (
-						Number(approvalDate[0]) == data.oneMonthAgoArray[0] &&
-						Number(approvalDate[2]) == data.oneMonthAgoArray[1]
-					) {
-						report.newAffsMonth2.push(thisRow[0]);
-					}
-					if (
-						Number(approvalDate[0]) == data.twoMonthsAgoArray[0] &&
-						Number(approvalDate[2]) == data.twoMonthsAgoArray[1]
-					) {
-						report.newAffsMonth3.push(thisRow[0]);
+					console.log();
+					if (thisRow[10]) {
+						let approvalDate = thisRow[10].toString().split("/");
+						console.log(approvalDate[2].length);
+						if (approvalDate[2].length === 2) {
+							approvalDate[2] = 20 + approvalDate[2];
+							console.log(
+								"making it a four digit year",
+								approvalDate[2]
+							);
+						}
+						if (
+							Number(approvalDate[0]) == data.thisMonthArray[0] &&
+							Number(approvalDate[2]) == data.thisMonthArray[1]
+						) {
+							report.newAffsMonth1.push(thisRow[0]);
+						}
+						if (
+							Number(approvalDate[0]) ==
+								data.oneMonthAgoArray[0] &&
+							Number(approvalDate[2]) == data.oneMonthAgoArray[1]
+						) {
+							report.newAffsMonth2.push(thisRow[0]);
+						}
+						if (
+							Number(approvalDate[0]) ==
+								data.twoMonthsAgoArray[0] &&
+							Number(approvalDate[2]) == data.twoMonthsAgoArray[1]
+						) {
+							report.newAffsMonth3.push(thisRow[0]);
+						}
 					}
 				}
+				console.log(
+					"AFF DATA PROCESSED",
+					report.newAffsMonth1,
+					report.newAffsMonth2,
+					report.newAffsMonth3
+				);
 			}
 			buildNewPerformersTable();
 		}

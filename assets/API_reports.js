@@ -606,7 +606,7 @@ function reportStep2(xml, report_id, month) {
 									priorMonth.affiliateReport[j].Click_Throughs
 								).toFixed(2);
 							}
-							console.log(y);
+							// console.log(y);
 
 							primaryMonth.affiliateReport[
 								i
@@ -690,7 +690,7 @@ function reportStep2(xml, report_id, month) {
 					return b.Sales - a.Sales;
 				});
 				for (xy = 0; xy < primaryMonth.affiliateReport.length; xy++) {
-					console.log(primaryMonth.affiliateReport[xy].Sales);
+					// console.log(primaryMonth.affiliateReport[xy].Sales);
 					if (
 						primaryMonth.affiliateReport[xy].Affiliate_Id ===
 						"142482"
