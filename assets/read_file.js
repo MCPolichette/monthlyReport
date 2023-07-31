@@ -23,47 +23,57 @@ function read_file(input) {
 				console.log("File Read!? " + secondButtonBoolean);
 				console.log(allLines.length);
 				console.log(allLines[0], allLines[1]);
+				console.log(data);
 				for (i = 1; i < allLines.length - 1; i++) {
 					let thisRow = allLines[i].split(",");
-					console.log();
 					if (thisRow[10]) {
 						let approvalDate = thisRow[10].toString().split("/");
-						console.log(approvalDate[2].length);
 						if (approvalDate[2].length === 2) {
 							approvalDate[2] = 20 + approvalDate[2];
-							console.log(
-								"making it a four digit year",
-								approvalDate[2]
-							);
 						}
-						if (
-							Number(approvalDate[0]) == data.thisMonthArray[0] &&
-							Number(approvalDate[2]) == data.thisMonthArray[1]
-						) {
-							report.newAffsMonth1.push(thisRow[0]);
+						const month = Number(approvalDate[0]);
+						const year = Number(approvalDate[2]);
+
+						switch (true) {
+							case month === data.thisMonthArray[0] &&
+								year === data.thisMonthArray[1]:
+								console.log(month, year);
+								report.newAffsMonth1.push(thisRow[0]);
+								break;
+							case month === data.oneMonthAgoArray[0] &&
+								year === data.oneMonthAgoArray[1]:
+								report.newAffsMonth2.push(thisRow[0]);
+								break;
+							case month === data.twoMonthsAgoArray[0] &&
+								year === data.twoMonthsAgoArray[1]:
+								report.newAffsMonth3.push(thisRow[0]);
+								break;
+							default:
+								// no conditions match.
+								break;
 						}
-						if (
-							Number(approvalDate[0]) ==
-								data.oneMonthAgoArray[0] &&
-							Number(approvalDate[2]) == data.oneMonthAgoArray[1]
-						) {
-							report.newAffsMonth2.push(thisRow[0]);
-						}
-						if (
-							Number(approvalDate[0]) ==
-								data.twoMonthsAgoArray[0] &&
-							Number(approvalDate[2]) == data.twoMonthsAgoArray[1]
-						) {
-							report.newAffsMonth3.push(thisRow[0]);
-						}
+						// if (
+						// 	Number(approvalDate[0]) == data.thisMonthArray[0] &&
+						// 	Number(approvalDate[2]) == data.thisMonthArray[1]
+						// ) {
+						// 	report.newAffsMonth1.push(thisRow[0]);
+						// }
+						// if (
+						// 	Number(approvalDate[0]) ==
+						// 		data.oneMonthAgoArray[0] &&
+						// 	Number(approvalDate[2]) == data.oneMonthAgoArray[1]
+						// ) {
+						// 	report.newAffsMonth2.push(thisRow[0]);
+						// }
+						// if (
+						// 	Number(approvalDate[0]) ==
+						// 		data.twoMonthsAgoArray[0] &&
+						// 	Number(approvalDate[2]) == data.twoMonthsAgoArray[1]
+						// ) {
+						// 	report.newAffsMonth3.push(thisRow[0]);
+						// }
 					}
 				}
-				console.log(
-					"AFF DATA PROCESSED",
-					report.newAffsMonth1,
-					report.newAffsMonth2,
-					report.newAffsMonth3
-				);
 			}
 			buildNewPerformersTable();
 		}
