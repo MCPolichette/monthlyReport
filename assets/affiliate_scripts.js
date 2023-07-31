@@ -251,7 +251,7 @@ function buildNewPerformersTable(y1, y2, y3) {
 	}
 	buildRow(table, 0, [
 		data.month,
-		report.newAffsMonth2.length,
+		report.newAffsMonth1.length,
 		toUSD(month1Total),
 		`<table class="table table-striped centered table-sm" id="notableTable1"><tbody style="font-size: small">
 									<thead id="notableThead1"></thead>
@@ -291,7 +291,7 @@ function buildNewPerformersTable(y1, y2, y3) {
 	}
 	buildRow(table, 1, [
 		data.previousMonth,
-		report.newAffsMonth3.length,
+		report.newAffsMonth2.length,
 		toUSD(month2Total),
 		`<table class="table table-striped centered table-sm" id="notableTable2"><tbody style="font-size: small">
 									<thead id="notableThead2"></thead>
@@ -343,7 +343,7 @@ function buildNewPerformersTable(y1, y2, y3) {
 	removeDisabledButton("addNotablesBtn");
 
 	let tablex = document.getElementById("quickStats");
-	buildRow(tablex, 0, ["New Affiliates", report.newAffsMonth2.length]);
+	buildRow(tablex, 0, ["New Affiliates", report.newAffsMonth1.length]);
 }
 function updateTopPerformers() {
 	let content = document.getElementById("updateTopPerformers").value;
