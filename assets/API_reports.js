@@ -700,9 +700,17 @@ function reportStep2(xml, report_id, month) {
 				}
 				console.log(primaryMonth);
 				let topTen = [];
-				for (let k = 0; k < 10; k++) {
-					topTen.push(report.yoyPerformance[k]);
+				let lessThanTen = 10;
+				console.log(primaryMonth.affiliateReport.length);
+				if (primaryMonth.affiliateReport.length < 10) {
+					lessThanTen === primaryMonth.affiliateReport.length;
 				}
+				if (lessThanTen) {
+					for (let k = 0; k < lessThanTen; k++) {
+						topTen.push(report.yoyPerformance[k]);
+					}
+				}
+				console.log("building tables");
 				buildAffiliateTable(primaryMonth.affiliateReport);
 				buildQuickStatsTable();
 				runAPI({

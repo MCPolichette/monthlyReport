@@ -391,10 +391,10 @@ function buildAffiliateTable(array) {
 		data.abMonth + " " + report.year + " ROAS",
 		"YoY %",
 	];
-	for (var i = 0; i < headArray.length; i++) {
+	for (var z = 0; z < headArray.length; z++) {
 		thead
 			.appendChild(document.createElement("th"))
-			.appendChild(document.createTextNode(headArray[i]));
+			.appendChild(document.createTextNode(headArray[z]));
 	}
 	function percentNaNCheck(value) {
 		if (isNaN(value)) {
@@ -404,19 +404,23 @@ function buildAffiliateTable(array) {
 		}
 	}
 	table.style.textAlign = "right";
-	for (let i = 0; i < report.topAffiliateCount; i++) {
-		if (array[i].Sales > 0) {
-			buildRow(table, i, [
-				array[i].Affiliate,
-				toUSD(array[i].Sales),
-				percentNaNCheck(array[i].salesYOYpercent),
-				array[i].Click_Throughs,
-				percentNaNCheck(array[i].Click_ThroughsYOYpercent),
-				toUSD(array[i].Total_Commission.toFixed(2)),
-				percentNaNCheck(array[i].totalCommissionYOYPercent),
-				toUSD(array[i].roa.toFixed(2)),
-				percentNaNCheck(array[i].roaYOYPercent),
-			]);
+	console.log("ALERT", report.topAffiliateCount);
+	if (report.topAffiliateCount) {
+		for (let i = 0; i < report.topAffiliateCount.length; i++) {
+			if (array[i].Sales > 0) {
+				buildRow(table, i, [
+					array[i].Affiliate,
+					toUSD(array[i].Sales),
+					percentNaNCheck(array[i].salesYOYpercent),
+					array[i].Click_Throughs,
+					percentNaNCheck(array[i].Click_ThroughsYOYpercent),
+					toUSD(array[i].Total_Commission.toFixed(2)),
+					percentNaNCheck(array[i].totalCommissionYOYPercent),
+					toUSD(array[i].roa.toFixed(2)),
+					percentNaNCheck(array[i].roaYOYPercent),
+				]);
+				console.log(i);
+			}
 		}
 	}
 	add_borders("affiliateSummaryReport", 3);
