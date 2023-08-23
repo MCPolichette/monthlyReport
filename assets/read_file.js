@@ -26,7 +26,8 @@ function read_file(input) {
 				console.log(data);
 				for (i = 1; i < allLines.length - 1; i++) {
 					let thisRow = allLines[i].split(",");
-					if (thisRow[10]) {
+					var datestring = checkMMDDYYYY(thisRow[10]);
+					if (datestring) {
 						let approvalDate = thisRow[10].toString().split("/");
 						if (approvalDate[2].length === 2) {
 							approvalDate[2] = 20 + approvalDate[2];
@@ -86,4 +87,26 @@ function fileCheck(myFile) {
 	filename.split("-");
 	console.log("FILENAME, ", filename);
 	return filename;
+}
+function checkMMDDYYYY(dateStr) {
+	const parts = dateStr.split("/");
+	if (parts.length === 3) {
+		const month = parts[0].padStart(2, "0");
+		const day = parts[1].padStart(2, "0");
+		const year = parts[2].length === 2 ? "20" + parts[2] : parts[2];
+		return `${month}/${day}/${year}`;
+	} else if (
+		parts.length === 1 &&
+		(dateStr.length === 6 || dateStr.length === 8)
+	) {
+		const month = dateStr.substring(0, 2).padStart(2, "0");
+		const day = dateStr.substring(2, 4).padStart(2, "0");
+		const year =
+			dateStr.substring(4).length === 2
+				? "20" + dateStr.substring(4)
+				: dateStr.substring(4);
+		return `${month}/${day}/${year}`;
+	} else {
+		return null;
+	}
 }
