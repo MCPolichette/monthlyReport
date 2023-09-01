@@ -404,12 +404,17 @@ function buildAffiliateTable(array) {
 		}
 	}
 	table.style.textAlign = "right";
-	console.log("ALERT", report.topAffiliateCount);
+
 	if (array.length < report.topAffiliateCount) {
 		report.topAffiliateCount = array.length;
 	}
+	console.log("ALERT", report.topAffiliateCount);
 	if (report.topAffiliateCount) {
 		for (let i = 0; i < report.topAffiliateCount; i++) {
+			console.log(array[i]);
+			if (isNaN(array[i].Sales)) {
+				return 0;
+			}
 			if (array[i].Sales > 0) {
 				buildRow(table, i, [
 					array[i].Affiliate,
