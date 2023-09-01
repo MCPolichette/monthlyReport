@@ -405,6 +405,9 @@ function buildAffiliateTable(array) {
 	}
 	table.style.textAlign = "right";
 	console.log("ALERT", report.topAffiliateCount);
+	if (array.length < report.topAffiliateCount) {
+		report.topAffiliateCount = array.length;
+	}
 	if (report.topAffiliateCount) {
 		for (let i = 0; i < report.topAffiliateCount; i++) {
 			if (array[i].Sales > 0) {

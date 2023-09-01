@@ -712,6 +712,7 @@ function reportStep2(xml, report_id, month) {
 				}
 				console.log("building tables");
 				buildAffiliateTable(primaryMonth.affiliateReport);
+				console.log("table built");
 				buildQuickStatsTable();
 				runAPI({
 					report_id: 65,
